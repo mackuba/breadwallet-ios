@@ -311,9 +311,6 @@ class ApplicationController: Subscriber, Trackable {
                 for (n, e) in errors {
                     print("Bundle \(n) ran update. err: \(String(describing: e))")
                 }
-                DispatchQueue.main.async {
-                    self.modalPresenter?.preloadSupportCenter()
-                }
             }
         }
     }

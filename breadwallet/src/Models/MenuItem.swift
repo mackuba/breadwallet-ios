@@ -15,8 +15,6 @@ struct MenuItem {
         static let wallet = UIImage(named: "wallet")
         static let preferences = UIImage(named: "prefs")
         static let security = UIImage(named: "security")
-        static let support = UIImage(named: "support")
-        static let rewards = UIImage(named: "Star")
         static let about = UIImage(named: "about")
         static let atmMap = UIImage(named: "placemark")
         static let export = UIImage(named: "Export")

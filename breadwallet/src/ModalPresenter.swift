@@ -55,13 +55,6 @@ class ModalPresenter: Subscriber, Trackable {
         Store.lazySubscribe(self,
                             selector: { $0.rootModal != $1.rootModal },
                             callback: { [weak self] in self?.presentModal($0.rootModal) })
-        
-        Store.subscribe(self, name: .presentFaq("", nil), callback: { [weak self] in
-            guard let trigger = $0 else { return }
-            if case .presentFaq(let articleId, let currency) = trigger {
-                self?.presentFaq(articleId: articleId, currency: currency)
-            }
-        })
 
         //Subscribe to prompt actions
         Store.subscribe(self, name: .promptUpgradePin, callback: { [weak self] _ in
@@ -218,27 +211,6 @@ class ModalPresenter: Subscriber, Trackable {
             Store.perform(action: RootModalActions.Present(modal: .none))
             Store.trigger(name: .hideStatusBar)
         }
-    }
-    
-    func preloadSupportCenter() {
-        supportCenter.preload() // pre-load contents for faster access
-    }
-
-    func presentFaq(articleId: String? = nil, currency: Currency? = nil) {
-        supportCenter.modalPresentationStyle = .overFullScreen
-        supportCenter.modalPresentationCapturesStatusBarAppearance = true
-        supportCenter.transitioningDelegate = supportCenter
-        var url: String
-        if let articleId = articleId {
-            url = "/support/article?slug=\(articleId)"
-            if let currency = currency {
-                url += "&currency=\(currency.supportCode)"
-            }
-        } else {
-            url = "/support?"
-        }
-        supportCenter.navigate(to: url)
-        topViewController?.present(supportCenter, animated: true, completion: {})
     }
 
     private func rootModalViewController(_ type: RootModal) -> UIViewController? {
@@ -561,17 +533,7 @@ class ModalPresenter: Subscriber, Trackable {
                      subMenu: securityItems,
                      rootNav: menuNav,
                      faqButton: UIButton.buildFaqButton(articleId: ArticleIds.securityCenter)),
-            
-            // Support
-            MenuItem(title: S.MenuButton.support, icon: MenuItem.Icon.support) { [weak self] in
-                self?.presentFaq()
-            },
-                        
-            // Rewards
-            MenuItem(title: S.Settings.rewards, icon: MenuItem.Icon.rewards) { [weak self] in
-                self?.presentPlatformWebViewController("/rewards")
-            },
-            
+
             // About
             MenuItem(title: S.Settings.about, icon: MenuItem.Icon.about) {
                 menuNav.pushViewController(AboutViewController(), animated: true)

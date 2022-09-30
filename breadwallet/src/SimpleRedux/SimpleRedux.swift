@@ -40,7 +40,6 @@ struct Trigger {
 }
 
 enum TriggerName {
-    case presentFaq(String, Currency?)
     case registerForPushNotificationToken
     case lock
     case promptBiometrics
@@ -81,8 +80,6 @@ extension TriggerName: Equatable {}
 
 func == (lhs: TriggerName, rhs: TriggerName) -> Bool {
     switch (lhs, rhs) {
-    case (.presentFaq, .presentFaq):
-        return true
     case (.registerForPushNotificationToken, .registerForPushNotificationToken):
         return true
     case (.lock, .lock):
