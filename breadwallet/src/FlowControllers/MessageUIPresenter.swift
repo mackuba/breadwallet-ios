@@ -66,16 +66,6 @@ class MessageUIPresenter: NSObject, Trackable {
         present(emailView)
     }
     
-    func presentFeedbackCompose() {
-        guard MFMailComposeViewController.canSendMail() else { showEmailUnavailableAlert(); return }
-        originalTitleTextAttributes = UINavigationBar.appearance().titleTextAttributes
-        UINavigationBar.appearance().titleTextAttributes = nil
-        let emailView = MFMailComposeViewController()
-        emailView.setToRecipients([C.feedbackEmail])
-        emailView.mailComposeDelegate = self
-        present(emailView)
-    }
-
     func presentMailCompose(emailAddress: String, subject: String? = nil, body: String? = nil) {
         guard MFMailComposeViewController.canSendMail() else { showEmailUnavailableAlert(); return }
         originalTitleTextAttributes = UINavigationBar.appearance().titleTextAttributes

@@ -49,7 +49,6 @@ struct C {
     static let walletQueue = "com.breadwallet.walletqueue"
     static let null = "(null)"
     static let maxMemoLength = 250
-    static let feedbackEmail = "feedback@breadapp.com"
     static let iosEmail = "ios@breadapp.com"
     static let reviewLink = "https://itunes.apple.com/app/breadwallet-bitcoin-wallet/id885251393?action=write-review"
     static var standardPort: Int {
