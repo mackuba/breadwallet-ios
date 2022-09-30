@@ -97,8 +97,6 @@ public enum Event: String {
     case send
     case redeem
     
-    case fixerFetch
-
     var name: String { return rawValue }
 }
 

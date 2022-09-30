@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import LocalAuthentication
 import WalletKit
-import CloudKit
 
 enum KeyStoreError: Error {
     case alreadyInitialized
@@ -152,16 +151,6 @@ class KeyStore {
                     allBip39Words.formUnion(words.map { $0 as String })
                 }
             }
-        }
-
-        // pre-fetch client token
-        if !E.isRunningTests, try keychainItem(key: KeychainKey.bdbClientToken) as String? == nil {
-            KeyStore.fetchCloudKitToken(id: C.bdbClientTokenRecordId, keyChainID: KeychainKey.bdbClientToken, completion: { _ in })
-        }
-        
-        // pre-fetch api key
-        if try keychainItem(key: KeychainKey.fixerAPIToken) as String? == nil {
-            KeyStore.fetchCloudKitToken(id: C.fixerAPITokenRecordId, keyChainID: KeychainKey.fixerAPIToken, completion: { _ in })
         }
     }
     
@@ -319,51 +308,6 @@ extension KeyStore: WalletAuthenticator {
             do {
                 try setKeychainItem(key: KeychainKey.apiUserAccount, item: value)
             } catch { }
-        }
-    }
-
-    static func getFixerApiToken(completion: @escaping (String?) -> Void) {
-        // fetch from keychain
-        do {
-            if let token: String = try keychainItem(key: KeychainKey.fixerAPIToken) {
-                return completion(token)
-            }
-        } catch let error {
-            print("[KEYSTORE] keychain error: \(error.localizedDescription)")
-            assertionFailure()
-        }
-        KeyStore.fetchCloudKitToken(id: C.fixerAPITokenRecordId, keyChainID: KeychainKey.fixerAPIToken, completion: completion)
-    }
-
-    private func getClientToken(completion: @escaping (String?) -> Void) {
-        // fetch from keychain
-        do {
-            if let token: String = try keychainItem(key: KeychainKey.bdbClientToken) {
-                return completion(token)
-            }
-        } catch let error {
-            print("[KEYSTORE] keychain error: \(error.localizedDescription)")
-            assertionFailure()
-        }
-        KeyStore.fetchCloudKitToken(id: C.bdbClientTokenRecordId, keyChainID: KeychainKey.bdbClientToken, completion: completion)
-    }
-    
-    private static func fetchCloudKitToken(id: String, keyChainID: String, completion: @escaping (String?) -> Void) {
-        CKContainer.default().publicCloudDatabase.fetch(withRecordID: CKRecord.ID(recordName: id)) { record, error in
-            DispatchQueue.global(qos: .userInitiated).async {
-                guard let token = record?.value(forKey: "token") as? String else {
-                    print("[KEYSTORE] CloudKit error: \(error?.localizedDescription ?? "none")")
-                    return completion(nil)
-                }
-                print("[KEYSTORE] retreived client token from CloudKit for id: \(id)")
-                do {
-                    try setKeychainItem(key: keyChainID, item: token)
-                } catch let error {
-                    print("[KEYSTORE] keychain error: \(error.localizedDescription)")
-                    assertionFailure()
-                }
-                completion(token)
-            }
         }
     }
 
@@ -766,8 +710,6 @@ extension KeyStore: KeyMaster {
             try setKeychainItem(key: KeychainKey.systemAccount, item: nil as Data?)
             try setKeychainItem(key: KeychainKey.apiAuthKey, item: nil as String?)
             try setKeychainItem(key: KeychainKey.apiUserAccount, item: nil as String?)
-            try setKeychainItem(key: KeychainKey.bdbClientToken, item: nil as String?)
-            try setKeychainItem(key: KeychainKey.fixerAPIToken, item: nil as String?)
             try setKeychainItem(key: KeychainKey.bdbAuthUser, item: nil as String?)
             try setKeychainItem(key: KeychainKey.creationTime, item: nil as Data?)
             try setKeychainItem(key: KeychainKey.pinFailTime, item: nil as Int64?)

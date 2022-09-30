@@ -73,30 +73,4 @@ class ExchangeUpdater: Subscriber {
             handler(.success(combinedResults))
         }
     }
-    
-    private func convert(from: String, to: String, callback: @escaping (Double) -> Void) {
-        
-        struct FixerResult: Codable {
-            var rates: [String: Double]
-        }
-        
-        KeyStore.getFixerApiToken { token in
-            guard let token = token else { return }
-            let url = URL(string: "http://data.fixer.io/api/latest?access_key=\(token)&base=\(from)&symbols=\(to)")!
-            URLSession.shared.dataTask(with: url, completionHandler: { data, _, error in
-                guard let data = data else { print("error: \(error!)"); return }
-                do {
-                    let result = try JSONDecoder().decode(FixerResult.self, from: data)
-                    if let rate = result.rates[to] {
-                        callback(rate)
-                    } else {
-                        print("Fixer result not found: \(result)")
-                    }
-                } catch let e {
-                    print("JSON decoding error: \(e)")
-                }
-            }).resume()
-        }
-    }
-
 }
