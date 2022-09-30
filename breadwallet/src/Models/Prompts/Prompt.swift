@@ -35,8 +35,7 @@ enum PromptKey: String {
     case bodyKey
     case imageName
     case imageUrl
-    case emailList
-    
+
     var key: String { return rawValue }
 }
 
@@ -52,12 +51,11 @@ enum PromptType: Int {
     case noPasscode
     case biometrics
     case announcement
-    case email
 
     var order: Int { return rawValue }
     
     static var defaultTypes: [PromptType] = {
-        return [.upgradePin, .paperKey, .noPasscode, .biometrics, .email]
+        return [.upgradePin, .paperKey, .noPasscode, .biometrics]
     }()
     
     var title: String {
@@ -66,7 +64,6 @@ enum PromptType: Int {
         case .paperKey: return S.Prompts.PaperKey.title
         case .upgradePin: return S.Prompts.UpgradePin.title
         case .noPasscode: return S.Prompts.NoPasscode.title
-        case .email: return S.Prompts.Email.title
         default: return ""
         }
     }
@@ -77,7 +74,6 @@ enum PromptType: Int {
         case .paperKey: return "paperKeyPrompt"
         case .upgradePin: return "upgradePinPrompt"
         case .noPasscode: return "noPasscodePrompt"
-        case .email: return "emailPrompt"
         case .announcement: return "announcementPrompt"
         default: return ""
         }
@@ -89,7 +85,6 @@ enum PromptType: Int {
         case .paperKey: return S.Prompts.PaperKey.body
         case .upgradePin: return S.Prompts.UpgradePin.body
         case .noPasscode: return S.Prompts.NoPasscode.body
-        case .email: return S.Prompts.Email.body
         default: return ""
         }
     }
@@ -101,7 +96,6 @@ enum PromptType: Int {
         case .paperKey: return .promptPaperKey
         case .upgradePin: return .promptUpgradePin
         case .noPasscode: return nil
-        case .email: return .promptEmail
         default: return nil
         }
     }
@@ -256,101 +250,6 @@ struct StandardPrompt: Prompt {
     }
 }
 
-/**
- *  Protocol for obtaining an email address from the user, optionally for a specific mailing list.
- */
-protocol EmailCollectingPrompt: Prompt {
-
-    /**
-     *  Title text for the page displayed when the email subscription has been confirmed.
-     */
-    var confirmationTitle: String { get }
-
-    /**
-     *  Body text for the page displayed when the email subscription has been confirmed.
-     */
-    var confirmationBody: String { get }
-
-    /**
-     *  Text for a footnote to be displayed when the email subscription is confirmed.
-     */
-    var confirmationFootnote: String? { get }
-    
-    /**
-     *  Name for an image to be displayed when the email subscription is confirmed.
-     */
-    var confirmationImageName: String? { get }
-    
-    /**
-     *  The email subscription list to which the user will be subscribed if a valid email address
-     *  is submitted.
-     */
-    var emailList: String? { get }
-    
-    /**
-     *  To be invoked by the get-email prompt view when the user has successfully subscribed to updates.
-     */
-    func didSubscribe()
-}
-
-// Default email-prompt implementation, used for the standard email subscription prompt.
-struct StandardEmailCollectingPrompt: Prompt, EmailCollectingPrompt {
-    
-    var type: PromptType {
-        return .email
-    }
-    
-    var order: Int {
-        return PromptType.email.order
-    }
-    
-    var title: String {
-        return S.Prompts.Email.title
-    }
-    
-    var body: String {
-        return S.Prompts.Email.body
-    }
-    
-    var confirmationTitle: String {
-        return S.Prompts.Email.successTitle
-    }
-    
-    var confirmationBody: String {
-        return S.Prompts.Email.successBody
-    }
-    
-    var confirmationFootnote: String? {
-        return S.Prompts.Email.successFootnote
-    }
-    
-    var confirmationImageName: String? {
-        return "Email"
-    }
-
-    var imageName: String? {
-        return "Email"
-    }
-    
-    var emailList: String? {
-        // The standard get-email prompt does not have an email list -- users are just subscribed to our
-        // general updates mailing list.
-        return nil
-    }
-
-    func shouldPrompt(walletAuthenticator: WalletAuthenticator?) -> Bool {
-        return !UserDefaults.hasPromptedForEmail && !UserDefaults.hasSubscribedToEmailUpdates
-    }
-    
-    func didPrompt() {
-        UserDefaults.hasPromptedForEmail = true
-    }
-    
-    func didSubscribe() {
-        UserDefaults.hasSubscribedToEmailUpdates = true
-    }
-}
-
 // Creates prompt views based on a given type. The 'email' type requires a more
 // sophisticated view with an email input field.
 class PromptFactory: Subscriber {
@@ -376,11 +275,7 @@ class PromptFactory: Subscriber {
         }
 
         supported.forEach({
-            if $0.isGetEmailAnnouncement {
-                shared.prompts.append(AnnouncementBasedEmailCollectingPrompt(announcement: $0))
-            } else {
-                shared.prompts.append(StandardAnnouncementPrompt(announcement: $0))
-            }
+            shared.prompts.append(StandardAnnouncementPrompt(announcement: $0))
         })
         shared.sort()
     }
@@ -392,9 +287,7 @@ class PromptFactory: Subscriber {
     }
     
     static func createPromptView(prompt: Prompt, presenter: UIViewController) -> PromptView {
-        if let emailPrompt = prompt as? EmailCollectingPrompt {
-            return GetUserEmailPromptView(prompt: emailPrompt, presenter: presenter)
-        } else if let announcementPrompt = prompt as? AnnouncementBasedPrompt {
+        if let announcementPrompt = prompt as? AnnouncementBasedPrompt {
             return AnnouncementPromptView(prompt: announcementPrompt)
         } else {
             return PromptView(prompt: prompt)
@@ -403,11 +296,7 @@ class PromptFactory: Subscriber {
     
     private func addDefaultPrompts() {
         PromptType.defaultTypes.forEach { (type) in
-            if type == PromptType.email {
-                prompts.append(StandardEmailCollectingPrompt())
-            } else {
-                prompts.append(StandardPrompt(type: type))
-            }
+            prompts.append(StandardPrompt(type: type))
         }
         sort()
     }

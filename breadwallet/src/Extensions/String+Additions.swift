@@ -14,15 +14,6 @@ extension String {
         return range(of: pattern, options: .regularExpression) != nil
     }
 
-    var isValidEmailAddress: Bool {
-        guard !isEmpty else { return false }
-        
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,10}"
-        let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailRegex)
-        
-        return emailPredicate.evaluate(with: self)
-    }
-
     var sanitized: String {
         return applyingTransform(.toUnicodeName, reverse: false) ?? ""
     }

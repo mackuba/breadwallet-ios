@@ -12,8 +12,6 @@ import Foundation
 enum AnnouncementType: String {
     // General announcement without user input.
     case announcement
-    // Announcement that can obtain an email address from the user for a mailing list subscription.
-    case announcementEmail = "announcement-email"
     // A promotional announcement.
     case announcementPromo = "announcement-promo"
 }
@@ -134,8 +132,7 @@ struct Announcement: Decodable {
     
     // N.B. Add supported types here otherwise they will be ignored by PromptFactory.
     static var supportedTypes: [String] {
-        return [AnnouncementType.announcementEmail.rawValue,
-                AnnouncementType.announcementPromo.rawValue]
+        return [AnnouncementType.announcementPromo.rawValue]
     }
 
     enum Keys: String, CodingKey {
@@ -168,10 +165,6 @@ struct Announcement: Decodable {
         return Announcement.supportedTypes.contains(self.type ?? "")
     }
     
-    var isGetEmailAnnouncement: Bool {
-        return self.type == AnnouncementType.announcementEmail.rawValue
-    }
-        
     func page(at step: PromptPageStep) -> AnnouncementPage? {
         if let pages = pages, !pages.isEmpty && step.step < pages.count {
             return pages[step.rawValue]
@@ -311,45 +304,5 @@ struct StandardAnnouncementPrompt: AnnouncementBasedPrompt {
 
     init(announcement: Announcement) {
         self.announcement = announcement
-    }
-}
-
-/**
- *  A prompt based on an announcement that can obtain an email address from the user.
- */
-struct AnnouncementBasedEmailCollectingPrompt: AnnouncementBasedPrompt, EmailCollectingPrompt {
-    let announcement: Announcement
-    
-    init(announcement: Announcement) {
-        self.announcement = announcement
-    }
-    
-    // MARK: EmailCollecting
-
-    var confirmationTitle: String {
-        return announcement.title(for: .confirmation)
-    }
-    
-    var confirmationBody: String {
-        return announcement.body(for: .confirmation)
-    }
-    
-    var confirmationFootnote: String? {
-        return nil
-    }
-    
-    var confirmationImageName: String? {
-        return announcement.imageName(for: .confirmation)
-    }
-    
-    var emailList: String? {
-        if let page = announcement.page(at: .initialDisplay), let list = page.emailList {
-            return list
-        }
-        return nil
-    }
-
-    func didSubscribe() {
-        
     }
 }

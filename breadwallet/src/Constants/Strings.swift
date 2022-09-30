@@ -478,22 +478,6 @@ enum S {
             static let title = NSLocalizedString("Prompts.FaceId.title", value: "Enable Face ID", comment: "Enable face ID prompt title")
             static let body = NSLocalizedString("Prompts.FaceId.body", value: "Tap Continue to enable Face ID", comment: "Enable face ID prompt body")
         }
-        enum Email {
-            static let title = NSLocalizedString("Prompts.Email.title", value: "Get in the loop", comment: "Get user email address prompt title")
-            static let body = NSLocalizedString("Prompts.Email.body", 
-                                                value: "Be the first to receive important support and product updates",
-                                                comment: "Get user email address prompt body")
-            static let emailPlaceholder = NSLocalizedString("Prompts.Email.placeholder", value: "enter your email", comment: "user email input placeholder")
-            static let successTitle = NSLocalizedString("Prompts.Email.successTitle", 
-                                                        value: "Thank you!", 
-                                                        comment: "Get user email address prompt title upon success")
-            static let successBody = NSLocalizedString("Prompts.Email.successBody", 
-                                                        value: "You have successfully subscribed to receive updates", 
-                                                        comment: "body text show after the user successfully submits an email address for updates")
-            static let successFootnote = NSLocalizedString("Prompts.Email.successFootnote", 
-                                                           value: "We appreciate your continued support", 
-                                                           comment: "shown after the user successfully submits an email address for updates")
-        }
     }
 
     enum PaymentProtocol {

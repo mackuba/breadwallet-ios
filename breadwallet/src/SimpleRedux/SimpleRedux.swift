@@ -43,7 +43,6 @@ enum TriggerName {
     case registerForPushNotificationToken
     case lock
     case promptBiometrics
-    case promptEmail
     case promptPaperKey
     case promptUpgradePin
     case blockModalDismissal

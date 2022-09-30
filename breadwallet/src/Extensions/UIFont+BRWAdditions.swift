@@ -24,9 +24,6 @@ extension UIFont {
         guard let font = UIFont(name: "CircularPro-Medium", size: size) else { return UIFont.systemFont(ofSize: size, weight: .medium) }
         return font
     }
-    static func emailPlaceholder() -> UIFont {
-        return customBody(size: 15.0)
-    }
     static func onboardingHeading() -> UIFont {
         return customBody(size: 24.0)
     }
