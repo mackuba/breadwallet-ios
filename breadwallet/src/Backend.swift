@@ -23,7 +23,6 @@ class Backend {
     private var apiClient: BRAPIClient
     private var kvStore: BRReplicatedKVStore?
     private var exchangeUpdater: ExchangeUpdater?
-    private let userAgentFetcher = UserAgentFetcher()
     
     // MARK: - Public
     
@@ -59,22 +58,5 @@ class Backend {
         shared.exchangeUpdater = nil
         shared.kvStore = nil
         shared.apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())
-    }
-}
-
-// MARK: - 
-
-class UserAgentFetcher {
-    lazy var webView: WKWebView = { return WKWebView(frame: .zero) }()
-    
-    func getUserAgent(completion: @escaping (String) -> Void) {
-        webView.loadHTMLString("<html></html>", baseURL: nil)
-        webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
-            guard let agent = result as? String else {
-                print(String(describing: error))
-                return completion("")
-            }
-            completion(agent)
-        }
     }
 }
