@@ -102,7 +102,6 @@ class Currency: CurrencyWithIcon {
     /// Primary + secondary color
     var colors: (UIColor, UIColor) { return metaData.colors }
     /// False if a token has been delisted, true otherwise
-    var isSupported: Bool { return metaData.isSupported }
     var tokenAddress: String? { return metaData.tokenAddress }
     
     // MARK: URI
@@ -325,7 +324,6 @@ public struct CurrencyMetaData: CurrencyWithIcon {
     
     let uid: CurrencyId
     let code: String
-    let isSupported: Bool
     let colors: (UIColor, UIColor)
     let name: String
     var tokenAddress: String?
@@ -346,7 +344,6 @@ public struct CurrencyMetaData: CurrencyWithIcon {
     enum CodingKeys: String, CodingKey {
         case uid = "currency_id"
         case code
-        case isSupported = "is_supported"
         case colors
         case tokenAddress = "contract_address"
         case name
@@ -376,7 +373,6 @@ extension CurrencyMetaData: Codable {
             }
             colors = (UIColor.black, UIColor.black)
         }
-        isSupported = try container.decode(Bool.self, forKey: .isSupported)
         name = try container.decode(String.self, forKey: .name)
         tokenAddress = try container.decode(String.self, forKey: .tokenAddress)
         decimals = try container.decode(UInt8.self, forKey: .decimals)
@@ -411,7 +407,6 @@ extension CurrencyMetaData: Codable {
         colorValues.append(colors.0.toHex)
         colorValues.append(colors.1.toHex)
         try container.encode(colorValues, forKey: .colors)
-        try container.encode(isSupported, forKey: .isSupported)
         try container.encode(name, forKey: .name)
         try container.encode(tokenAddress, forKey: .tokenAddress)
         try container.encode(decimals, forKey: .decimals)

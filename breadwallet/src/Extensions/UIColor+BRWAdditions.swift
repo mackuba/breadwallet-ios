@@ -266,10 +266,6 @@ extension UIColor {
         return UIColor(white: 1.0, alpha: 0.25)
     }
     
-    static var disabledCellBackground: UIColor {
-        return UIColor.fromHex("190C2A")
-    }
-    
     static var pageIndicatorDotBackground: UIColor {
         return UIColor.fromHex("1F1E3D")
     }

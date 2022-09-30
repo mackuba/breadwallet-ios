@@ -22,7 +22,7 @@ class AssetCollection: Subscriber {
     var availableAssets: [CurrencyMetaData] {
         let enabledKeys = Set(enabledAssets.map { $0.uid })
         return allAssets
-            .filter { $0.value.isSupported && !enabledKeys.contains($0.key) }.values
+            .filter { !enabledKeys.contains($0.key) }.values
             .sorted { return $0.code < $1.code }
             .sorted { return $0.isPreferred && !$1.isPreferred }
     }

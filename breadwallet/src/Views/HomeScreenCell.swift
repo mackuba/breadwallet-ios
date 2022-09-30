@@ -28,7 +28,7 @@ class Background: UIView, GradientDrawable {
 
     override func draw(_ rect: CGRect) {
         guard let currency = currency else { return }
-        let colors = currency.isSupported ? currency.colors : (UIColor.disabledCellBackground, UIColor.disabledCellBackground)
+        let colors = currency.colors
         drawGradient(start: colors.0, end: colors.1, rect)
     }
 }
@@ -49,7 +49,7 @@ class HomeScreenCell: UITableViewCell, Subscriber {
     private var isSyncIndicatorVisible: Bool = false {
         didSet {
             UIView.crossfade(tokenBalance, syncIndicator, toRight: isSyncIndicatorVisible, duration: isSyncIndicatorVisible == oldValue ? 0.0 : 0.3)
-            fiatBalance.textColor = (isSyncIndicatorVisible || !(container.currency?.isSupported ?? false)) ? .disabledWhiteText : .white
+            fiatBalance.textColor = isSyncIndicatorVisible ? .disabledWhiteText : .white
         }
     }
     
@@ -66,13 +66,13 @@ class HomeScreenCell: UITableViewCell, Subscriber {
         accessibilityIdentifier = viewModel.currency.name
         container.currency = viewModel.currency
         icon.image = viewModel.currency.imageNoBackground
-        icon.tintColor = viewModel.currency.isSupported ? .white : .disabledBackground
+        icon.tintColor = .white
         iconContainer.layer.cornerRadius = C.Sizes.homeCellCornerRadius
         currencyName.text = viewModel.currency.name
-        currencyName.textColor = viewModel.currency.isSupported ? .white : .disabledWhiteText
+        currencyName.textColor = .white
         price.text = viewModel.exchangeRate
         fiatBalance.text = viewModel.fiatBalance
-        fiatBalance.textColor = viewModel.currency.isSupported ? .white : .disabledWhiteText
+        fiatBalance.textColor = .white
         tokenBalance.text = viewModel.tokenBalance
         priceChangeView.isHidden = false
         priceChangeView.currency = viewModel.currency

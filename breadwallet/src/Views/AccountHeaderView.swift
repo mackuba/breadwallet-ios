@@ -21,7 +21,6 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
     private let currencyName = UILabel(font: .customBody(size: 18.0))
     private let exchangeRateLabel = UILabel(font: .customBody(size: 28.0))
     private let modeLabel = UILabel(font: .customBody(size: 12.0), color: .transparentWhiteText) // debug info
-    private var delistedTokenView: DelistedTokenView?
     private let chartView: ChartView
     private let priceChangeView = PriceChangeView(style: .percentAndAbsolute)
     private let priceDateLabel = UILabel(font: .customBody(size: 14.0))
@@ -84,9 +83,6 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
         self.currency = currency
         self.balanceCell = BalanceCell(currency: currency)
         self.chartView = ChartView(currency: currency)
-        if currency.isSupported == false {
-            self.delistedTokenView = DelistedTokenView(currency: currency)
-        }
         super.init(frame: CGRect())
         setup()
     }
@@ -125,9 +121,6 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
         
         addSubview(balanceSeparator)
         addSubview(balanceCell)
-        if let delistedTokenView = delistedTokenView {
-            addSubview(delistedTokenView)
-        }
         graphButtons.forEach {
             graphButtonStackView.addArrangedSubview($0.button)
         }
@@ -153,14 +146,7 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
         modeLabel.constrain([
             modeLabel.centerXAnchor.constraint(equalTo: priceInfoStackView.centerXAnchor),
             modeLabel.topAnchor.constraint(equalTo: priceInfoStackView.bottomAnchor)])
-        if let delistedTokenView = delistedTokenView {
-            delistedTokenView.constrain([
-                delistedTokenView.topAnchor.constraint(equalTo: priceInfoStackView.topAnchor),
-                delistedTokenView.bottomAnchor.constraint(equalTo: balanceCell.topAnchor, constant: -C.padding[1]),
-                delistedTokenView.widthAnchor.constraint(equalTo: widthAnchor),
-                delistedTokenView.leadingAnchor.constraint(equalTo: leadingAnchor)])
-        }
-        
+
         let graphBottom = marketDataView == nil ? balanceCell.topAnchor : marketDataView!.topAnchor
         
         graphButtonStackView.constrain([
@@ -327,7 +313,7 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
     }
     
     func setOffset(_ offset: CGFloat) {
-        guard delistedTokenView == nil, !shouldLockExpandingChart else { return } //Disable expanding/collapsing header when delistedTokenView is shown
+        guard !shouldLockExpandingChart else { return } //Disable expanding/collapsing header when delistedTokenView is shown
         guard headerHeight?.isActive == true else { return }
         guard let headerHeight = headerHeight else { return }
         let newHeaderViewHeight: CGFloat = headerHeight.constant - offset
@@ -348,7 +334,7 @@ class AccountHeaderView: UIView, GradientDrawable, Subscriber, Trackable {
     }
     
     func didStopScrolling() {
-        guard delistedTokenView == nil, !shouldLockExpandingChart else { return } //Disable expanding/collapsing header when delistedTokenView is shown
+        guard !shouldLockExpandingChart else { return } //Disable expanding/collapsing header when delistedTokenView is shown
         guard headerHeight?.isActive == true else { return }
         guard let currentHeight = headerHeight?.constant else { return }
         let range = AccountHeaderView.headerViewMaxHeight - AccountHeaderView.headerViewMinHeight
