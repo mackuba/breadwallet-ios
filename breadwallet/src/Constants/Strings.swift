@@ -296,7 +296,6 @@ enum S {
         static let notifications = NSLocalizedString("Settings.notifications", value:"Notifications", comment: "Notifications label")
         static let currency = NSLocalizedString("Settings.currency", value:"Display Currency", comment: "Default currency label")
         static let sync = NSLocalizedString("Settings.sync", value:"Sync Blockchain", comment: "Sync blockchain label")
-        static let shareData = NSLocalizedString("Settings.shareData", value:"Share Anonymous Data", comment: "Share anonymous data label")
         static let earlyAccess = NSLocalizedString("Settings.earlyAccess", value:"Join Early Access", comment: "Join Early access label")
         static let about = NSLocalizedString("Settings.about", value:"About", comment: "About label")
         static let exportTransfers = NSLocalizedString("Settings.exportTransfers", value:"Export transaction history to CSV", comment: "Export transfers")
@@ -365,12 +364,6 @@ enum S {
         static let alertAction = NSLocalizedString("ReScan.alertAction", value:"Sync", comment: "Alert action button label")
     }
 
-    enum ShareData {
-        static let header = NSLocalizedString("ShareData.header", value:"Share Data?", comment: "Share data header")
-        static let body = NSLocalizedString("ShareData.body", value:"Help improve BRD by sharing your anonymous data with us. This does not include any financial information. We respect your financial privacy.", comment: "Share data view body")
-        static let toggleLabel = NSLocalizedString("ShareData.toggleLabel", value:"Share Anonymous Data?", comment: "Share data switch label.")
-    }
-    
     enum ExportTransfers {
         static let header = NSLocalizedString("ExportTransfers.header", value:"Export transactions?", comment: "Export transfers header")
         static let body = NSLocalizedString("ExportTransfers.body", value:"This will generate a CSV file including all completed transactions from all enabled wallets.", comment: "Export transfers body")

@@ -66,9 +66,6 @@ class ModalPresenter: Subscriber, Trackable {
         Store.subscribe(self, name: .promptBiometrics, callback: { [weak self] _ in
             self?.presentBiometricsMenuItem()
         })
-        Store.subscribe(self, name: .promptShareData, callback: { [weak self] _ in
-            self?.promptShareData()
-        })
         Store.subscribe(self, name: .openFile(Data()), callback: { [weak self] in
             guard let trigger = $0 else { return }
             if case .openFile(let file) = trigger {
@@ -437,11 +434,6 @@ class ModalPresenter: Subscriber, Trackable {
             btcMenu,
             ethMenu,
 
-            // Share Anonymous Data
-            MenuItem(title: S.Settings.shareData, callback: {
-                menuNav.pushViewController(ShareDataViewController(), animated: true)
-            }),
-            
             // Reset Wallets
             MenuItem(title: S.Settings.resetCurrencies, callback: { [weak self] in
                 guard let `self` = self else { return }
@@ -890,16 +882,6 @@ class ModalPresenter: Subscriber, Trackable {
         nc.setWhiteStyle()
         nc.isNavigationBarHidden = true
         nc.delegate = securityCenterNavigationDelegate
-        topViewController?.present(nc, animated: true, completion: nil)
-    }
-
-    private func promptShareData() {
-        let shareData = ShareDataViewController()
-        let nc = ModalNavigationController(rootViewController: shareData)
-        nc.setDefaultStyle()
-        nc.isNavigationBarHidden = true
-        nc.delegate = securityCenterNavigationDelegate
-        shareData.addCloseNavigationItem()
         topViewController?.present(nc, animated: true, completion: nil)
     }
 

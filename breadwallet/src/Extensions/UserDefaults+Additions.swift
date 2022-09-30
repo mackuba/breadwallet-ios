@@ -12,7 +12,6 @@ private let defaults = UserDefaults.standard
 private let isBiometricsEnabledKey = "istouchidenabled"
 private let isBiometricsEnabledForTransactionsKey = "isbiometricsenabledtx"
 private let defaultCurrencyCodeKey = "defaultcurrency"
-private let hasAquiredShareDataPermissionKey = "has_acquired_permission"
 private let legacyWalletNeedsBackupKey = "WALLET_NEEDS_BACKUP"
 private let writePaperPhraseDateKey = "writepaperphrasedatekey"
 private let hasPromptedBiometricsKey = "haspromptedtouched"
@@ -23,7 +22,6 @@ private let pushTokenKey = "pushTokenKey"
 private let currentRateKey = "currentRateKey"
 private let customNodeIPKey = "customNodeIPKey"
 private let customNodePortKey = "customNodePortKey"
-private let hasPromptedShareDataKey = "hasPromptedShareDataKey"
 private let hasCompletedKYC = "hasCompletedKYCKey"
 private let hasAgreedToCrowdsaleTermsKey = "hasAgreedToCrowdsaleTermsKey"
 private let selectedCurrencyCodeKey = "selectedCurrencyCodeKey"
@@ -62,7 +60,6 @@ extension UserDefaults {
         [hasPromptedBiometricsKey: false],
         [isBiometricsEnabledKey: false],
         [isBiometricsEnabledForTransactionsKey: false],
-        [hasPromptedShareDataKey: false],
         [hasOptedInSegwitKey: false],
         [debugShouldAutoEnterPinKey: false],
         [debugShouldSuppressPaperKeyPromptKey: false],
@@ -141,17 +138,6 @@ extension UserDefaults {
         set { defaults.set(newValue, forKey: defaultCurrencyCodeKey) }
     }
 
-    static var hasAquiredShareDataPermission: Bool {
-        get {
-            //If user's haven't set this key, default to true
-            if defaults.object(forKey: hasAquiredShareDataPermissionKey) == nil {
-                return true
-            }
-            return defaults.bool(forKey: hasAquiredShareDataPermissionKey)
-        }
-        set { defaults.set(newValue, forKey: hasAquiredShareDataPermissionKey) }
-    }
-
     static var showFiatAmounts: Bool {
         get { return defaults.bool(forKey: showFiatAmountsKey)
         }
@@ -221,11 +207,6 @@ extension UserDefaults {
         set { defaults.set(newValue, forKey: customNodePortKey) }
     }
 
-    static var hasPromptedShareData: Bool {
-        get { return defaults.bool(forKey: hasPromptedBiometricsKey) }
-        set { defaults.set(newValue, forKey: hasPromptedBiometricsKey) }
-    }
-    
     static func rescanState(for currency: Currency) -> RescanState? {
         let key = rescanStateKeyPrefix + currency.code.uppercased()
         guard let data = defaults.object(forKey: key) as? Data else { return nil }
