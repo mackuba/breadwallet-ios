@@ -57,7 +57,6 @@ extension Experiment: Equatable {
  */
 public enum ExperimentName: String {
     case atmFinder = "map"
-    case buyAndSell = "buy-sell-menu-button"
 }
 
 /**

@@ -348,15 +348,7 @@ class ApplicationController: Subscriber, Trackable {
             let accountViewController = AccountViewController(currency: currency, wallet: wallet)
             navigationController.pushViewController(accountViewController, animated: true)
         }
-        
-        homeScreen.didTapBuy = {
-            Store.perform(action: RootModalActions.Present(modal: .buy(currency: nil)))
-        }
-        
-        homeScreen.didTapTrade = {
-            Store.perform(action: RootModalActions.Present(modal: .trade))
-        }
-        
+
         homeScreen.didTapMenu = { [unowned self] in
             self.modalPresenter?.presentMenu()
         }

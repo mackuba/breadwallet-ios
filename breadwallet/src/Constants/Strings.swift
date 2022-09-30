@@ -30,8 +30,6 @@ enum S {
         static let no = NSLocalizedString("Button.no", value: "No", comment: "No button")
         static let send = NSLocalizedString("Button.send", value: "Send", comment: "send button")
         static let receive = NSLocalizedString("Button.receive", value: "Receive", comment: "receive button")
-        static let buy = NSLocalizedString("Button.buy", value: "Buy", comment: "buy button")
-        static let sell = NSLocalizedString("Button.sell", value: "Sell", comment: "sell button")
         static let continueAction = NSLocalizedString("Button.continueAction", value: "Continue", comment: "prompt continue button")
         static let dismiss = NSLocalizedString("Button.dismiss", value: "Dismiss", comment: "prompt dismiss button")
         static let home = NSLocalizedString("Button.home", value: "Home", comment: "prompt home button")
@@ -432,9 +430,6 @@ enum S {
         static let totalAssets = NSLocalizedString("HomeScreen.totalAssets", value: "Total Assets", comment: "header")
         static let portfolio = NSLocalizedString("HomeScreen.portfolio", value: "Wallets", comment: "Section header")
         static let admin = NSLocalizedString("HomeScreen.admin", value: "Admin", comment: "Section header")
-        static let buy = NSLocalizedString("HomeScreen.buy", value: "Buy", comment: "home screen toolbar button")
-        static let buyAndSell = NSLocalizedString("HomeScreen.buyAndSell", value: "Buy & Sell", comment: "home screen Buy & Sell button")
-        static let trade = NSLocalizedString("HomeScreen.trade", value: "Trade", comment: "home screen toolbar button")
         static let menu = NSLocalizedString("Button.menu", value: "Menu", comment: "home screen toolbar button")
     }
 

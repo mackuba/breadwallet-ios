@@ -36,18 +36,6 @@ struct State {
     var currencies: [Currency] {
         return orderedWallets.map { $0.currency }
     }
-    
-    var shouldShowBuyNotificationForDefaultCurrency: Bool {
-        switch defaultCurrencyCode {
-        // Currencies eligible for Coinify.
-        case C.euroCurrencyCode,
-             C.britishPoundCurrencyCode,
-             C.danishKroneCurrencyCode:
-            return true
-        default:
-            return false
-        }
-    }
 }
 
 extension State {
@@ -124,9 +112,6 @@ enum RootModal {
     case receive(currency: Currency)
     case loginScan
     case requestAmount(currency: Currency, address: String)
-    case buy(currency: Currency?)
-    case sell(currency: Currency?)
-    case trade
     case receiveLegacy
     case gift
 }
@@ -220,16 +205,6 @@ func == (lhs: RootModal, rhs: RootModal) -> Bool {
         return true
     case (.requestAmount(let lhsCurrency, let lhsAddress), .requestAmount(let rhsCurrency, let rhsAddress)):
         return lhsCurrency == rhsCurrency && lhsAddress == rhsAddress
-    case (.buy(let lhsCurrency?), .buy(let rhsCurrency?)):
-        return lhsCurrency == rhsCurrency
-    case (.buy(nil), .buy(nil)):
-        return true
-    case (.sell(let lhsCurrency?), .sell(let rhsCurrency?)):
-        return lhsCurrency == rhsCurrency
-    case (.sell(nil), .sell(nil)):
-        return true
-    case (.trade, .trade):
-        return true
     case (.receiveLegacy, .receiveLegacy):
         return true
     case (.gift, .gift):

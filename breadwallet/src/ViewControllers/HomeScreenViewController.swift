@@ -21,35 +21,10 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     private let prompt = UIView()
     private var promptHiddenConstraint: NSLayoutConstraint!
     private let toolbar = UIToolbar()
-    private var toolbarButtons = [UIButton]()
     private let notificationHandler = NotificationHandler()
-    
-    private var shouldShowBuyAndSell: Bool {
-        return (Store.state.experimentWithName(.buyAndSell)?.active ?? false) && (Store.state.defaultCurrencyCode == C.usdCurrencyCode)
-    }
-    
-    private var buyButtonTitle: String {
-        return shouldShowBuyAndSell ? S.HomeScreen.buyAndSell : S.HomeScreen.buy
-    }
-    
-    private let buyButtonIndex = 0
-    private let tradeButtonIndex = 1
-    private let menuButtonIndex = 2
-    
-    private var buyButton: UIButton? {
-        guard toolbarButtons.count == 3 else { return nil }
-        return toolbarButtons[buyButtonIndex]
-    }
-    
-    private var tradeButton: UIButton? {
-        guard toolbarButtons.count == 3 else { return nil }
-        return toolbarButtons[tradeButtonIndex]
-    }
     
     var didSelectCurrency: ((Currency) -> Void)?
     var didTapManageWallets: (() -> Void)?
-    var didTapBuy: (() -> Void)?
-    var didTapTrade: (() -> Void)?
     var didTapMenu: (() -> Void)?
     
     var okToShowPrompts: Bool {
@@ -204,64 +179,26 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
         setupToolbar()
         updateTotalAssets()
     }
-    
-    //Returns the added image view so that it can be kept track of for removing later
-    private func addNotificationIndicatorToButton(button: UIButton) -> UIImageView? {
-        guard (button.subviews.last as? UIImageView) == nil else { return nil }    // make sure we didn't already add the bell
-        guard let buttonImageView = button.imageView else { return nil }
-        let buyImageFrame = buttonImageView
-        let bellImage = UIImage(named: "notification-bell")
 
-        let bellImageView = UIImageView(image: bellImage)
-        bellImageView.contentMode = .center
-
-        let bellWidth = bellImage?.size.width ?? 0
-        let bellHeight = bellImage?.size.height ?? 0
-        
-        let bellXOffset = buyImageFrame.center.x + 4
-        let bellYOffset = buyImageFrame.center.y - bellHeight + 2.0
-        
-        bellImageView.frame = CGRect(x: bellXOffset, y: bellYOffset, width: bellWidth, height: bellHeight)
-        
-        button.addSubview(bellImageView)
-        return bellImageView
-    }
-    
     private func setupToolbar() {
-        let buttons = [(buyButtonTitle, #imageLiteral(resourceName: "buy"), #selector(buy)),
-                       (S.HomeScreen.trade, #imageLiteral(resourceName: "trade"), #selector(trade)),
-                       (S.HomeScreen.menu, #imageLiteral(resourceName: "menu"), #selector(menu))].map { (title, image, selector) -> UIBarButtonItem in
-                        let button = UIButton.vertical(title: title, image: image)
-                        button.tintColor = .navigationTint
-                        button.addTarget(self, action: selector, for: .touchUpInside)
-                        return UIBarButtonItem(customView: button)
-        }
-                
+        let menuButton = UIButton.vertical(title: S.HomeScreen.menu, image: #imageLiteral(resourceName: "menu"))
+        menuButton.tintColor = .navigationTint
+        menuButton.addTarget(self, action: #selector(menu), for: .touchUpInside)
+
+        let menuBarButton = UIBarButtonItem(customView: menuButton)
+
         let paddingWidth = C.padding[2]
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
+
         toolbar.items = [
             flexibleSpace,
-            buttons[0],
-            flexibleSpace,
-            buttons[1],
-            flexibleSpace,
-            buttons[2],
-            flexibleSpace
+            menuBarButton
         ]
-        
-        let buttonWidth = (view.bounds.width - (paddingWidth * CGFloat(buttons.count+1))) / CGFloat(buttons.count)
+
+        let buttonWidth = view.bounds.width - paddingWidth * 2
         let buttonHeight = CGFloat(44.0)
-        buttons.forEach {
-            $0.customView?.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
-        }
-        
-        // Stash the UIButton's wrapped by the toolbar items in case we need add a badge later.
-        buttons.forEach { (toolbarButtonItem) in
-            if let button = toolbarButtonItem.customView as? UIButton {
-                self.toolbarButtons.append(button)
-            }
-        }
+
+        menuButton.frame = CGRect(x: 0, y: 0, width: buttonWidth, height: buttonHeight)
 
         toolbar.isTranslucent = false
         toolbar.barTintColor = Theme.secondaryBackground
@@ -295,14 +232,6 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
             if self.currentPromptView?.type == .paperKey {
                 self.currentPromptView = nil
             }
-        })
-        
-        Store.subscribe(self, selector: {
-            return ($0.experiments ?? nil) != ($1.experiments ?? nil)
-        }, callback: { _ in
-            // Do a full reload of the toolbar so it's laid out correctly with updated button titles.
-            self.setupToolbar()
-            self.saveEvent("experiment.buySellMenuButton", attributes: ["show": self.shouldShowBuyAndSell ? "true" : "false"])
         })
         
         Store.subscribe(self, selector: {
@@ -342,16 +271,6 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     }
     
     // MARK: Actions
-    
-    @objc private func buy() {
-        saveEvent("currency.didTapBuyBitcoin", attributes: [ "buyAndSell": shouldShowBuyAndSell ? "true" : "false" ])
-        didTapBuy?()
-    }
-    
-    @objc private func trade() {
-        saveEvent("currency.didTapTrade", attributes: [:])
-        didTapTrade?()
-    }
     
     @objc private func menu() { didTapMenu?() }
     

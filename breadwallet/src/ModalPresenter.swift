@@ -261,23 +261,6 @@ class ModalPresenter: Subscriber, Trackable {
             }
                         
             return ModalViewController(childViewController: requestVc)
-        case .buy(let currency):
-            var url = "/buy"
-            if let currency = currency {
-                url += "?currency=\(currency.code)"
-            }
-            presentPlatformWebViewController(url)
-            return nil
-        case .sell(let currency):
-            var url = "/sell"
-            if let currency = currency {
-                url += "?currency=\(currency.code)"
-            }
-            presentPlatformWebViewController(url)
-            return nil
-        case .trade:
-            presentPlatformWebViewController("/trade")
-            return nil
         case .receiveLegacy:
             guard let btc = Currencies.btc.instance else { return nil }
             return makeReceiveView(currency: btc, isRequestAmountVisible: false, isBTCLegacy: true)
