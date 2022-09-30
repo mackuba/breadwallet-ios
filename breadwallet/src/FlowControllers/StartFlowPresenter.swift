@@ -73,11 +73,7 @@ class StartFlowPresenter: Subscriber, Trackable {
         
         /// Displays the onboarding screen (app landing page) that allows the user to either create
         /// a new wallet or restore an existing wallet.
-        
-        // Register the onboarding event context so that events are logged to the server throughout
-        // the onboarding process, including post-walkthrough events such as PIN entry and paper-key entry.
-        EventMonitor.shared.register(.onboarding)
-        
+
         let onboardingScreen = OnboardingViewController(doesCloudBackupExist: keyMaster.doesCloudBackupExist(),
                                                         didExitOnboarding: { [weak self] (action) in
             guard let `self` = self else { return }
@@ -316,7 +312,6 @@ class StartFlowPresenter: Subscriber, Trackable {
         saveEvent(context: .onboarding, event: .complete)
         
         // Onboarding is finished.
-        EventMonitor.shared.deregister(.onboarding)
         navigationController.dismiss(animated: true) { [unowned self] in
             self.navigationController = nil
         }

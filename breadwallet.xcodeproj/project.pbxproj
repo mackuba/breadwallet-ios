@@ -120,7 +120,6 @@
 		713CD88A2240198A004657D4 /* RecoveryKeyIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713CD8892240198A004657D4 /* RecoveryKeyIntroViewController.swift */; };
 		7141BB5B2245271800F7ECF2 /* WriteRecoveryKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141BB5A2245271800F7ECF2 /* WriteRecoveryKeyViewController.swift */; };
 		7141BB5D2249543600F7ECF2 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141BB5C2249543600F7ECF2 /* InfoView.swift */; };
-		714F5D6E22037F2400F7CA70 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714F5D6D22037F2400F7CA70 /* EventMonitor.swift */; };
 		716F824321F91D9A0064E6F4 /* AppRatingManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716F824221F91D9A0064E6F4 /* AppRatingManagerTests.swift */; };
 		71904FB72225A1F900A6D027 /* announcement-promo.json in Resources */ = {isa = PBXBuildFile; fileRef = 71904FB62225A1F800A6D027 /* announcement-promo.json */; };
 		71904FB92225AB3900A6D027 /* AnnouncementPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71904FB82225AB3900A6D027 /* AnnouncementPromptView.swift */; };
@@ -606,9 +605,6 @@
 		CEF3E8361DE60222007C0A9E /* ModalNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF3E8351DE60222007C0A9E /* ModalNavigationController.swift */; };
 		CEF61B121ECF52C700C7EA6A /* AmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF61B111ECF52C700C7EA6A /* AmountViewController.swift */; };
 		CEF7D94622CE6AC000939D19 /* HistoryPeriodButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEF7D94522CE6AC000939D19 /* HistoryPeriodButton.swift */; };
-		E821D4CA21C16A8300B0907B /* AnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */; };
-		E821D4CC21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
-		E821D4CD21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */; };
 		E837FD00219D1C0600F59D99 /* onboarding-video-globe.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E837FCFC219D1C0600F59D99 /* onboarding-video-globe.mp4 */; };
 		E837FD01219D1C0600F59D99 /* onboarding-video-coins-out.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E837FCFD219D1C0600F59D99 /* onboarding-video-coins-out.mp4 */; };
 		E837FD02219D1C0600F59D99 /* onboarding-video-coins-in.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E837FCFE219D1C0600F59D99 /* onboarding-video-coins-in.mp4 */; };
@@ -827,7 +823,6 @@
 		713CD8892240198A004657D4 /* RecoveryKeyIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecoveryKeyIntroViewController.swift; path = src/ViewControllers/RecoveryKey/RecoveryKeyIntroViewController.swift; sourceTree = "<group>"; };
 		7141BB5A2245271800F7ECF2 /* WriteRecoveryKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WriteRecoveryKeyViewController.swift; path = src/ViewControllers/RecoveryKey/WriteRecoveryKeyViewController.swift; sourceTree = "<group>"; };
 		7141BB5C2249543600F7ECF2 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InfoView.swift; path = src/Views/InfoView.swift; sourceTree = "<group>"; };
-		714F5D6D22037F2400F7CA70 /* EventMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EventMonitor.swift; path = src/Utilities/EventMonitor.swift; sourceTree = "<group>"; };
 		716F824221F91D9A0064E6F4 /* AppRatingManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRatingManagerTests.swift; sourceTree = "<group>"; };
 		71904FB62225A1F800A6D027 /* announcement-promo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "announcement-promo.json"; path = "json/announcement-promo.json"; sourceTree = "<group>"; };
 		71904FB82225AB3900A6D027 /* AnnouncementPromptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnouncementPromptView.swift; path = src/Views/AnnouncementPromptView.swift; sourceTree = "<group>"; };
@@ -1314,8 +1309,6 @@
 		CEF3E8351DE60222007C0A9E /* ModalNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModalNavigationController.swift; path = src/ViewControllers/ModalNavigationController.swift; sourceTree = "<group>"; };
 		CEF61B111ECF52C700C7EA6A /* AmountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = AmountViewController.swift; path = src/ViewControllers/AmountViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CEF7D94522CE6AC000939D19 /* HistoryPeriodButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HistoryPeriodButton.swift; path = src/Views/Charts/HistoryPeriodButton.swift; sourceTree = "<group>"; };
-		E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTests.swift; sourceTree = "<group>"; };
-		E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BRAnalyticsEvent.swift; path = src/Platform/BRAnalyticsEvent.swift; sourceTree = "<group>"; };
 		E837FCFC219D1C0600F59D99 /* onboarding-video-globe.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "onboarding-video-globe.mp4"; path = "Resources/onboarding-videos/onboarding-video-globe.mp4"; sourceTree = "<group>"; };
 		E837FCFD219D1C0600F59D99 /* onboarding-video-coins-out.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "onboarding-video-coins-out.mp4"; path = "Resources/onboarding-videos/onboarding-video-coins-out.mp4"; sourceTree = "<group>"; };
 		E837FCFE219D1C0600F59D99 /* onboarding-video-coins-in.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = "onboarding-video-coins-in.mp4"; path = "Resources/onboarding-videos/onboarding-video-coins-in.mp4"; sourceTree = "<group>"; };
@@ -1405,7 +1398,6 @@
 				7C6E0D902214C9B700CA3BA5 /* AssetArchive.swift */,
 				22E773031EE7813000397E0E /* Bonjour.swift */,
 				CE4CA7BB1EE3649100373F11 /* BRActivityView.swift */,
-				E821D4CB21C16B2E00B0907B /* BRAnalyticsEvent.swift */,
 				22A9A9321DF61945000F0016 /* BRAPIClient.swift */,
 				7117305A220CE7B8001931B3 /* BRAPIClient+Announcements.swift */,
 				2218BD761E8F55430091D5E8 /* BRAPIClient+Assets.swift */,
@@ -1587,7 +1579,6 @@
 			children = (
 				CE74F58C1E3BA85600ED5FA9 /* ExchangeUpdater.swift */,
 				710B036321F8C208007E8A2A /* AppRatingManager.swift */,
-				714F5D6D22037F2400F7CA70 /* EventMonitor.swift */,
 				3AB3EE0E227A23B400414616 /* ASADataFormatter.swift */,
 				7CF5319C231EE01300E61F12 /* Base32.swift */,
 				3ADA10E724BE28D6000A1D99 /* HistoryFetcher.swift */,
@@ -1734,7 +1725,6 @@
 				75A2A7AA1DA5934300A983D8 /* Info.plist */,
 				3A65DE802447E9AF0025C56E /* AccountInitializationTests.swift */,
 				CE0ED79824098302000AA24F /* AddressTests.swift */,
-				E821D4C921C16A8300B0907B /* AnalyticsEventTests.swift */,
 				716F824221F91D9A0064E6F4 /* AppRatingManagerTests.swift */,
 				3AB3EE10227A27DD00414616 /* ASADataFormatterTests.swift */,
 				CEC7F929208803FA0083DF64 /* AssetCollectionTests.swift */,
@@ -3276,7 +3266,6 @@
 				CEC6AA421DEFC88F00EE5AFD /* ReceiveViewController.swift in Sources */,
 				7C9BC58F231765190011732F /* WalletConnectionSettings.swift in Sources */,
 				CEE20C2D1EA288FA0086F724 /* UpdatingLabel.swift in Sources */,
-				714F5D6E22037F2400F7CA70 /* EventMonitor.swift in Sources */,
 				CE3D4C591EF743EF0016B1C8 /* Functions.swift in Sources */,
 				CEE20C341EA5B4550086F724 /* ArticleIds.swift in Sources */,
 				3A93890A22A303800081FCF9 /* CubicCurveAlgorithm.swift in Sources */,
@@ -3288,7 +3277,6 @@
 				71988B0821EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift in Sources */,
 				CEE20C361EA5B4620086F724 /* Constants.swift in Sources */,
 				3A7605F724D0BB1F0057C1F4 /* CloudBackup.swift in Sources */,
-				E821D4CC21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */,
 				CEEC707F1E8D6B4100EF788E /* MenuViewController.swift in Sources */,
 				CEEE92F11EBA7CBA00B7AC9C /* RequestAmountViewController.swift in Sources */,
 				CE8CD8DF1E2E825100785E02 /* VerifyPinViewController.swift in Sources */,
@@ -3435,7 +3423,6 @@
 				CEDD8F101E575DD4007A4123 /* WalletAuthenticationTests.swift in Sources */,
 				CEC7F92A208803FA0083DF64 /* AssetCollectionTests.swift in Sources */,
 				7C9BC591231843A50011732F /* WalletConnectionSettingsTests.swift in Sources */,
-				E821D4CD21C16B2E00B0907B /* BRAnalyticsEvent.swift in Sources */,
 				3AEF7B72234A4E3C005BE184 /* RequestUrlTests.swift in Sources */,
 				7CB3BCD52059B62200053687 /* UnitConversionTests.swift in Sources */,
 				710B036221F67888007E8A2A /* MockClasses.swift in Sources */,
@@ -3453,7 +3440,6 @@
 				7138BABB223062F50059091E /* NotificationTests.swift in Sources */,
 				71249918222046EB00BEA491 /* PromptTests.swift in Sources */,
 				71988B0B21EF8D06008B8EA0 /* BRUserAgentHeaderGeneratorTests.swift in Sources */,
-				E821D4CA21C16A8300B0907B /* AnalyticsEventTests.swift in Sources */,
 				22C4312C1DF89D700017CAEA /* BRBSPatchTests.swift in Sources */,
 				CEA7E6761F057D77001F8C27 /* WalletInfoTest.swift in Sources */,
 				3A211D1D2242AF0500C2A906 /* Bip38Tests.swift in Sources */,

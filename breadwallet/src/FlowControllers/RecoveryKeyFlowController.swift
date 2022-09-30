@@ -64,10 +64,6 @@ class RecoveryKeyFlowController {
         let recoveryKeyMode: EnterRecoveryKeyMode = isGeneratingKey ? .generateKey : .writeKey
         let eventContext = (context == .none) ? (isGeneratingKey ? .generateKey : .writeKey) : context
 
-        // Register the context so that the recovery key events are tracked, with the correct context.
-        // When the flow is dismissed,
-        EventMonitor.shared.register(eventContext)
-        
         let recoveryKeyNavController = RecoveryKeyFlowController.makeNavigationController()
         
         var baseNavigationController: UINavigationController?
@@ -89,9 +85,6 @@ class RecoveryKeyFlowController {
         
         // dismisses the entire recovery key flow
         let dismissFlow = {
-            
-            EventMonitor.shared.deregister(eventContext)
-            
             if let dismissAction = dismissAction {
                 dismissAction()
             } else {

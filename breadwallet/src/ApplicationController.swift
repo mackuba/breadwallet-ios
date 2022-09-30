@@ -78,7 +78,6 @@ class ApplicationController: Subscriber, Trackable {
         application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalNever)
         
         UNUserNotificationCenter.current().delegate = notificationHandler
-        EventMonitor.shared.register(.pushNotifications)
         
         setup()
         Reachability.addDidChangeCallback({ isReachable in
