@@ -98,9 +98,8 @@ class ConfirmRecoveryKeyViewController: BaseRecoveryKeyViewController {
     override func onCloseButton() {
         RecoveryKeyFlowController.promptToSetUpRecoveryKeyLater(from: self) { [unowned self] (userWantsToSetUpLater) in
             if userWantsToSetUpLater {
-                self.trackEvent(event: .dismissed, metaData: nil, tracked: {
-                    self.dismiss(animated: true, completion: nil)
-                })
+                self.trackEvent(event: .dismissed, metaData: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         }
     }

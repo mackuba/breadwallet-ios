@@ -100,15 +100,11 @@ class BaseRecoveryKeyViewController: UIViewController, Trackable {
         navigationItem.leftBarButtonItem = nil
     }
     
-    func trackEvent(event: Event, metaData: [String: String]? = nil, tracked: (() -> Void)? = nil) {
+    func trackEvent(event: Event, metaData: [String: String]? = nil) {
         if let attributes = metaData {
-            saveEvent(context: eventContext, screen: screen, event: event, attributes: attributes, callback: { _ in
-                tracked?()
-            })
+            saveEvent(context: eventContext, screen: screen, event: event, attributes: attributes)
         } else {
-            saveEvent(context: eventContext, screen: screen, event: event) { _ in
-                tracked?()
-            }
+            saveEvent(context: eventContext, screen: screen, event: event)
         }
     }
 }

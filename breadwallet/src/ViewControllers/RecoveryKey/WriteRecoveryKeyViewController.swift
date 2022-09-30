@@ -149,9 +149,8 @@ class WriteRecoveryKeyViewController: BaseRecoveryKeyViewController {
                 // deinit'd before the event is logged.
                 
                 let metaData = [ "step": String(self.pageIndex + 1) ]
-                self.trackEvent(event: .dismissed, metaData: metaData, tracked: {
-                    self.exitWithoutPrompting()
-                })
+                self.trackEvent(event: .dismissed, metaData: metaData)
+                self.exitWithoutPrompting()
             }
         }
     }
@@ -437,18 +436,14 @@ extension WriteRecoveryKeyViewController {
         self.scrollOffset = xOffset
     }
     
-    func trackEvent(event: Event, tracked: @escaping () -> Void) {
+    func trackEvent(event: Event) {
         if event == .dismissed {
             if mode == .generateKey {
                 let metaData = [ "step": String(pageIndex + 1) ]
-                saveEvent(context: eventContext, screen: .writePaperKey, event: event, attributes: metaData, callback: { _ in
-                    tracked()
-                })
+                saveEvent(context: eventContext, screen: .writePaperKey, event: event, attributes: metaData)
             }
         } else {
-            saveEvent(context: eventContext, screen: .writePaperKey, event: event, callback: { _ in
-                tracked()
-            })
+            saveEvent(context: eventContext, screen: .writePaperKey, event: event)
         }
     }
     

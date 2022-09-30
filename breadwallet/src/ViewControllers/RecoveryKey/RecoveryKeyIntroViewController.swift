@@ -335,9 +335,8 @@ class RecoveryKeyIntroViewController: BaseRecoveryKeyViewController {
         case .generateKey:
             RecoveryKeyFlowController.promptToSetUpRecoveryKeyLater(from: self) { [unowned self] (userWantsToSetUpLater) in
                 if userWantsToSetUpLater {
-                    self.trackEvent(event: .dismissed, metaData: nil, tracked: {
-                        exit(.abort)
-                    })
+                    self.trackEvent(event: .dismissed, metaData: nil)
+                    exit(.abort)
                 }
             }
         
@@ -453,9 +452,8 @@ class RecoveryKeyIntroViewController: BaseRecoveryKeyViewController {
         if let exit = exitCallback {
             
             if action == .generateKey {
-                trackEvent(event: .generatePaperKeyButton, metaData: nil, tracked: {
-                    exit(action)
-                })
+                trackEvent(event: .generatePaperKeyButton, metaData: nil)
+                exit(action)
             } else {
                 exit(action)
             }

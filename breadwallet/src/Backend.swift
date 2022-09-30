@@ -23,7 +23,6 @@ class Backend {
     private var apiClient: BRAPIClient
     private var kvStore: BRReplicatedKVStore?
     private var exchangeUpdater: ExchangeUpdater?
-    private var eventManager: EventManager?
     private let userAgentFetcher = UserAgentFetcher()
     
     // MARK: - Public
@@ -40,22 +39,11 @@ class Backend {
         return shared.kvStore
     }
 
-    static var eventManager: EventManager? {
-        return shared.eventManager
-    }
-    
     static func updateExchangeRates() {
         shared.exchangeUpdater?.refresh()
     }
     
-    static func sendLaunchEvent() {
-        DispatchQueue.main.async { // WKWebView creation must be on main thread
-            shared.userAgentFetcher.getUserAgent { userAgent in
-                shared.apiClient.sendLaunchEvent(userAgent: userAgent)
-            }
-        }
-    }
-    
+
     // MARK: Setup
     
     static func connect(authenticator: WalletAuthenticator) {
@@ -63,13 +51,11 @@ class Backend {
         shared.apiClient = BRAPIClient(authenticator: authenticator)
         shared.kvStore = try? BRReplicatedKVStore(encryptionKey: key, remoteAdaptor: KVStoreAdaptor(client: shared.apiClient))
         shared.exchangeUpdater = ExchangeUpdater()
-        shared.eventManager = EventManager(adaptor: shared.apiClient)
     }
     
     /// Disconnect backend services and reset API auth
     static func disconnectWallet() {
         URLCache.shared.removeAllCachedResponses()
-        shared.eventManager = nil
         shared.exchangeUpdater = nil
         shared.kvStore = nil
         shared.apiClient = BRAPIClient(authenticator: NoAuthWalletAuthenticator())

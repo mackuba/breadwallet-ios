@@ -100,10 +100,6 @@ class ApplicationController: Subscriber, Trackable {
         
         alertPresenter = AlertPresenter(window: self.window)
 
-        // Start collecting analytics events. Once we have a wallet, startBackendServices() will
-        // notify `Backend.apiClient.analytics` so that it can upload events to the server.
-        Backend.apiClient.analytics?.startCollectingEvents()
-
         appRatingManager.start()
 
         Store.subscribe(self, name: .wipeWalletNoPrompt, callback: { [weak self] _ in
@@ -210,7 +206,6 @@ class ApplicationController: Subscriber, Trackable {
     func willEnterForeground() {
         guard !keyStore.noWallet else { return }
         bumpLaunchCount()
-        Backend.sendLaunchEvent()
         if shouldRequireLogin() {
             Store.perform(action: RequireLogin())
         }
@@ -286,8 +281,6 @@ class ApplicationController: Subscriber, Trackable {
     /// Initialize backend services. Should only be called once per session.
     private func startBackendServices() {
         Backend.connect(authenticator: keyStore as WalletAuthenticator)
-        Backend.sendLaunchEvent()
-        Backend.apiClient.analytics?.onWalletReady()
     }
 
     /// Initialize WalletInfo in KV-store. Needed prior to creating the System.

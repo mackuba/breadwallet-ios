@@ -34,7 +34,7 @@ class NotificationHandler: NSObject, UNUserNotificationCenterDelegate, Trackable
             eventAttributes = brdData
         }
         
-        saveEvent(context: .pushNotifications, screen: .none, event: .openNotification, attributes: eventAttributes ?? [:], callback: nil)
+        saveEvent(context: .pushNotifications, screen: .none, event: .openNotification, attributes: eventAttributes ?? [:])
 
         // Log an event for the push notification campaign if applicable.
         if let messageInfo = json["mp"] as? [String: Any], let campaignId = messageInfo["c"] as? Int {
