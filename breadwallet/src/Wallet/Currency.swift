@@ -114,9 +114,6 @@ class Currency: CurrencyWithIcon {
         if isEthereumCompatible {
             return ["ethereum"]
         }
-        if isXRP {
-            return ["xrpl", "xrp", "ripple"]
-        }
         return nil
     }
     
@@ -130,17 +127,10 @@ class Currency: CurrencyWithIcon {
     var payId: String? {
         if isBitcoin { return "btc" }
         if isEthereum { return "eth" }
-        if isXRP { return "xrpl" }
         return nil
     }
     
     var attributeDefinition: AttributeDefinition? {
-        if isXRP {
-            return AttributeDefinition(key: "DestinationTag",
-                                       label: S.Send.destinationTagLabel,
-                                       keyboardType: .numberPad,
-                                       maxLength: 10)
-        }
         return nil
     }
     
@@ -151,9 +141,6 @@ class Currency: CurrencyWithIcon {
         }
         if isEthereumCompatible {
             return "0xA6A60123Feb7F61081b1BFe063464b3219cEdCEc"
-        }
-        if isXRP {
-            return "r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV"
         }
         return nil
     }
@@ -247,7 +234,6 @@ extension Currency {
     var isEthereum: Bool { return uid == Currencies.eth.uid }
     var isERC20Token: Bool { return tokenType == .erc20 }
     var isBRDToken: Bool { return uid == Currencies.brd.uid }
-    var isXRP: Bool { return uid == Currencies.xrp.uid }
     var isBitcoinCompatible: Bool { return isBitcoin }
     var isEthereumCompatible: Bool { return isEthereum || isERC20Token }
 }
@@ -461,7 +447,6 @@ enum Currencies: String, CaseIterable {
     case eth
     case brd
     case tusd
-    case xrp
     case usdc
     
     var code: String { return rawValue }
@@ -476,8 +461,6 @@ enum Currencies: String, CaseIterable {
             uids = "ethereum-mainnet:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6"
         case .tusd:
             uids = "ethereum-mainnet:0x0000000000085d4780B73119b644AE5ecd22b376"
-        case .xrp:
-            uids = "ripple-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
         case .usdc:
             uids = "ethereum-mainnet:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
         }

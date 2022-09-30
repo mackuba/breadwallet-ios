@@ -451,14 +451,6 @@ class SendViewController: UIViewController, Subscriber, ModalPresentable, Tracka
             showAlert(title: S.Alert.error, message: "No fee estimate", buttonLabel: S.Button.ok)
             return false
         }
-        
-        //XRP destination Tag must fit into UInt32
-        if let attribute = attributeCell?.attribute, currency.isXRP {
-            if UInt32(attribute) == nil {
-               showAlert(title: S.Alert.error, message: "Destination tag is too long.", buttonLabel: S.Button.ok)
-               return false
-            }
-        }
 
         return handleValidationResult(sender.createTransaction(address: address,
                                                         amount: amount,

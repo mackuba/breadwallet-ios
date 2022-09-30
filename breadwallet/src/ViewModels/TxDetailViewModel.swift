@@ -73,9 +73,6 @@ struct TxDetailViewModel: TxViewModel {
     }
     
     var extraAttributeHeader: String {
-        if tx.currency.isXRP {
-            return S.TransactionDetails.destinationTagHeader
-        }
         return ""
     }
     
