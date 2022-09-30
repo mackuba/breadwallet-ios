@@ -293,18 +293,6 @@ extension UIColor {
     static var onboardingOrangeText: UIColor {
         return UIColor.fromHex("EA8017")
     }
-
-    static var rewardsViewNormalTitle: UIColor {
-        return UIColor.fromHex("2A2A2A")
-    }
-
-    static var rewardsViewExpandedTitle: UIColor {
-        return UIColor.fromHex("441E36")
-    }
-
-    static var rewardsViewExpandedBody: UIColor {
-        return UIColor.fromHex("#441E36").withAlphaComponent(0.7)
-    }
 }
 
 extension UIColor {

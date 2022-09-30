@@ -233,7 +233,6 @@ extension Currency {
     var isBitcoin: Bool { return uid == Currencies.btc.uid }
     var isEthereum: Bool { return uid == Currencies.eth.uid }
     var isERC20Token: Bool { return tokenType == .erc20 }
-    var isBRDToken: Bool { return uid == Currencies.brd.uid }
     var isBitcoinCompatible: Bool { return isBitcoin }
     var isEthereumCompatible: Bool { return isEthereum || isERC20Token }
 }
@@ -364,7 +363,6 @@ extension CurrencyMetaData: Codable {
         var uid = try container.decode(String.self, forKey: .uid)
         if E.isTestnet {
             uid = uid.replacingOccurrences(of: "mainnet", with: "testnet")
-            uid = uid.replacingOccurrences(of: "0x558ec3152e2eb2174905cd19aea4e34a23de9ad6", with: "0x7108ca7c4718efa810457f228305c9c71390931a") // BRD token
             uid = uid.replacingOccurrences(of: "ethereum-testnet", with: "ethereum-ropsten")
         }
         self.uid = CurrencyId(rawValue: uid) //try container.decode(CurrencyId.self, forKey: .uid)
@@ -445,7 +443,6 @@ extension CurrencyMetaData: Hashable {
 enum Currencies: String, CaseIterable {
     case btc
     case eth
-    case brd
     case tusd
     case usdc
     
@@ -457,8 +454,6 @@ enum Currencies: String, CaseIterable {
             uids = "bitcoin-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
         case .eth:
             uids = "ethereum-\(E.isTestnet ? "ropsten" : "mainnet"):__native__"
-        case .brd:
-            uids = "ethereum-mainnet:0x558ec3152e2eb2174905cd19aea4e34a23de9ad6"
         case .tusd:
             uids = "ethereum-mainnet:0x0000000000085d4780B73119b644AE5ecd22b376"
         case .usdc:

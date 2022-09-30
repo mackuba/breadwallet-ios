@@ -8,14 +8,8 @@
 
 import UIKit
 
-protocol HighlightableCell {
-    func highlight()
-    func unhighlight()
-}
-
 enum HomeScreenCellIds: String {
-    case regularCell        = "CurrencyCell"
-    case highlightableCell  = "HighlightableCurrencyCell"
+    case regularCell = "CurrencyCell"
 }
 
 class Background: UIView, GradientDrawable {

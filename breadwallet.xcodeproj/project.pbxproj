@@ -100,7 +100,6 @@
 		71014F7C2327E49400DA1373 /* fiatcurrencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 71014F7B2327E49400DA1373 /* fiatcurrencies.json */; };
 		710B036221F67888007E8A2A /* MockClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710B036121F67888007E8A2A /* MockClasses.swift */; };
 		710B036421F8C208007E8A2A /* AppRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710B036321F8C208007E8A2A /* AppRatingManager.swift */; };
-		711730572204FDFB001931B3 /* HomeScreenHiglightableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 711730562204FDFB001931B3 /* HomeScreenHiglightableCell.swift */; };
 		71173059220CCC91001931B3 /* PromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71173058220CCC91001931B3 /* PromptView.swift */; };
 		7117305B220CE7B8001931B3 /* BRAPIClient+Announcements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7117305A220CE7B8001931B3 /* BRAPIClient+Announcements.swift */; };
 		71249913221F44FE00BEA491 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71249912221F44FE00BEA491 /* Announcement.swift */; };
@@ -351,8 +350,6 @@
 		9AE8011321FFF81F00D5058C /* rewardsIcon-57.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9AE800CD21FFF81E00D5058C /* rewardsIcon-57.gif */; };
 		9AE8011421FFF81F00D5058C /* rewardsIcon-63.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9AE800CE21FFF81F00D5058C /* rewardsIcon-63.gif */; };
 		9AE8011521FFF81F00D5058C /* rewardsIcon-64.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9AE800CF21FFF81F00D5058C /* rewardsIcon-64.gif */; };
-		9AE8FFF821FE64E200D5058C /* RewardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE8FFF721FE64E200D5058C /* RewardsView.swift */; };
-		9AE8FFFA21FE6FE000D5058C /* RewardsIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE8FFF921FE6FE000D5058C /* RewardsIconView.swift */; };
 		9F00EA9325DDEED200A99218 /* brd-tokens.tar in Resources */ = {isa = PBXBuildFile; fileRef = 7CC7D8D421581C41007E1B9A /* brd-tokens.tar */; };
 		9F00EAA825DDEF7900A99218 /* ImageStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F00EAA725DDEF7800A99218 /* ImageStorageService.swift */; };
 		9F00EAD025DDF28400A99218 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F00EAAF25DDF15200A99218 /* Bundle+Extensions.swift */; };
@@ -793,7 +790,6 @@
 		71014F7B2327E49400DA1373 /* fiatcurrencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = fiatcurrencies.json; path = Resources/fiatcurrencies.json; sourceTree = "<group>"; };
 		710B036121F67888007E8A2A /* MockClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockClasses.swift; path = MockClasses/MockClasses.swift; sourceTree = "<group>"; };
 		710B036321F8C208007E8A2A /* AppRatingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppRatingManager.swift; path = src/Utilities/AppRatingManager.swift; sourceTree = "<group>"; };
-		711730562204FDFB001931B3 /* HomeScreenHiglightableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeScreenHiglightableCell.swift; path = src/Views/HomeScreenHiglightableCell.swift; sourceTree = "<group>"; };
 		71173058220CCC91001931B3 /* PromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromptView.swift; path = src/Views/PromptView.swift; sourceTree = "<group>"; };
 		7117305A220CE7B8001931B3 /* BRAPIClient+Announcements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Announcements.swift"; path = "src/Platform/BRAPIClient+Announcements.swift"; sourceTree = "<group>"; };
 		71249912221F44FE00BEA491 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Announcement.swift; path = src/Models/Prompts/Announcement.swift; sourceTree = "<group>"; };
@@ -1054,8 +1050,6 @@
 		9AE800CD21FFF81E00D5058C /* rewardsIcon-57.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "rewardsIcon-57.gif"; path = "src/Views/AnimatedIcons/Rewards Icon Frames/rewardsIcon-57.gif"; sourceTree = "<group>"; };
 		9AE800CE21FFF81F00D5058C /* rewardsIcon-63.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "rewardsIcon-63.gif"; path = "src/Views/AnimatedIcons/Rewards Icon Frames/rewardsIcon-63.gif"; sourceTree = "<group>"; };
 		9AE800CF21FFF81F00D5058C /* rewardsIcon-64.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "rewardsIcon-64.gif"; path = "src/Views/AnimatedIcons/Rewards Icon Frames/rewardsIcon-64.gif"; sourceTree = "<group>"; };
-		9AE8FFF721FE64E200D5058C /* RewardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RewardsView.swift; path = src/Views/RewardsView.swift; sourceTree = "<group>"; };
-		9AE8FFF921FE6FE000D5058C /* RewardsIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RewardsIconView.swift; path = src/Views/AnimatedIcons/RewardsIconView.swift; sourceTree = "<group>"; };
 		9F00EAA725DDEF7800A99218 /* ImageStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStorageService.swift; sourceTree = "<group>"; };
 		9F00EAAF25DDF15200A99218 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		9F00EAF325DDFC9600A99218 /* Currency+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Currency+Extensions.swift"; sourceTree = "<group>"; };
@@ -2185,7 +2179,6 @@
 				CEEC70911E95DA4400EF788E /* GradientSwitch.swift */,
 				CEF3E82E1DE534C5007C0A9E /* GradientView.swift */,
 				CE0822651FCE059A00EF371D /* HomeScreenCell.swift */,
-				711730562204FDFB001931B3 /* HomeScreenHiglightableCell.swift */,
 				CED341321EF5A5C00014912A /* InAppAlert.swift */,
 				7141BB5C2249543600F7ECF2 /* InfoView.swift */,
 				CE25BF8C1DF3B8A500BC67B6 /* InViewAlert.swift */,
@@ -2201,7 +2194,6 @@
 				3A36328C225301D60043EBA4 /* PriceChangeView.swift */,
 				71173058220CCC91001931B3 /* PromptView.swift */,
 				CEC6AA3C1DEE687000EE5AFD /* RadialGradientView.swift */,
-				9AE8FFF721FE64E200D5058C /* RewardsView.swift */,
 				CE8F0AE21EB91BB500AA7642 /* SearchHeaderView.swift */,
 				CE6B6B491E54C0CA00B31405 /* SecurityCenterCell.swift */,
 				CEAFC8601E5D5B0500E4FD06 /* SegmentedButton.swift */,
@@ -2452,7 +2444,6 @@
 				CEF3E8311DE55540007C0A9E /* CheckView.swift */,
 				CEF3E8331DE57166007C0A9E /* AnimatableIcon.swift */,
 				9A39B1242202AE9E00E5018B /* MultiframeAnimation.swift */,
-				9AE8FFF921FE6FE000D5058C /* RewardsIconView.swift */,
 				9A39B1222202AA3400E5018B /* HomeScreenCellHighlightView.swift */,
 			);
 			name = AnimatedIcons;
@@ -3053,7 +3044,6 @@
 				CEC6AA4D1DF0741100EE5AFD /* ModalDisplayable.swift in Sources */,
 				7CF9988D23202C75004AEC17 /* BRAPIClient+Experiments.swift in Sources */,
 				CEE0EF521EBD14B60018DB36 /* PinTransitioningDelegate.swift in Sources */,
-				9AE8FFFA21FE6FE000D5058C /* RewardsIconView.swift in Sources */,
 				754AE0BC1DFE8A46007FD001 /* SecureAllocator.swift in Sources */,
 				22A9A94A1DF61945000F0016 /* BRCameraPlugin.swift in Sources */,
 				3A5C9B2B22A5676F00C907C1 /* PriceChange.swift in Sources */,
@@ -3189,7 +3179,6 @@
 				22A9A9461DF61945000F0016 /* BRAPIClient.swift in Sources */,
 				CEAA9E9B1DC2B9320066731D /* ConfirmPhraseView.swift in Sources */,
 				75A2A7941DA5934300A983D8 /* AppDelegate.swift in Sources */,
-				711730572204FDFB001931B3 /* HomeScreenHiglightableCell.swift in Sources */,
 				CEEC70901E95D5C100EF788E /* PushNotificationsViewController.swift in Sources */,
 				3AFB571524E2E0BA00087527 /* UIHelpers.swift in Sources */,
 				222C42501E90492800078EB5 /* BRAPIClient+KV.swift in Sources */,
@@ -3306,7 +3295,6 @@
 				CE20C90C1DBC59E600C8397A /* StartFlowPresenter.swift in Sources */,
 				CE20C8FC1DBB0F3A00C8397A /* UIColor+BRWAdditions.swift in Sources */,
 				3A6785F1256F2F1A0065F835 /* RedeemGiftViewController.swift in Sources */,
-				9AE8FFF821FE64E200D5058C /* RewardsView.swift in Sources */,
 				CEA3626A1E01150D0061FC0E /* CGContext+Additions.swift in Sources */,
 				7C6ACCB41FEB34470028ABFA /* TxLabelCell.swift in Sources */,
 				7C40DE2D20E09207000E289D /* ToggleButton.swift in Sources */,
