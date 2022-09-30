@@ -50,7 +50,6 @@ struct C {
     static let null = "(null)"
     static let maxMemoLength = 250
     static let iosEmail = "ios@breadapp.com"
-    static let reviewLink = "https://itunes.apple.com/app/breadwallet-bitcoin-wallet/id885251393?action=write-review"
     static var standardPort: Int {
         return E.isTestnet ? 18333 : 8333
     }
@@ -106,12 +105,6 @@ struct C {
     static var bdbHost: String {
         return "api.blockset.com"
     }
-
-    static let daiContractAddress = "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"
-    static let daiContractCode = "DAI"
-    
-    static let tusdContractAddress = "0x0000000000085d4780B73119b644AE5ecd22b376"
-    static let tusdContractCode = "TUSD"
 }
 
 enum Words {
