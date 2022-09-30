@@ -365,13 +365,7 @@ class CoreSystem: Subscriber, Trackable {
                             currency: currency,
                             system: self)
         wallets[coreWallet.currency.uid] = wallet
-        if currency.isHBAR && createWalletCallback != nil {
-            createWalletCallback?(wallet)
-            createWalletCallback = nil
-            DispatchQueue.main.async {
-                Store.perform(action: SetCreationSuccess(currency))
-            }
-        }
+
         return wallet
     }
     

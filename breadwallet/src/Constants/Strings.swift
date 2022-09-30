@@ -116,16 +116,6 @@ enum S {
         static let balance = NSLocalizedString("Account.balance", value:"Balance", comment: "Account header balance label")
         static let delistedToken = NSLocalizedString("Account.delistedToken", value: "This token has been delisted. \n\nYou may still be able to send these tokens to another platform. For more details, visit our support page.", comment: "Delisted token alert banner message")
     }
-    
-    enum AccountCreation {
-        static let title = NSLocalizedString("AccountCreation.title", value:"Confirm Account Creation", comment: "Confirm Account Creation Title")
-        static let body = NSLocalizedString("AccountCreation.body", value:"Only create a Hedera account if you intend on storing HBAR in your wallet.", comment: "Confirm Account Creation mesage body")
-        static let notNow = NSLocalizedString("AccountCreation.notNow", value:"Not Now", comment: "Not Now button label.")
-        static let create = NSLocalizedString("AccountCreation.create", value:"Create Account", comment: "Create Account button label")
-        static let creating = NSLocalizedString("AccountCreation.creating", value:"Creating Account", comment: "Creating Account progress Label")
-        static let error = NSLocalizedString("AccountCreation.error", value:"An error occured during account creation. Please try again later.", comment: "Creating Account progress Label")
-        static let timeout = NSLocalizedString("AccountCreation.timeout", value:"The Request timed out. Please try again later.", comment: "Creating Account progress Label")
-    }
 
     enum JailbreakWarnings {
         static let title = NSLocalizedString("JailbreakWarnings.title", value:"WARNING", comment: "Jailbreak warning title")

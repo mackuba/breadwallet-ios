@@ -76,9 +76,6 @@ struct TxDetailViewModel: TxViewModel {
         if tx.currency.isXRP {
             return S.TransactionDetails.destinationTagHeader
         }
-        if tx.currency.isHBAR {
-            return S.TransactionDetails.memoTagHeader
-        }
         return ""
     }
     

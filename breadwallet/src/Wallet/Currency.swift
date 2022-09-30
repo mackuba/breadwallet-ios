@@ -117,9 +117,6 @@ class Currency: CurrencyWithIcon {
         if isXRP {
             return ["xrpl", "xrp", "ripple"]
         }
-        if isHBAR {
-            return ["hbar"]
-        }
         return nil
     }
     
@@ -144,12 +141,6 @@ class Currency: CurrencyWithIcon {
                                        keyboardType: .numberPad,
                                        maxLength: 10)
         }
-        if isHBAR {
-            return AttributeDefinition(key: "Memo",
-                                       label: S.Send.memoTagLabelOptional,
-                                       keyboardType: .default,
-                                       maxLength: 100)
-        }
         return nil
     }
     
@@ -163,9 +154,6 @@ class Currency: CurrencyWithIcon {
         }
         if isXRP {
             return "r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV"
-        }
-        if isHBAR {
-            return "0.0.39768"
         }
         return nil
     }
@@ -260,7 +248,6 @@ extension Currency {
     var isERC20Token: Bool { return tokenType == .erc20 }
     var isBRDToken: Bool { return uid == Currencies.brd.uid }
     var isXRP: Bool { return uid == Currencies.xrp.uid }
-    var isHBAR: Bool { return uid == Currencies.hbar.uid }
     var isBitcoinCompatible: Bool { return isBitcoin }
     var isEthereumCompatible: Bool { return isEthereum || isERC20Token }
 }
@@ -475,7 +462,6 @@ enum Currencies: String, CaseIterable {
     case brd
     case tusd
     case xrp
-    case hbar
     case usdc
     
     var code: String { return rawValue }
@@ -492,8 +478,6 @@ enum Currencies: String, CaseIterable {
             uids = "ethereum-mainnet:0x0000000000085d4780B73119b644AE5ecd22b376"
         case .xrp:
             uids = "ripple-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
-        case .hbar:
-            uids = "hedera-mainnet:__native__"
         case .usdc:
             uids = "ethereum-mainnet:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
         }
