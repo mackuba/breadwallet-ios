@@ -300,7 +300,6 @@ class ApplicationController: Subscriber, Trackable {
             }
         }
 
-        Backend.apiClient.updateExperiments()
         Backend.updateExchangeRates()
     }
     

@@ -525,35 +525,6 @@ class ModalPresenter: Subscriber, Trackable {
             }
         ]
 
-        // ATM Finder
-        if let experiment = Store.state.experimentWithName(.atmFinder), experiment.active,
-            let meta = experiment.meta as? BrowserExperimentMetaData,
-            let url = meta.url, !url.isEmpty,
-            let URL = URL(string: url) {
-            
-            rootItems.append(MenuItem(title: S.Settings.atmMapMenuItemTitle,
-                                      subTitle: S.Settings.atmMapMenuItemSubtitle,
-                                      icon: MenuItem.Icon.atmMap) { [weak self] in
-                guard let `self` = self else { return }
-                
-                let browser = BRBrowserViewController()
-                
-                browser.isNavigationBarHidden = true
-                browser.showsBottomToolbar = false
-                browser.statusBarStyle = .lightContent
-                
-                if let closeUrl = meta.closeOn {
-                    browser.closeOnURL = closeUrl
-                }
-                
-                let req = URLRequest(url: URL)
-                
-                browser.load(req)
-                
-                self.topViewController?.present(browser, animated: true, completion: nil)
-            })
-        }
-        
         // MARK: Developer/QA Menu
         
         if E.isSimulator || E.isDebug || E.isTestFlight {
