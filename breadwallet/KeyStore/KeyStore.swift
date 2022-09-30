@@ -30,14 +30,6 @@ enum AccountError: Error {
     case invalidSerialization
 }
 
-enum APIAuthenticationError: Error {
-    case invalidKey
-    case invalidClientToken
-    case invalidUserCredentials(APIRequestError)
-    case tokenGenerationError(Error)
-}
-typealias APIAuthenticationResult = Result<JWT, APIAuthenticationError>
-
 private struct DefaultsKey {
     public static let pinUnlockTime = "PIN_UNLOCK_TIME"
 }
@@ -66,8 +58,6 @@ protocol WalletAuthenticator {
 
     var apiAuthKey: Key? { get }
     var apiUserAccount: [AnyHashable: Any]? { get set }
-
-    func authenticateWithBlockchainDB(client: AuthenticationClient, completion: @escaping (APIAuthenticationResult) -> Void)
 
     func buildBitIdKey(url: String, index: Int) -> Key?
 }
@@ -342,95 +332,7 @@ extension KeyStore: WalletAuthenticator {
             } catch { }
         }
     }
-    
-    // MARK: - BlockchainDB Authentication
 
-    func authenticateWithBlockchainDB(client: AuthenticationClient, completion: @escaping (APIAuthenticationResult) -> Void) {
-        if let jwt = bdbAuthToken, !jwt.isExpired {
-            return completion(.success(jwt))
-        }
-        print("[KEYSTORE] generating new BDB JWT...")
-        generateTokenForBlockchainDB(client: client, completion: completion)
-    }
-
-    /// Generate a new JWT access token and store it in the keychain.
-    private func generateTokenForBlockchainDB(client: AuthenticationClient, completion: @escaping (APIAuthenticationResult) -> Void) {
-        guard let key = apiAuthKey else { assertionFailure(); return completion(.failure(.invalidKey)) }
-        getAuthCredentials(client: client, key: key) { authUserResult in
-            let jwtResult = authUserResult.flatMap { authUser -> APIAuthenticationResult in
-                print("[KEYSTORE] BDB user id: \(authUser.userId)")
-                return client.generateToken(for: authUser, key: key)
-                    .mapError { APIAuthenticationError.tokenGenerationError($0) }
-            }
-            if case .success(let jwt) = jwtResult {
-                self.bdbAuthToken = jwt  // save in keychain
-            }
-            completion(jwtResult)
-        }
-    }
-
-    /// Get user authentication credentials from keychain if available.
-    /// Fetch new credentials from server and store in keychain if not available.
-    private func getAuthCredentials(client: AuthenticationClient, key: Key, completion: @escaping (Result<AuthUserCredentials, APIAuthenticationError>) -> Void) {
-        if let authUser = bdbAuthUser {
-            return completion(.success(authUser))
-        }
-        // handshake with server
-        getClientToken { clientToken in
-            guard let clientToken = clientToken else { return completion(.failure(.invalidClientToken)) }
-            print("[KEYSTORE] fetching user credentials...")
-            client.authenticate(apiKey: key,
-                                clientToken: clientToken,
-                                deviceId: UserDefaults.deviceID) { result in
-                                    let result = result.mapError({ APIAuthenticationError.invalidUserCredentials($0) })
-                                    if case .success(let authUser) = result {
-                                        self.bdbAuthUser = authUser // save in keychain
-                                    }
-                                    completion(result)
-            }
-        }
-    }
-
-    private var bdbAuthUser: AuthUserCredentials? {
-        get {
-            guard let userData: Data = try? keychainItem(key: KeychainKey.bdbAuthUser) else { return nil }
-            return try? JSONDecoder().decode(AuthUserCredentials.self, from: userData)
-        }
-
-        set {
-            do {
-                let userData: Data? = try newValue.map { try JSONEncoder().encode($0) }
-                try setKeychainItem(key: KeychainKey.bdbAuthUser, item: userData)
-            } catch let e {
-                print("[KEYSTORE] keychain error: \(e.localizedDescription)")
-                assertionFailure()
-            }
-        }
-    }
-
-    private var bdbAuthToken: JWT? {
-        get {
-            do {
-                guard let tokenData: Data = try keychainItem(key: KeychainKey.bdbAuthToken) else { return nil }
-                return try JSONDecoder().decode(JWT.self, from: tokenData)
-            } catch let e {
-                print("[KEYSTORE] keychain error: \(e.localizedDescription)")
-                assertionFailure()
-                return nil
-            }
-        }
-
-        set {
-            do {
-                let tokenData: Data? = try newValue.map { try JSONEncoder().encode($0) }
-                try setKeychainItem(key: KeychainKey.bdbAuthToken, item: tokenData)
-            } catch let e {
-                print("[KEYSTORE] keychain error: \(e.localizedDescription)")
-                assertionFailure()
-            }
-        }
-    }
-    
     static func getFixerApiToken(completion: @escaping (String?) -> Void) {
         // fetch from keychain
         do {
@@ -883,7 +785,6 @@ extension KeyStore: KeyMaster {
             try setKeychainItem(key: KeychainKey.bdbClientToken, item: nil as String?)
             try setKeychainItem(key: KeychainKey.fixerAPIToken, item: nil as String?)
             try setKeychainItem(key: KeychainKey.bdbAuthUser, item: nil as String?)
-            try setKeychainItem(key: KeychainKey.bdbAuthToken, item: nil as String?)
             try setKeychainItem(key: KeychainKey.creationTime, item: nil as Data?)
             try setKeychainItem(key: KeychainKey.pinFailTime, item: nil as Int64?)
             try setKeychainItem(key: KeychainKey.pinFailCount, item: nil as Int64?)
@@ -977,11 +878,6 @@ struct NoAuthWalletAuthenticator: WalletAuthenticator {
         completion(.failure)
     }
 
-    func authenticateWithBlockchainDB(client: AuthenticationClient, completion: @escaping (APIAuthenticationResult) -> Void) {
-        assertionFailure()
-        completion(.failure(.invalidKey))
-    }
-    
     func loadAccount() -> Result<Account, AccountError> {
         assertionFailure()
         return .failure(.noAccount)

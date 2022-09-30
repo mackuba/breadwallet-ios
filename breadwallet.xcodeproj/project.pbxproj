@@ -177,7 +177,6 @@
 		7CA3BC302006864C00517BF7 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CA3BC2F2006864C00517BF7 /* Currency.swift */; };
 		7CAF4EDF22CE80D100326168 /* AssetCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CAF4EDE22CE80D100326168 /* AssetCollection.swift */; };
 		7CB3BCD52059B62200053687 /* UnitConversionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB3BCD42059B62200053687 /* UnitConversionTests.swift */; };
-		7CB593E122F8C8FE005A230A /* AuthenticationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CB593E022F8C8FE005A230A /* AuthenticationClient.swift */; };
 		7CBA74E62022784D00FBBFA9 /* HomeScreenAssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA74E52022784D00FBBFA9 /* HomeScreenAssetViewModel.swift */; };
 		7CBA74E820227D1300FBBFA9 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBA74E720227D1300FBBFA9 /* MenuCell.swift */; };
 		7CBABD9C20181D890077CB55 /* NSMutableAttributedString+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBABD9B20181D890077CB55 /* NSMutableAttributedString+Additions.swift */; };
@@ -892,7 +891,6 @@
 		7CA3BC2F2006864C00517BF7 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		7CAF4EDE22CE80D100326168 /* AssetCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCollection.swift; sourceTree = "<group>"; };
 		7CB3BCD42059B62200053687 /* UnitConversionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitConversionTests.swift; sourceTree = "<group>"; };
-		7CB593E022F8C8FE005A230A /* AuthenticationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AuthenticationClient.swift; path = src/Platform/AuthenticationClient.swift; sourceTree = "<group>"; };
 		7CBA74E52022784D00FBBFA9 /* HomeScreenAssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenAssetViewModel.swift; sourceTree = "<group>"; };
 		7CBA74E720227D1300FBBFA9 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MenuCell.swift; path = src/Views/MenuCell.swift; sourceTree = "<group>"; };
 		7CBABD9B20181D890077CB55 /* NSMutableAttributedString+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "NSMutableAttributedString+Additions.swift"; path = "src/Extensions/NSMutableAttributedString+Additions.swift"; sourceTree = "<group>"; };
@@ -1390,7 +1388,6 @@
 		22A9A9311DF61930000F0016 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				7CB593E022F8C8FE005A230A /* AuthenticationClient.swift */,
 				223DB2171DF691260076A151 /* BRSocketHelpers.c */,
 				223DB2181DF691260076A151 /* BRSocketHelpers.h */,
 				222319B11F279B3C00008F20 /* POSTBouncer.html */,
@@ -3272,7 +3269,6 @@
 				7141BB5B2245271800F7ECF2 /* WriteRecoveryKeyViewController.swift in Sources */,
 				CEE65DF01E39056F0002994D /* Rate.swift in Sources */,
 				CEDB09331FEAA21C001AF56A /* TxDetailViewModel.swift in Sources */,
-				7CB593E122F8C8FE005A230A /* AuthenticationClient.swift in Sources */,
 				4F3AB12425D53F5D00B378DC /* Baker.swift in Sources */,
 				71988B0821EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift in Sources */,
 				CEE20C361EA5B4620086F724 /* Constants.swift in Sources */,

@@ -149,17 +149,21 @@ class ApplicationController: Subscriber, Trackable {
     private func setupSystem(with account: Account) {
         self.startBackendServices()
         self.setWalletInfo(account: account)
-        authenticateWithBackend { jwt in
-            self.coreSystem.create(account: account,
-                                   authToken: jwt,
-                                   btcWalletCreationCallback: self.handleDeferedLaunchURL)
-            
-            self.modalPresenter = ModalPresenter(keyStore: self.keyStore,
-                                                 system: self.coreSystem,
-                                                 window: self.window,
-                                                 alertPresenter: self.alertPresenter)
-            self.coreSystem.connect()
-        }
+
+        self.coreSystem.create(
+            account: account,
+            authToken: nil,
+            btcWalletCreationCallback: self.handleDeferedLaunchURL
+        )
+
+        self.modalPresenter = ModalPresenter(
+            keyStore: self.keyStore,
+            system: self.coreSystem,
+            window: self.window,
+            alertPresenter: self.alertPresenter
+        )
+
+        self.coreSystem.connect()
     }
     
     private func handleDeferedLaunchURL() {
@@ -291,22 +295,6 @@ class ApplicationController: Subscriber, Trackable {
         _ = try? kvStore.set(walletInfo)
     }
 
-    private func authenticateWithBackend(completion: @escaping (String?) -> Void) {
-        //TODO:CRYPTO optimize for new/recovered wallets by pre-fetching auth token during pin entry
-        let bdbAuthClient = AuthenticationClient(baseURL: URL(string: "https://\(C.bdbHost)")!, urlSession: URLSession.shared)
-        keyStore.authenticateWithBlockchainDB(client: bdbAuthClient) { result in
-            switch result {
-            case .success(let jwt):
-                assert(!jwt.isExpired)
-                completion(jwt.token)
-            case .failure(let error):
-                print("[BDB] authentication failure: \(error)")
-                assertionFailure()
-                completion(nil)
-            }
-        }
-    }
-    
     /// Fetch updates from backend services.
     private func fetchBackendUpdates() {
         DispatchQueue.global(qos: .utility).async {

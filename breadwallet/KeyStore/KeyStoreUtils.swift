@@ -33,7 +33,6 @@ struct KeychainKey {
     public static let apiUserAccount = "https://api.breadwallet.com"
     public static let bdbClientToken = "bdbClientToken3"
     public static let bdbAuthUser = "bdbAuthUser3"
-    public static let bdbAuthToken = "bdbAuthToken3"
     public static let systemAccount = "systemAccount"
     public static let seed = "seed" // deprecated
     public static let masterPubKey = "masterpubkey" // deprecated

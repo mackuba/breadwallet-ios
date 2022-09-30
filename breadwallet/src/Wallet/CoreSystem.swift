@@ -75,14 +75,8 @@ class CoreSystem: Subscriber, Trackable {
 
         let backend = BlockChainDB(bdbBaseURL: "https://\(C.bdbHost)",
             bdbDataTaskFunc: { (session, request, completion) -> URLSessionDataTask in
-                
-                var req = request
-                if let authToken = authToken {
-                    req.authorize(withToken: authToken)
-                }
-                
                 //TODO:CRYPTO does not handle 401, other headers, redirects
-                return session.dataTask(with: req, completionHandler: completion)
+                return session.dataTask(with: request, completionHandler: completion)
         },
             apiBaseURL: "https://\(C.backendHost)",
             apiDataTaskFunc: { (_, req, completion) -> URLSessionDataTask in
