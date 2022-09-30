@@ -45,7 +45,6 @@ class ApplicationController: Subscriber, Trackable {
     private var launchURL: URL?
     private var urlController: URLController?
     private let notificationHandler = NotificationHandler()
-    private var appRatingManager = AppRatingManager()
     private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
     private var shouldDisableBiometrics = false
     
@@ -98,8 +97,6 @@ class ApplicationController: Subscriber, Trackable {
         initializeAssets()
         
         alertPresenter = AlertPresenter(window: self.window)
-
-        appRatingManager.start()
 
         Store.subscribe(self, name: .wipeWalletNoPrompt, callback: { [weak self] _ in
             self?.wipeWalletNoPrompt()

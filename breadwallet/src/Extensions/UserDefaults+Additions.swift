@@ -29,14 +29,11 @@ private let hasScannedForTokenBalancesKey = "hasScannedForTokenBalances"
 private let debugShouldAutoEnterPinKey = "shouldAutoEnterPIN"
 private let debugShouldSuppressPaperKeyPromptKey = "shouldSuppressPaperKeyPrompt"
 private let debugShouldShowPaperKeyPreviewKey = "debugShouldShowPaperKeyPreviewKey"
-private let debugShowAppRatingPromptOnEnterWalletKey = "debugShowAppRatingPromptOnEnterWalletKey"
-private let debugSuppressAppRatingPromptKey = "debugSuppressAppRatingPromptKey"
 private let debugConnectionModeOverrideKey = "debugConnectionModeOverrideKey"
 private let debugBackendHostKey = "debugBackendHostKey"
 private let debugWebBundleNameKey = "debugWebBundleNameKey"
 private let platformDebugURLKey = "platformDebugURLKey"
 private let appLaunchCountKey = "appLaunchCountKey"
-private let appLaunchCountAtLastRatingPromptKey = "appLaunchCountAtLastRatingPromptKey"
 private let notificationOptInDeferralCountKey = "notificationOptInDeferCountKey"
 private let appLaunchesAtLastNotificationDeferralKey = "appLaunchesAtLastNotificationDeferralKey"
 private let deviceIdKey = "BR_DEVICE_ID"
@@ -57,9 +54,7 @@ extension UserDefaults {
         [hasOptedInSegwitKey: false],
         [debugShouldAutoEnterPinKey: false],
         [debugShouldSuppressPaperKeyPromptKey: false],
-        [debugShouldShowPaperKeyPreviewKey: false],
-        [debugSuppressAppRatingPromptKey: false],
-        [debugShowAppRatingPromptOnEnterWalletKey: false]
+        [debugShouldShowPaperKeyPreviewKey: false]
     ]
     
     static let resettableObjects: [ResettableObjectSetting] = [
@@ -317,13 +312,6 @@ extension UserDefaults {
         get { return defaults.integer(forKey: appLaunchCountKey ) }
         set { defaults.set(newValue, forKey: appLaunchCountKey )}
     }
-    
-    // The app launch count the last time the ratings prompt was shown.
-    static var appLaunchCountAtLastRatingPrompt: Int {
-        get { return UserDefaults.standard.integer(forKey: appLaunchCountAtLastRatingPromptKey ) }
-        set { UserDefaults.standard.set(newValue, forKey: appLaunchCountAtLastRatingPromptKey )}
-    }
-
 }
 
 // MARK: - State Restoration
@@ -425,38 +413,6 @@ extension UserDefaults {
         set {
             defaults.set(newValue, forKey: debugShouldShowPaperKeyPreviewKey)
         }        
-    }
-    
-    // option to always show the app rating prompt when entering a wallet
-    static func toggleShowAppRatingPromptOnEnterWallet() -> Bool {
-        return toggleBoolean(key: debugShowAppRatingPromptOnEnterWalletKey)
-    }
-
-    static var debugShowAppRatingOnEnterWallet: Bool {
-        
-        get {
-            return defaults.bool(forKey: debugShowAppRatingPromptOnEnterWalletKey)
-        }
-        
-        set {
-            defaults.set(newValue, forKey: debugShowAppRatingPromptOnEnterWalletKey)
-        }
-    }
-    
-    // option to always suppress showing the app rating prompt
-    static func toggleSuppressAppRatingPrompt() -> Bool {
-        return toggleBoolean(key: debugSuppressAppRatingPromptKey)
-    }
-
-    static var debugSuppressAppRatingPrompt: Bool {
-        
-        get {
-            return defaults.bool(forKey: debugSuppressAppRatingPromptKey)
-        }
-        
-        set {
-            defaults.set(newValue, forKey: debugSuppressAppRatingPromptKey)
-        }
     }
 
     static var debugBackendHost: String? {
