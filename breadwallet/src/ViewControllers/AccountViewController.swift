@@ -94,7 +94,7 @@ class AccountViewController: UIViewController, Subscriber, Trackable {
     }
     
     private var shouldShowExtraView: Bool {
-        return currency.isBRDToken || currency.supportsStaking
+        return currency.isBRDToken
     }
     
     private var shouldAnimateRewardsView: Bool {
@@ -351,37 +351,11 @@ class AccountViewController: UIViewController, Subscriber, Trackable {
     // The accoessry view is a separate UIView that is displayed in the BRD wallet or staking compatible currencies,
     // under the table view header, above the transaction cells.
     private func addAccessoryView() {
-        if currency.supportsStaking {
-            addStakingView()
-        } else if currency.isBRDToken {
+        if currency.isBRDToken {
             addRewardsView()
         }
     }
-    
-    private func addStakingView() {
-        let staking = StakingCell(currency: currency, wallet: wallet)
-        view.addSubview(staking)
-        extraCell = staking
 
-        //Rewards view has an intrinsic grey padding view, so it doesn't need top padding.
-        let rewardsViewTopConstraint = staking.topAnchor.constraint(equalTo: headerView.bottomAnchor)
-        // Start the rewards view at a height of zero if animating, otherwise at the normal height.
-        let initialHeight = shouldAnimateRewardsView ? 0 : RewardsView.normalSize
-        rewardsViewHeightConstraint = staking.heightAnchor.constraint(equalToConstant: initialHeight)
-        
-        staking.constrain([
-            rewardsViewTopConstraint,
-            rewardsViewHeightConstraint,
-                            staking.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                            staking.trailingAnchor.constraint(equalTo: view.trailingAnchor)])
-        
-        tableViewTopConstraint?.constant = shouldAnimateRewardsView ? 0 : tableViewTopConstraintConstant(for: .normal)
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self,
-                                                          action: #selector(rewardsViewTapped))
-        extraCell?.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
     private func addRewardsView() {
         let rewards = RewardsView()
         view.addSubview(rewards)
@@ -446,8 +420,6 @@ class AccountViewController: UIViewController, Subscriber, Trackable {
         if currency.isBRDToken {
             saveEvent(rewardsTappedEvent)
             Store.trigger(name: .openPlatformUrl("/rewards"))
-        } else if currency.isTezos {
-            Store.perform(action: RootModalActions.Present(modal: .stake(currency: self.currency)))
         }
     }
 

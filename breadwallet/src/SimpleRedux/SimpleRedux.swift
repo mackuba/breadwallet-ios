@@ -75,7 +75,6 @@ enum TriggerName {
     case createAccount(Currency?, ((Wallet?) -> Void)?)
     case handleGift(URL)
     case reImportGift(TxViewModel?)
-    case didSelectBaker(Baker?)
 } //NB : remember to add to triggers to == fuction below
 
 extension TriggerName: Equatable {}
@@ -149,8 +148,6 @@ func == (lhs: TriggerName, rhs: TriggerName) -> Bool {
     case (.handleGift, .handleGift):
         return true
     case (.reImportGift, .reImportGift):
-        return true
-    case (.didSelectBaker, .didSelectBaker):
         return true
     default:
         return false

@@ -306,7 +306,7 @@ class GiftViewController: UIViewController, Trackable {
 
         guard let amount = extraSwitch.isOn ? totalWithExtra : selectedAmount else { return }
 
-        sender.estimateFee(address: address.description, amount: amount, tier: .regular, isStake: false, completion: { [weak self] feeBasis in
+        sender.estimateFee(address: address.description, amount: amount, tier: .regular, completion: { [weak self] feeBasis in
             guard let `self` = self else { return }
             guard let feeBasis = feeBasis else { return }
             let feeCurrency = self.sender.wallet.feeCurrency

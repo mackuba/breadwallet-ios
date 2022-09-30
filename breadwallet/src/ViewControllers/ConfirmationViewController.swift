@@ -18,8 +18,7 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter {
          isUsingBiometrics: Bool,
          currency: Currency,
          resolvedAddress: ResolvedAddress? = nil,
-         shouldShowMaskView: Bool,
-         isStake: Bool = false) {
+         shouldShowMaskView: Bool) {
             self.amount = amount
             self.feeAmount = fee
             self.displayFeeLevel = displayFeeLevel
@@ -27,7 +26,6 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter {
             self.isUsingBiometrics = isUsingBiometrics
             self.currency = currency
             self.resolvedAddress = resolvedAddress
-            self.isStake = isStake
             super.init(nibName: nil, bundle: nil)
             
             transitionDelegate.shouldShowMaskView = shouldShowMaskView
@@ -44,8 +42,7 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter {
     private let isUsingBiometrics: Bool
     private let currency: Currency
     private let resolvedAddress: ResolvedAddress?
-    private var isStake: Bool
-    
+
     //ContentBoxPresenter
     let contentBox = UIView(color: .white)
     let blurView = UIVisualEffectView()
@@ -177,28 +174,16 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter {
     
     private func setInitialData() {
         view.backgroundColor = .clear
-        if isStake {
-            if addressText == currency.wallet?.receiveAddress {
-                payLabel.text = "Unstake"
-            } else {
-                payLabel.text = "Stake"
-            }
-        } else {
-            payLabel.text = S.Confirmation.send
-        }
+        payLabel.text = S.Confirmation.send
 
         let totalAmount = (amount.currency == feeAmount.currency) ? amount + feeAmount : amount
         let displayTotal = Amount(amount: totalAmount,
                                   rate: amount.rate,
                                   minimumFractionDigits: amount.minimumFractionDigits)
 
-        if isStake {
-            amountLabel.text = currency.wallet?.balance.tokenDescription ?? ""
-        } else {
-            amountLabel.text = amount.combinedDescription
-        }
+        amountLabel.text = amount.combinedDescription
 
-        toLabel.text = isStake ? "Validator Address" : S.Confirmation.to
+        toLabel.text = S.Confirmation.to
         address.text = addressText
         address.lineBreakMode = .byTruncatingMiddle
 
@@ -243,17 +228,6 @@ class ConfirmationViewController: UIViewController, ContentBoxPresenter {
         } else {
             resolvedAddressLabel.text = resolvedAddress?.humanReadableAddress
             resolvedAddressTitle.text = resolvedAddress?.label
-        }
-        
-        if isStake {
-            feeLabel.isHidden = true
-            fee.isHidden = true
-            
-            total.isHidden = true
-            totalLabel.isHidden = true
-            
-            sendLabel.isHidden = true
-            send.isHidden = true
         }
     }
 

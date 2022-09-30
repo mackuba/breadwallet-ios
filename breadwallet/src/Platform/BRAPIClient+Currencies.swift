@@ -143,29 +143,8 @@ private func processCurrencies(_ currencies: [CurrencyMetaData], completion: ([C
 //                               decimals: 18,
 //                               alternateCode: nil,
 //                               coinGeckoId: nil)
-//
-//    let bsv = CurrencyMetaData(uid: "bitcoinsv-mainnet:__native__",
-//                               code: "BSV",
-//                               isSupported: true,
-//                               colors: (.yellow, .blue),
-//                               name: "BSV",
-//                               tokenAddress: nil,
-//                               decimals: 8,
-//                               alternateCode: nil,
-//                               coinGeckoId: nil)
-//    let xtz = CurrencyMetaData(uid: "tezos-mainnet:__native__",
-//                               code: "XTZ",
-//                               isSupported: true,
-//                               colors: (.blue, .blue),
-//                               name: "Tezos",
-//                               tokenAddress: nil,
-//                               decimals: 8,
-//                               alternateCode: nil,
-//                               coinGeckoId: "tezos")
-    
+
 //    currencyMetaData[tst.uid] = tst
-//    currencyMetaData[bsv.uid] = bsv
-//    currencyMetaData[xtz.uid] = xtz
     print("[CurrencyList] tokens updated: \(currencies.count) tokens")
     completion(currencyMetaData)
 }

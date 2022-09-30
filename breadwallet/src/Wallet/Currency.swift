@@ -172,8 +172,6 @@ class Currency: CurrencyWithIcon {
 
     /// Returns a transfer URI with the given address
     func addressURI(_ address: String) -> String? {
-        //Tezos doesn't have a URI scheme
-        if isTezos, isValidAddress(address) { return address }
         guard let scheme = urlSchemes?.first, isValidAddress(address) else { return nil }
         if isERC20Token, let tokenAddress = tokenAddress {
             //This is a non-standard uri format to maintain backwards compatibility with old versions of BRD
@@ -205,10 +203,6 @@ class Currency: CurrencyWithIcon {
         } else {
             return false
         }
-    }
-    
-    var supportsStaking: Bool {
-        return isTezos
     }
     
     // MARK: Init
@@ -269,7 +263,6 @@ extension Currency {
     var isHBAR: Bool { return uid == Currencies.hbar.uid }
     var isBitcoinCompatible: Bool { return isBitcoin }
     var isEthereumCompatible: Bool { return isEthereum || isERC20Token }
-    var isTezos: Bool { return uid == Currencies.xtz.uid }
 }
 
 // MARK: - Confirmation times
@@ -483,7 +476,6 @@ enum Currencies: String, CaseIterable {
     case tusd
     case xrp
     case hbar
-    case xtz
     case usdc
     
     var code: String { return rawValue }
@@ -502,8 +494,6 @@ enum Currencies: String, CaseIterable {
             uids = "ripple-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
         case .hbar:
             uids = "hedera-mainnet:__native__"
-        case .xtz:
-            uids = "tezos-mainnet:__native__"
         case .usdc:
             uids = "ethereum-mainnet:0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
         }
