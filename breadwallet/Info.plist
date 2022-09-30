@@ -75,17 +75,6 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>bitcoincash</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>bitcoincash</string>
-				<string>bchtest</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLName</key>
 			<string>bitcoin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>

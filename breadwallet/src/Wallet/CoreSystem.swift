@@ -314,9 +314,9 @@ class CoreSystem: Subscriber, Trackable {
     private func migrateLegacyDatabase(network: Network) {
         guard let system = system,
             let currency = currencies[network.currency.uid],
-            (currency.isBitcoin || currency.isBitcoinCash) else { return assertionFailure() }
+            currency.isBitcoin else { return assertionFailure() }
         let fm = FileManager.default
-        let filename = currency.isBitcoin ? "BreadWallet.sqlite" : "BreadWallet-bch.sqlite"
+        let filename = "BreadWallet.sqlite"
         let docsUrl = try? fm.url(for: .documentDirectory,
                                   in: .userDomainMask,
                                   appropriateFor: nil,
@@ -840,8 +840,6 @@ extension WalletManagerEvent: CustomStringConvertible {
 extension Address {
     var sanitizedDescription: String {
         return description
-            .removing(prefix: "bitcoincash:")
-            .removing(prefix: "bchtest:")
     }
 }
 

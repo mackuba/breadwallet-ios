@@ -409,11 +409,6 @@ class ModalPresenter: Subscriber, Trackable {
                         self.presentKeyImport(wallet: wallet, scanResult: scanResult)
                     }
                 }))
-                alert.addAction(UIAlertAction(title: "BCH", style: .default, handler: { _ in
-                    if let wallet = Currencies.bch.instance?.wallet {
-                        self.presentKeyImport(wallet: wallet, scanResult: scanResult)
-                    }
-                }))
                 alert.addAction(UIAlertAction(title: S.Button.cancel, style: .cancel, handler: nil))
                 top.present(alert, animated: true, completion: nil)
             case .deepLink(let url):
@@ -484,26 +479,6 @@ class ModalPresenter: Subscriber, Trackable {
         var btcMenu = MenuItem(title: String(format: S.Settings.currencyPageTitle, Currencies.btc.instance?.name ?? "Bitcoin"), subMenu: btcItems, rootNav: menuNav)
         btcMenu.shouldShow = { return !btcItems.isEmpty }
         
-        // MARK: Bitcoin Cash Menu
-        var bchItems: [MenuItem] = []
-        if let bch = Currencies.bch.instance, let bchWallet = bch.wallet {
-            if system.connectionMode(for: bch) == .p2p_only {
-                // Rescan
-                bchItems.append(MenuItem(title: S.Settings.sync, callback: { [weak self] in
-                    guard let `self` = self else { return }
-                    menuNav.pushViewController(ReScanViewController(system: self.system, wallet: bchWallet), animated: true)
-                }))
-            }
-            bchItems.append(MenuItem(title: S.Settings.importTile, callback: {
-                menuNav.dismiss(animated: true, completion: { [unowned self] in
-                    self.presentKeyImport(wallet: bchWallet)
-                })
-            }))
-            
-        }
-        var bchMenu = MenuItem(title: String(format: S.Settings.currencyPageTitle, Currencies.bch.instance?.name ?? "Bitcoin Cash"), subMenu: bchItems, rootNav: menuNav)
-        bchMenu.shouldShow = { return !bchItems.isEmpty }
-        
         // MARK: Ethereum Menu
         var ethItems: [MenuItem] = []
         if let eth = Currencies.eth.instance, let ethWallet = eth.wallet {
@@ -531,7 +506,6 @@ class ModalPresenter: Subscriber, Trackable {
             }),
             
             btcMenu,
-            bchMenu,
             ethMenu,
 
             // Share Anonymous Data
@@ -1040,7 +1014,6 @@ class ModalPresenter: Subscriber, Trackable {
                 if !attemptConfirmRequest() {
                     modalTransitionDelegate.reset()
                     topVC.dismiss(animated: true, completion: {
-                        //TODO:BCH
                         Store.perform(action: RootModalActions.Present(modal: .send(currency: Currencies.btc)))
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: { //This is a hack because present has no callback
                             _ = attemptConfirmRequest()

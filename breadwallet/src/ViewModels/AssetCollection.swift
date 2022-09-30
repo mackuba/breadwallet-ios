@@ -207,8 +207,6 @@ class AssetCollection: Subscriber {
                 switch oldKey.lowercased() {
                 case Currencies.btc.code.lowercased():
                     newKey = Currencies.btc.uid
-                case Currencies.bch.code.lowercased():
-                    newKey = Currencies.bch.uid
                 case Currencies.eth.code.lowercased():
                     newKey = Currencies.eth.uid
                 default:

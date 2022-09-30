@@ -29,7 +29,6 @@ private let hasAgreedToCrowdsaleTermsKey = "hasAgreedToCrowdsaleTermsKey"
 private let selectedCurrencyCodeKey = "selectedCurrencyCodeKey"
 private let mostRecentSelectedCurrencyCodeKey = "mostRecentSelectedSPVCurrencyCodeKey"
 private let hasSetSelectedCurrencyKey = "hasSetSelectedCurrencyKey"
-private let hasBchConnectedKey = "hasBchConnectedKey"
 private let rescanStateKeyPrefix = "lastRescan-" // append uppercased currency code for key
 private let hasOptedInSegwitKey = "hasOptedInSegwitKey"
 private let hasScannedForTokenBalancesKey = "hasScannedForTokenBalances"
@@ -408,11 +407,6 @@ extension UserDefaults {
         set {
             defaults.setValue(newValue, forKey: mostRecentSelectedCurrencyCodeKey)
         }
-    }
-
-    static var hasBchConnected: Bool {
-        get { return defaults.bool(forKey: hasBchConnectedKey) }
-        set { defaults.set(newValue, forKey: hasBchConnectedKey) }
     }
 }
 

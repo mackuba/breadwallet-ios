@@ -111,10 +111,6 @@ class Currency: CurrencyWithIcon {
         if isBitcoin {
             return ["bitcoin"]
         }
-        if isBitcoinCash {
-            return E.isTestnet ? ["bchtest"] : ["bitcoincash"]
-        }
-
         if isEthereumCompatible {
             return ["ethereum"]
         }
@@ -161,9 +157,6 @@ class Currency: CurrencyWithIcon {
     var placeHolderAddress: String? {
         if isBitcoin {
             return E.isTestnet ? "tb1qw508d6qejxtdg4y5r3zarvary0c5xw7kxpjzsx" : "bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq"
-        }
-        if isBitcoinCash {
-            return E.isTestnet ? "bchtest:qqpz7r5k72e07j0syq26f0h8srvdqeqjg50wg9fp3z" : "bitcoincash:qpm2qsznhks23z7629mms6s4cwef74vcwvy22gdx6a"
         }
         if isEthereumCompatible {
             return "0xA6A60123Feb7F61081b1BFe063464b3219cEdCEc"
@@ -269,13 +262,12 @@ extension Currency {
     }
 
     var isBitcoin: Bool { return uid == Currencies.btc.uid }
-    var isBitcoinCash: Bool { return uid == Currencies.bch.uid }
     var isEthereum: Bool { return uid == Currencies.eth.uid }
     var isERC20Token: Bool { return tokenType == .erc20 }
     var isBRDToken: Bool { return uid == Currencies.brd.uid }
     var isXRP: Bool { return uid == Currencies.xrp.uid }
     var isHBAR: Bool { return uid == Currencies.hbar.uid }
-    var isBitcoinCompatible: Bool { return isBitcoin || isBitcoinCash }
+    var isBitcoinCompatible: Bool { return isBitcoin }
     var isEthereumCompatible: Bool { return isEthereum || isERC20Token }
     var isTezos: Bool { return uid == Currencies.xtz.uid }
 }
@@ -486,7 +478,6 @@ extension CurrencyMetaData: Hashable {
 /// Natively supported currencies. Enum maps to ticker code.
 enum Currencies: String, CaseIterable {
     case btc
-    case bch
     case eth
     case brd
     case tusd
@@ -501,8 +492,6 @@ enum Currencies: String, CaseIterable {
         switch self {
         case .btc:
             uids = "bitcoin-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
-        case .bch:
-            uids = "bitcoincash-\(E.isTestnet ? "testnet" : "mainnet"):__native__"
         case .eth:
             uids = "ethereum-\(E.isTestnet ? "ropsten" : "mainnet"):__native__"
         case .brd:
