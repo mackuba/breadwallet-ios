@@ -231,7 +231,7 @@ class CoreSystem: Subscriber, Trackable {
             return
         }
 
-        if system.migrateRequired(network: network) {
+        if currency.isBitcoin {
             self.migrateLegacyDatabase(network: network)
         }
         
