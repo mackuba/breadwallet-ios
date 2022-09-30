@@ -14,8 +14,6 @@ enum AlertType {
     case sendSuccess
     case addressesCopied
     case sweepSuccess(callback: () -> Void)
-    case cloudBackupRestoreSuccess(callback: () -> Void)
-    case cloudBackupSuccess
     case none
 
     var header: String {
@@ -30,8 +28,6 @@ enum AlertType {
             return S.Alerts.copiedAddressesHeader
         case .sweepSuccess:
             return S.Import.success
-        case .cloudBackupRestoreSuccess, .cloudBackupSuccess:
-            return "Success"
         case .none:
             return "none"
         }
@@ -49,10 +45,6 @@ enum AlertType {
             return S.Alerts.copiedAddressesSubheader
         case .sweepSuccess:
             return S.Import.successBody
-        case .cloudBackupRestoreSuccess:
-            return "Account succesfully restored from Cloud backup"
-        case .cloudBackupSuccess:
-            return "Account backed up with iCloud Keychain"
         case .none:
             return "none"
         }
@@ -76,10 +68,6 @@ func == (lhs: AlertType, rhs: AlertType) -> Bool {
     case (.addressesCopied, .addressesCopied):
         return true
     case (.sweepSuccess, .sweepSuccess):
-        return true
-    case (.cloudBackupRestoreSuccess, .cloudBackupRestoreSuccess):
-        return true
-    case (.cloudBackupSuccess, .cloudBackupSuccess):
         return true
     case (.none, .none):
         return true

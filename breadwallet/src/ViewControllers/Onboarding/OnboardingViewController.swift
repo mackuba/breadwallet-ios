@@ -12,7 +12,6 @@ import AVKit
 enum OnboardingExitAction {
     case restoreWallet
     case createWallet
-    case restoreCloudBackup
 }
 
 typealias DidExitOnboardingWithAction = ((OnboardingExitAction) -> Void)
@@ -169,10 +168,7 @@ class OnboardingViewController: UIViewController {
     private let backButton = UIButton(type: .custom)
     private let skipButton = UIButton(type: .custom)
         
-    private let cloudBackupExists: Bool
-    
-    required init(doesCloudBackupExist: Bool, didExitOnboarding: DidExitOnboardingWithAction?) {
-        self.cloudBackupExists = doesCloudBackupExist
+    required init(didExitOnboarding: DidExitOnboardingWithAction?) {
         super.init(nibName: nil, bundle: nil)
         didExitWithAction = didExitOnboarding
     }
@@ -423,30 +419,18 @@ class OnboardingViewController: UIViewController {
     
     private func topButtonText(pageIndex: Int) -> String {
         if pageIndex == 0 {
-            if cloudBackupExists {
-                return S.CloudBackup.restoreButton
-            } else {
-                return S.OnboardingScreen.getStarted
-            }
+            return S.OnboardingScreen.getStarted
         }
         return ""
     }
 
     private func middleButtonText(pageIndex: Int) -> String {
-        //no middle button if no backup detected
-        if pageIndex == 0 && cloudBackupExists {
-            return S.CloudBackup.recoverButton
-        }
         return ""
     }
     
     private func bottomButtonText(pageIndex: Int) -> String {
         if pageIndex == 0 {
-            if cloudBackupExists {
-                return S.CloudBackup.createButton
-            } else {
-                return S.OnboardingScreen.restoreWallet
-            }
+            return S.OnboardingScreen.restoreWallet
         }
         return ""
     }
@@ -469,11 +453,7 @@ class OnboardingViewController: UIViewController {
     }
     
     private var topButtonVisibleYOffset: CGFloat {
-        if cloudBackupExists {
-            return middleButtonVisibleYOffset - (buttonsVerticalMargin + buttonHeight)
-        } else {
-            return middleButtonVisibleYOffset
-        }
+        return middleButtonVisibleYOffset
     }
         
     private var nextButtonVisibleYOffset: CGFloat {
@@ -538,10 +518,6 @@ class OnboardingViewController: UIViewController {
         
         topButton.tap = { [unowned self] in
             self.topButtonTapped()
-        }
-        
-        middleButton.tap = { [unowned self] in
-            self.middleButtonTapped()
         }
         
         bottomButton.tap = { [unowned self] in
@@ -692,17 +668,6 @@ class OnboardingViewController: UIViewController {
             self.view.layoutIfNeeded()
         })
         
-        if self.cloudBackupExists {
-            middleButtonAnimationConstraint?.constant = (buttonsVerticalMargin * 2.0)
-            view.layoutIfNeeded()
-            
-            // slide-up animation for the middle button
-            UIView.animate(withDuration: (duration * 1.5), delay: delay * 1.5, options: UIView.AnimationOptions.curveEaseInOut, animations: {
-                self.middleButtonAnimationConstraint?.constant = self.middleButtonVisibleYOffset
-                self.view.layoutIfNeeded()
-            })
-        }
-        
         bottomButtonAnimationConstraint?.constant = (buttonsVerticalMargin * 3.0)
         view.layoutIfNeeded()
         
@@ -821,36 +786,17 @@ class OnboardingViewController: UIViewController {
         
     private func topButtonTapped() {
         if self.pageIndex == 0 {
-            if cloudBackupExists {
-                exitWith(action: .restoreCloudBackup)
-            } else {
-               // 'Create new wallet'
-               self.animateToNextPage()
-               logEvent(.getStartedButton, screen: .landingPage)
-            }
+           // 'Create new wallet'
+           self.animateToNextPage()
+           logEvent(.getStartedButton, screen: .landingPage)
         }
-    }
-    
-    private func middleButtonTapped() {
-        showAlert(message: S.CloudBackup.recoverWarning,
-                  button: S.CloudBackup.recoverButton,
-                  completion: { [weak self] in
-                    self?.exitWith(action: .restoreWallet)
-                    self?.logEvent(.restoreWalletButton, screen: .landingPage)
-                })
     }
     
     private func bottomButtonTapped() {
         if pageIndex == 0 {
-            if cloudBackupExists {
-                showAlert(message: S.CloudBackup.createWarning, button: S.CloudBackup.createButton, completion: { [weak self] in
-                    self?.animateToNextPage()
-                })
-            } else {
-               // 'Restore wallet'
-               exitWith(action: .restoreWallet)
-               logEvent(.restoreWalletButton, screen: .landingPage)
-            }
+           // 'Restore wallet'
+           exitWith(action: .restoreWallet)
+           logEvent(.restoreWalletButton, screen: .landingPage)
         } else if pageIndex == self.lastPageIndex {
             // 'I'll browse first'
             exitWith(action: .createWallet)

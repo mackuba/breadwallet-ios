@@ -20,7 +20,6 @@ public enum EventContext: String {
     case wallet
     case jailbreak
     case fastSync
-    case recoverCloud
     case gift
     var name: String { return rawValue }
 }

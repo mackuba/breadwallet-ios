@@ -74,8 +74,7 @@ class StartFlowPresenter: Subscriber, Trackable {
         /// Displays the onboarding screen (app landing page) that allows the user to either create
         /// a new wallet or restore an existing wallet.
 
-        let onboardingScreen = OnboardingViewController(doesCloudBackupExist: keyMaster.doesCloudBackupExist(),
-                                                        didExitOnboarding: { [weak self] (action) in
+        let onboardingScreen = OnboardingViewController(didExitOnboarding: { [weak self] (action) in
             guard let `self` = self else { return }
             
             switch action {
@@ -83,8 +82,6 @@ class StartFlowPresenter: Subscriber, Trackable {
                 self.enterRecoverWalletFlow()
             case .createWallet:
                 self.enterCreateWalletFlow()
-            case .restoreCloudBackup:
-                self.enterRecoverCloudBackup()
             }
         })
         
@@ -161,59 +158,6 @@ class StartFlowPresenter: Subscriber, Trackable {
         
         self.navigationController?.pushViewController(recoverWalletViewController, animated: true)
     }
-    
-    private func enterRecoverCloudBackup() {
-        guard #available(iOS 13.6, *) else { return }
-        let backups = keyMaster.listBackups()
-        if backups.count > 1 {
-            let selectView = SelectBackupView(backups: backups) {
-                guard case let .success(backup) = $0 else {
-                    self.navigationController?.popToRootViewController(animated: true)
-                    return
-                }
-                self.recoverBackup(backup)
-            }
-            navigationController?.setClearNavbar()
-            navigationController?.setNavigationBarHidden(false, animated: false)
-            let vc = LightStatusBarHost(rootView: selectView)
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            recoverBackup(backups.first!)
-        }
-    }
-    
-    @available(iOS 13.6, *)
-    private func recoverBackup(_ backup: CloudBackup) {
-        let update = UpdatePinViewController(keyMaster: self.keyMaster,
-                                             type: .recoverBackup,
-                                             showsBackButton: true,
-                                             phrase: nil,
-                                             eventContext: .recoverCloud,
-                                             backupKey: backup.identifier)
-        update.didRecoverAccount = { [weak self] account in
-            self?.handleRecoveredAccount(account)
-        }
-        navigationController?.setClearNavbar()
-        navigationController?.setNavigationBarHidden(false, animated: false)
-        navigationController?.pushViewController(update, animated: true)
-    }
-    
-    private func handleRecoveredAccount(_ recoveredAccount: Account) {
-        var account = recoveredAccount
-        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2.0) { [weak self] in
-            self?.keyMaster.fetchCreationDate(for: account) { updatedAccount in
-                account = updatedAccount
-                DispatchQueue.main.async {
-                    self?.onboardingCompletionHandler?(account)
-                }
-            }
-        }
-        Store.perform(action: Alert.Show(.cloudBackupRestoreSuccess(callback: { [weak self] in
-            self?.navigationController?.dismiss(animated: true) {
-                self?.navigationController = nil
-            }
-        })))
-    }
 
     private func pushPinCreationViewForRecoveredWallet(recoveredAccount: Account) {
         var account = recoveredAccount
@@ -258,10 +202,8 @@ class StartFlowPresenter: Subscriber, Trackable {
             autoreleasepool {
                 guard let (_, account) = self.keyMaster.setRandomSeedPhrase() else { self.handleWalletCreationError(); return }
                 DispatchQueue.main.async {
-                    self.enterCloudBackup(pin: pin, callback: {
-                          self.pushStartPaperPhraseCreationViewController(pin: pin, eventContext: .onboarding)
-                          self.onboardingCompletionHandler?(account)
-                    })
+                    self.pushStartPaperPhraseCreationViewController(pin: pin, eventContext: .onboarding)
+                    self.onboardingCompletionHandler?(account)
                 }
             }
         }
@@ -269,20 +211,6 @@ class StartFlowPresenter: Subscriber, Trackable {
         navigationController?.setClearNavbar()
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationController?.pushViewController(pinCreationViewController, animated: true)
-    }
-    
-    private func enterCloudBackup(pin: String, callback: @escaping () -> Void) {
-        guard #available(iOS 13.6, *) else { callback(); return }
-        //We don't need to show the backup view if backup is already on
-        guard !keyMaster.doesCloudBackupExist() else { callback(); return }
-        guard let navController = navigationController else { return }
-        let synchronizer = BackupSynchronizer(context: .onboarding,
-                                              keyStore: self.keyMaster,
-                                              navController: navController)
-        synchronizer.completion = callback
-        let cloudView = CloudBackupView(synchronizer: synchronizer)
-        let hosting = LightStatusBarHost(rootView: cloudView)
-        navigationController?.pushViewController(hosting, animated: true)
     }
 
     private func handleWalletCreationError() {

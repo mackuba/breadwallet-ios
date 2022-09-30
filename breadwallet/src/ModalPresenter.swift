@@ -489,19 +489,7 @@ class ModalPresenter: Subscriber, Trackable {
                          (menuNav.topViewController as? MenuViewController)?.reloadMenu()
                      })
         ]
-        
-        // Add iCloud backup
-        if #available(iOS 13.6, *) {
-            securityItems.append(
-                MenuItem(title: S.CloudBackup.backupMenuTitle) {
-                    let synchronizer = BackupSynchronizer(context: .existingWallet, keyStore: self.keyStore, navController: menuNav)
-                    let cloudView = CloudBackupView(synchronizer: synchronizer)
-                    let hosting = UIHostingController(rootView: cloudView)
-                    menuNav.pushViewController(hosting, animated: true)
-                }
-            )
-        }
-        
+
         // MARK: Root Menu
         var rootItems: [MenuItem] = [
             // Scan QR Code

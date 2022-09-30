@@ -831,64 +831,7 @@ enum S {
                                                value: "There was an error retrieving the address for this FIO address. Please try again later.",
                                                comment: "")
     }
-    
-    enum CloudBackup {
-        static let mainBody = NSLocalizedString("CloudBackup.mainBody",
-                                                value:"Please note, iCloud backup is only as secure as your iCloud account. We still recommend writing down your recovery phrase in the following step and keeping it secure. The recovery phrase is the only way to recover your wallet if you can no longer access iCloud.",
-                                                comment: "")
-        static let mainTitle = NSLocalizedString("CloudBackup.mainTitle",
-                                                 value: "iCloud Recovery Backup", comment: "")
-        static let mainWarning = NSLocalizedString("CloudBackup.mainWarning",
-                                                   value: "iCloud Keychain must be turned on in the iOS Settings app for this feature to work", comment: "")
-        static let mainToggleTitle = NSLocalizedString("CloudBackup.mainTitle",
-                                                   value: "Enable iCloud Recovery Backup", comment: "")
-        static let mainWarningConfirmation = NSLocalizedString("CloudBackup.mainWarningConfirmation",
-                                                               value: "Are you sure you want to disable iCloud Backup? This will delete your backup from all devices.",
-                                                               comment: "")
-        static let selectTitle = NSLocalizedString("CloudBackup.selectTitle",
-                                                   value: "Choose Backup",
-                                                   comment: "")
-        static let enableTitle = NSLocalizedString("CloudBackup.enableTitle",
-                                                   value: "Enable Keychain",
-                                                   comment: "")
-        static let enableButton = NSLocalizedString("CloudBackup.enableButton",
-                                                   value: "I have turned on iCloud Keychain",
-                                                   comment: "")
-        static let enableBody1 = NSLocalizedString("CloudBackup.enableBody1",
-                                                   value: "iCloud Keychain must be turned on for this feature to work.", comment: "")
-        static let enableBody2 = NSLocalizedString("CloudBackup.enableBody2",
-                                                   value: "It should look like the following:", comment: "")
-        static let step1 = NSLocalizedString("CloudBackup.step1",
-                                                   value: "Launch the Settings app.", comment: "")
-        static let step2 = NSLocalizedString("CloudBackup.step2",
-                                                   value: "Tap your Apple ID name.", comment: "")
-        static let step3 = NSLocalizedString("CloudBackup.step3",
-                                                   value: "Tap iCloud.", comment: "")
-        static let step4 = NSLocalizedString("CloudBackup.step4",
-                                                   value: "Verify that iCloud Keychain is ON", comment: "")
-        static let understandText = NSLocalizedString("CloudBackup.understandText",
-                                                   value: "I understand that this feature will not work unless iCloud Keychain is enabled.", comment: "")
-        
-        static let recoverHeader = NSLocalizedString("CloudBackup.recoverHeader",
-                                                     value: "Enter PIN to unlock iCloud backup", comment: "")
-        
-        static let pinAttempts = NSLocalizedString("CloudBackup.pinAttempts",
-                                                   value: "Attempts remaining before erasing backup: %1$@", comment: "")
-        static let warningBody = NSLocalizedString("CloudBackup.warningBody",
-                                                   value: "Your iCloud backup will be erased after %1$@ more incorrect PIN attempts.", comment: "")
-        static let backupDeleted = NSLocalizedString("CloudBackup.backupDeleted",
-                                                     value: "Backup Erased", comment: "")
-        static let backupDeletedMessage = NSLocalizedString("CloudBackup.backupDeletedMessage",
-                                                            value: "Your iCloud backup has been erased after too many failed PIN attempts. The app will now restart.", comment: "")
-        static let encryptBackupMessage = NSLocalizedString("CloudBackup.encryptBackupMessage", value: "Enter pin to encrypt backup", comment: "")
-        static let createWarning = NSLocalizedString("CloudBackup.createWarning", value: "A previously backed up wallet has been detected. Using this backup is recommended. Are you sure you want to proceeed with creating a new wallet?", comment: "")
-        static let createButton = NSLocalizedString("CloudBackup.createButton", value: "Create new wallet", comment: "")
-        static let recoverButton = NSLocalizedString("CloudBackup.recoverButton", value: "Restore from Recovery Phrase", comment: "")
-        static let recoverWarning = NSLocalizedString("CloudBackup.createWarning", value: "A previously backed up wallet has been detected. Using this backup is recommended. Are you sure you want to proceeed with restoring from a recovery phrase?", comment: "")
-        static let restoreButton = NSLocalizedString("CloudBackup.restoreButton", value: "Restore from iCloud Backup", comment: "")
-        static let backupMenuTitle = NSLocalizedString("CloudBackup.backupMenuTitle", value: "iCloud Backup", comment: "")
-    }
-    
+
     enum MarketData {
         static let high24h = NSLocalizedString("MarketData.high24h", value: "24h high", comment: "")
         static let low24h = NSLocalizedString("MarketData.low24h", value: "24h low", comment: "")

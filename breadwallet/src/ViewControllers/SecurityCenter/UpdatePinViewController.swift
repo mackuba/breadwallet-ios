@@ -15,7 +15,6 @@ enum UpdatePinType {
     case creationNoPhrase
     case creationWithPhrase
     case update
-    case recoverBackup
 }
 
 class UpdatePinViewController: UIViewController, Subscriber {
@@ -24,22 +23,18 @@ class UpdatePinViewController: UIViewController, Subscriber {
     var setPinSuccess: ((String) -> Void)?
     var resetFromDisabledSuccess: ((String) -> Void)?
     var resetFromDisabledWillSucceed: (() -> Void)?
-    var didRecoverAccount: ((Account) -> Void)?
-    var didFailRecoverBackup: (() -> Void)?
-    
+
     init(keyMaster: KeyMaster,
          type: UpdatePinType,
          showsBackButton: Bool = true,
          phrase: String? = nil,
-         eventContext: EventContext = .none,
-         backupKey: String? = nil) {
+         eventContext: EventContext = .none) {
         self.keyMaster = keyMaster
         self.phrase = phrase
         self.pinView = PinView(style: .create, length: Store.state.pinLength)
         self.showsBackButton = showsBackButton
         self.type = type
         self.eventContext = eventContext
-        self.backupKey = backupKey
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -53,16 +48,12 @@ class UpdatePinViewController: UIViewController, Subscriber {
     private let pinPad = PinPadViewController(style: .clear, keyboardType: .pinPad, maxDigits: 0, shouldShowBiometrics: false)
     private let spacer = UIView()
     private let keyMaster: KeyMaster
-    private let backupKey: String?
-    
+
     private lazy var faq = UIButton.buildFaqButton(articleId: ArticleIds.setPin, currency: nil, tapped: { [unowned self] in
         self.trackEvent(event: .helpButton)
     })
     
     private var shouldShowFAQButton: Bool {
-        if type == .recoverBackup {
-            return false
-        }
         // Don't show the FAQ button during onboarding because we don't have the wallet/authentication
         // initialized yet, and therefore can't open platform content.
         return eventContext != .onboarding
@@ -177,17 +168,6 @@ class UpdatePinViewController: UIViewController, Subscriber {
         pinPad.didMove(toParent: self)
     }
     
-    private func addCloudView() {
-        guard type == .recoverBackup, #available(iOS 13.6, *) else { return }
-        let hosting = UIHostingController(rootView: CloudBackupIcon(style: .down))
-        view.addSubview(hosting.view)
-        hosting.view.backgroundColor = .clear
-        hosting.view.constrain([
-            hosting.view.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            hosting.view.topAnchor.constraint(equalTo: header.bottomAnchor, constant: C.padding[3])
-        ])
-    }
-
     private func setData() {
         view.backgroundColor = Theme.primaryBackground
         pinPad.ouputDidUpdate = { [weak self] text in
@@ -202,89 +182,37 @@ class UpdatePinViewController: UIViewController, Subscriber {
             }
         }
 
-        if type == .recoverBackup {
-            header.text = S.CloudBackup.recoverHeader
-            instruction.text = ""
-            caption.text = ""
+        caption.text = S.UpdatePin.caption
+        header.text = isCreatingPin ? S.UpdatePin.createTitle : S.UpdatePin.updateTitle
+        instruction.text = isCreatingPin ? S.UpdatePin.createInstruction : S.UpdatePin.enterCurrent
+        if isCreatingPin {
+            step = .new
+            caption.isHidden = false
         } else {
-            caption.text = S.UpdatePin.caption
-            header.text = isCreatingPin ? S.UpdatePin.createTitle : S.UpdatePin.updateTitle
-            instruction.text = isCreatingPin ? S.UpdatePin.createInstruction : S.UpdatePin.enterCurrent
-            if isCreatingPin {
-                step = .new
-                caption.isHidden = false
-            } else {
-                caption.isHidden = true
-            }
+            caption.isHidden = true
         }
 
         if !showsBackButton {
             navigationItem.leftBarButtonItem = nil
             navigationItem.hidesBackButton = true
         }
-        addCloudView()
     }
 
     private func didUpdateForCurrent(pin: String) {
         pinView.fill(pin.utf8.count)
-        if type == .recoverBackup {
-            if pin.utf8.count == 6 {
-                self.recoverBackupFor(pin: pin)
-            }
-        } else {
-            if pin.utf8.count == Store.state.pinLength {
-                if keyMaster.authenticate(withPin: pin) {
-                    pushNewStep(.new)
-                    currentPin = pin
-                    replacePinView()
+        if pin.utf8.count == Store.state.pinLength {
+            if keyMaster.authenticate(withPin: pin) {
+                pushNewStep(.new)
+                currentPin = pin
+                replacePinView()
+            } else {
+                if keyMaster.walletDisabledUntil > 0 {
+                    dismiss(animated: true, completion: {
+                        Store.perform(action: RequireLogin())
+                    })
                 } else {
-                    if keyMaster.walletDisabledUntil > 0 {
-                        dismiss(animated: true, completion: {
-                            Store.perform(action: RequireLogin())
-                        })
-                    } else {
-                        clearAfterFailure()
-                    }
+                    clearAfterFailure()
                 }
-            }
-        }
-    }
-    
-    private func recoverBackupFor(pin: String) {
-        guard let backupKey = backupKey, #available(iOS 13.6, *) else { return }
-        let result = keyMaster.unlockBackup(pin: pin, key: backupKey)
-        switch result {
-        case .success(let account):
-            self.didRecoverAccount?(account)
-        case .failure(let error):
-            switch error {
-            case UnlockBackupError.wrongPin(let retries):
-                if retries < 5 {
-                    warning.pushNewText(String(format: S.CloudBackup.pinAttempts, "\(retries)"))
-                    let retryCount = 3
-                    if retries == retryCount {
-                        let alert = UIAlertController(title: S.Alert.warning,
-                                                      message: String(format: S.CloudBackup.warningBody, "\(retryCount)"),
-                                                      preferredStyle: .alert)
-                        alert.addAction(UIAlertAction(title: S.Button.ok, style: .default, handler: nil))
-                        present(alert, animated: true, completion: nil)
-                    }
-                } else {
-                    warning.text = ""
-                }
-                clearAfterFailure()
-            case UnlockBackupError.backupDeleted:
-                caption.pushNewText(S.CloudBackup.backupDeleted)
-                clearAfterFailure()
-                let alert = UIAlertController(title: S.CloudBackup.backupDeleted,
-                                              message: S.CloudBackup.backupDeletedMessage,
-                                              preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: S.Button.ok, style: .default, handler: { _ in
-                    exit(0)
-                }))
-                present(alert, animated: true, completion: nil)
-            default:
-                clearAfterFailure()
             }
         }
     }

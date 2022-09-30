@@ -45,16 +45,5 @@ class StartNavigationDelegate: NSObject, UINavigationControllerDelegate {
                 navigationController.view.removeGestureRecognizer(gr)
             }
         }
-        
-        if #available(iOS 13.6, *) {
-            if viewController is UIHostingController<SelectBackupView> {
-               navigationController.navigationBar.tintColor = .navigationTint
-               navigationController.navigationBar.titleTextAttributes = [
-                   NSAttributedString.Key.foregroundColor: UIColor.white,
-                   NSAttributedString.Key.font: UIFont.customBold(size: 17.0)
-               ]
-               navigationController.setClearNavbar()
-           }
-        }
     }
 }

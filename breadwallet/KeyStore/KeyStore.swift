@@ -107,15 +107,6 @@ protocol KeyMaster: WalletAuthenticator {
     func isSeedPhraseValid(_ phrase: String) -> Bool
     /// Returns true if the word belongs to any supported BIP39 word lists
     func isSeedWordValid(_ word: String) -> Bool
-    
-    // MARK: - iCloud Backup
-    func doesCloudBackupExist() -> Bool
-    
-    @available(iOS 13.6, *)
-    func listBackups() -> [CloudBackup]
-    
-    @available(iOS 13.6, *)
-    func unlockBackup(pin: String, key: String) -> Result<Account, Error>
 }
 
 /// The KeyStore manages keychain access by implementing the access protocols
@@ -125,11 +116,9 @@ class KeyStore {
     static private var instance: KeyStore?
 
     static private var failedPins = [String]()
-    static var failedBackupPins = [String]()
 
     private let maxPinAttemptsBeforeDisable: Int64 = 3
     private let maxPinAttemptsBeforeWipe: Int64 = 8
-    let maxBackupPinAttemptsBeforeWipe: Int64 = 12
     private let defaultPinLength = 6
 
     private var allBip39WordLists: [[NSString]] = []
@@ -722,11 +711,6 @@ extension KeyStore: KeyMaster {
                 Store.perform(action: PinLength.Set(newPin.utf8.count))
             }
             try setKeychainItem(key: KeychainKey.pin, item: newPin)
-            if #available(iOS 13.6, *) {
-                if let id = Store.state.walletID {
-                    _ = updateBackupPin(newPin: newPin, currentPin: currentPin, forKey: id)
-                }
-            }
             return true
         } catch { return false }
     }
@@ -820,18 +804,6 @@ extension KeyStore: KeyMaster {
         assert(!allBip39Words.isEmpty)
         return allBip39Words.contains(word)
     }
-    
-    func doesCloudBackupExist() -> Bool {
-        guard #available(iOS 13.6, *) else { return false }
-        return !listBackups().isEmpty
-    }
-}
-
-enum UnlockBackupError: Error {
-    case couldNotCreateAccount
-    case noBackupFound
-    case backupDeleted
-    case wrongPin(Int) //wrong pin with retries remaining
 }
 
 // MARK: - Testing Support

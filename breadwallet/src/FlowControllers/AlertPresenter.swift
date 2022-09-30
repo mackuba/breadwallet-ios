@@ -101,9 +101,6 @@ class AlertPresenter: Subscriber {
                 if case .sweepSuccess(let callback) = type {
                     callback()
                 }
-                if case .cloudBackupRestoreSuccess(let callback) = type {
-                    callback()
-                }
                 completion()
                 alertView.removeFromSuperview()
             })
