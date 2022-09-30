@@ -50,7 +50,6 @@ enum PromptType: Int {
     case paperKey
     case noPasscode
     case biometrics
-    case announcement
 
     var order: Int { return rawValue }
     
@@ -74,7 +73,6 @@ enum PromptType: Int {
         case .paperKey: return "paperKeyPrompt"
         case .upgradePin: return "upgradePinPrompt"
         case .noPasscode: return "noPasscodePrompt"
-        case .announcement: return "announcementPrompt"
         default: return ""
         }
     }
@@ -265,21 +263,7 @@ class PromptFactory: Subscriber {
     static var promptCount: Int {
         return shared.prompts.count
     }
-    
-    // Invoked from BRAPIClient.fetchAnnouncements()
-    static func didFetchAnnouncements(announcements: [Announcement]) {
-        let supported = announcements.filter({ $0.isSupported })
-        
-        if supported.isEmpty {
-            return
-        }
 
-        supported.forEach({
-            shared.prompts.append(StandardAnnouncementPrompt(announcement: $0))
-        })
-        shared.sort()
-    }
-    
     static func nextPrompt(walletAuthenticator: WalletAuthenticator) -> Prompt? {
         let prompts = PromptFactory.shared.prompts
         let next = prompts.first(where: { $0.shouldPrompt(walletAuthenticator: walletAuthenticator) })
@@ -287,11 +271,7 @@ class PromptFactory: Subscriber {
     }
     
     static func createPromptView(prompt: Prompt, presenter: UIViewController) -> PromptView {
-        if let announcementPrompt = prompt as? AnnouncementBasedPrompt {
-            return AnnouncementPromptView(prompt: announcementPrompt)
-        } else {
-            return PromptView(prompt: prompt)
-        }
+        return PromptView(prompt: prompt)
     }
     
     private func addDefaultPrompts() {

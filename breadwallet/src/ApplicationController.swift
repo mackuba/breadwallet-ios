@@ -302,7 +302,6 @@ class ApplicationController: Subscriber, Trackable {
 
         Backend.apiClient.updateExperiments()
         Backend.updateExchangeRates()
-        Backend.apiClient.fetchAnnouncements()
     }
     
     private func updateAssetBundles() {

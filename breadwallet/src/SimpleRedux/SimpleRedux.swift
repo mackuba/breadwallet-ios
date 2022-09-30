@@ -61,7 +61,6 @@ enum TriggerName {
     case txMetaDataUpdated(String)
     case didWritePaperKey
     case wipeWalletNoPrompt
-    case didFetchAnnouncements([Announcement])
     case showCurrency(Currency?)
     case fetchInbox
     case optInSegWit
@@ -119,8 +118,6 @@ func == (lhs: TriggerName, rhs: TriggerName) -> Bool {
     case (.didWritePaperKey, .didWritePaperKey):
         return true
     case (.wipeWalletNoPrompt, .wipeWalletNoPrompt):
-        return true
-    case (.didFetchAnnouncements, .didFetchAnnouncements):
         return true
     case (.showCurrency, .showCurrency):
         return true

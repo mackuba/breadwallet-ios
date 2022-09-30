@@ -93,8 +93,6 @@
 		710B036221F67888007E8A2A /* MockClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710B036121F67888007E8A2A /* MockClasses.swift */; };
 		710B036421F8C208007E8A2A /* AppRatingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710B036321F8C208007E8A2A /* AppRatingManager.swift */; };
 		71173059220CCC91001931B3 /* PromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71173058220CCC91001931B3 /* PromptView.swift */; };
-		7117305B220CE7B8001931B3 /* BRAPIClient+Announcements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7117305A220CE7B8001931B3 /* BRAPIClient+Announcements.swift */; };
-		71249913221F44FE00BEA491 /* Announcement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71249912221F44FE00BEA491 /* Announcement.swift */; };
 		71249916221F466800BEA491 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71249915221F466800BEA491 /* Prompt.swift */; };
 		71249918222046EB00BEA491 /* PromptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71249917222046EB00BEA491 /* PromptTests.swift */; };
 		7124991B22204E6C00BEA491 /* announcement-email.json in Resources */ = {isa = PBXBuildFile; fileRef = 7124991A22204E6C00BEA491 /* announcement-email.json */; };
@@ -105,7 +103,6 @@
 		7141BB5D2249543600F7ECF2 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141BB5C2249543600F7ECF2 /* InfoView.swift */; };
 		716F824321F91D9A0064E6F4 /* AppRatingManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716F824221F91D9A0064E6F4 /* AppRatingManagerTests.swift */; };
 		71904FB72225A1F900A6D027 /* announcement-promo.json in Resources */ = {isa = PBXBuildFile; fileRef = 71904FB62225A1F800A6D027 /* announcement-promo.json */; };
-		71904FB92225AB3900A6D027 /* AnnouncementPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71904FB82225AB3900A6D027 /* AnnouncementPromptView.swift */; };
 		71904FBB2228132100A6D027 /* announcement-supported.json in Resources */ = {isa = PBXBuildFile; fileRef = 71904FBA2228132100A6D027 /* announcement-supported.json */; };
 		71988B0821EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71988B0721EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift */; };
 		71988B0921EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71988B0721EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift */; };
@@ -771,8 +768,6 @@
 		710B036121F67888007E8A2A /* MockClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockClasses.swift; path = MockClasses/MockClasses.swift; sourceTree = "<group>"; };
 		710B036321F8C208007E8A2A /* AppRatingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppRatingManager.swift; path = src/Utilities/AppRatingManager.swift; sourceTree = "<group>"; };
 		71173058220CCC91001931B3 /* PromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PromptView.swift; path = src/Views/PromptView.swift; sourceTree = "<group>"; };
-		7117305A220CE7B8001931B3 /* BRAPIClient+Announcements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Announcements.swift"; path = "src/Platform/BRAPIClient+Announcements.swift"; sourceTree = "<group>"; };
-		71249912221F44FE00BEA491 /* Announcement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Announcement.swift; path = src/Models/Prompts/Announcement.swift; sourceTree = "<group>"; };
 		71249915221F466800BEA491 /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Prompt.swift; path = src/Models/Prompts/Prompt.swift; sourceTree = "<group>"; };
 		71249917222046EB00BEA491 /* PromptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTests.swift; sourceTree = "<group>"; };
 		7124991A22204E6C00BEA491 /* announcement-email.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "announcement-email.json"; path = "json/announcement-email.json"; sourceTree = "<group>"; };
@@ -783,7 +778,6 @@
 		7141BB5C2249543600F7ECF2 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InfoView.swift; path = src/Views/InfoView.swift; sourceTree = "<group>"; };
 		716F824221F91D9A0064E6F4 /* AppRatingManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRatingManagerTests.swift; sourceTree = "<group>"; };
 		71904FB62225A1F800A6D027 /* announcement-promo.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "announcement-promo.json"; path = "json/announcement-promo.json"; sourceTree = "<group>"; };
-		71904FB82225AB3900A6D027 /* AnnouncementPromptView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnnouncementPromptView.swift; path = src/Views/AnnouncementPromptView.swift; sourceTree = "<group>"; };
 		71904FBA2228132100A6D027 /* announcement-supported.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "announcement-supported.json"; path = "json/announcement-supported.json"; sourceTree = "<group>"; };
 		71988B0721EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BRUserAgentHeaderGenerator.swift; path = src/Platform/BRUserAgentHeaderGenerator.swift; sourceTree = "<group>"; };
 		71988B0A21EF8D06008B8EA0 /* BRUserAgentHeaderGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRUserAgentHeaderGeneratorTests.swift; sourceTree = "<group>"; };
@@ -1348,7 +1342,6 @@
 				22E773031EE7813000397E0E /* Bonjour.swift */,
 				CE4CA7BB1EE3649100373F11 /* BRActivityView.swift */,
 				22A9A9321DF61945000F0016 /* BRAPIClient.swift */,
-				7117305A220CE7B8001931B3 /* BRAPIClient+Announcements.swift */,
 				2218BD761E8F55430091D5E8 /* BRAPIClient+Assets.swift */,
 				7C67B6352056FB13006487BE /* BRAPIClient+Currencies.swift */,
 				7CF9988C23202C75004AEC17 /* BRAPIClient+Experiments.swift */,
@@ -1502,7 +1495,6 @@
 		71249914221F465000BEA491 /* Prompts */ = {
 			isa = PBXGroup;
 			children = (
-				71249912221F44FE00BEA491 /* Announcement.swift */,
 				71249915221F466800BEA491 /* Prompt.swift */,
 			);
 			name = Prompts;
@@ -2120,7 +2112,6 @@
 				CEBF32F31DDCE12900348FC6 /* AccountFooterView.swift */,
 				CEBF32F11DDCE10D00348FC6 /* AccountHeaderView.swift */,
 				CEF3E82C1DE528BF007C0A9E /* AlertView.swift */,
-				71904FB82225AB3900A6D027 /* AnnouncementPromptView.swift */,
 				CE41327522CACA05002391E6 /* BalanceCell.swift */,
 				CEE20C2E1EA3E5820086F724 /* BlinkingView.swift */,
 				CEBF32ED1DDBC30000348FC6 /* BRDButton.swift */,
@@ -3020,7 +3011,6 @@
 				3A611A0F2325738C004B8E36 /* AnimatedBlockSetLogo.swift in Sources */,
 				71C44E92225F95B100EF4459 /* RecoveryKeyCompleteViewController.swift in Sources */,
 				CE6DCC251E6001E50044257B /* UIControl+Callback.swift in Sources */,
-				71904FB92225AB3900A6D027 /* AnnouncementPromptView.swift in Sources */,
 				71999FDD22147CD90024271F /* Events.swift in Sources */,
 				CE0822641FCD1BD100EF371D /* HomeScreenViewController.swift in Sources */,
 				223DB2191DF691260076A151 /* BRSocketHelpers.c in Sources */,
@@ -3043,7 +3033,6 @@
 				CE5F21DB1E4A93A500C47B8E /* LoginTransitionDelegate.swift in Sources */,
 				71C44E942264BE2C00EF4459 /* BaseRecoveryKeyViewController.swift in Sources */,
 				CEAA9EA81DC3342E0066731D /* PinView.swift in Sources */,
-				7117305B220CE7B8001931B3 /* BRAPIClient+Announcements.swift in Sources */,
 				CE1D84B61EAEB2F4002A5D7B /* UIBarButtonItem+Additions.swift in Sources */,
 				CE5E6C961EB8CCF500A476DB /* SupportCenterContainer.swift in Sources */,
 				CE4B6C1A1E219CA600CF935B /* RescanCoordinator.swift in Sources */,
@@ -3169,7 +3158,6 @@
 				CE4DFB2C1E9BE5880014009E /* ReScanViewController.swift in Sources */,
 				7C9724661FF07B9A004248C4 /* StatusPip.swift in Sources */,
 				7C35E712200AC2080064808F /* TxViewModel.swift in Sources */,
-				71249913221F44FE00BEA491 /* Announcement.swift in Sources */,
 				71F829422321953F00B3C76E /* AlertPresenter.swift in Sources */,
 				CE8F0AE31EB91BB500AA7642 /* SearchHeaderView.swift in Sources */,
 				22A9A9551DF61945000F0016 /* BRTar.swift in Sources */,
