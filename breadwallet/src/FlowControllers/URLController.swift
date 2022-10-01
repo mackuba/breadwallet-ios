@@ -169,11 +169,6 @@ class URLController: Trackable, Subscriber {
     private func handleDebugLink(_ url: URL) {
         guard let params = url.queryParameters else { return }
 
-        if let backendHost = params["api_server"] {
-            UserDefaults.debugBackendHost = backendHost
-            Backend.apiClient.host = backendHost
-        }
-
         if let urlText = params["bundle_debug_url"], let platformDebugURL = URL(string: urlText) {
             UserDefaults.platformDebugURL = platformDebugURL
         }

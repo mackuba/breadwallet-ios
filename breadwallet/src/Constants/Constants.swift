@@ -86,11 +86,7 @@ struct C {
     static let erc20Prefix = "erc20:"
 
     static var backendHost: String {
-        if let debugBackendHost = UserDefaults.debugBackendHost {
-            return debugBackendHost
-        } else {
-            return (E.isDebug || E.isTestFlight) ? "stage2.breadwallet.com" : "api.breadwallet.com"
-        }
+        return (E.isDebug || E.isTestFlight) ? "stage2.breadwallet.com" : "api.breadwallet.com"
     }
 
     static var webBundle: String {

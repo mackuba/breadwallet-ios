@@ -28,7 +28,6 @@ private let hasScannedForTokenBalancesKey = "hasScannedForTokenBalances"
 private let debugShouldAutoEnterPinKey = "shouldAutoEnterPIN"
 private let debugShouldSuppressPaperKeyPromptKey = "shouldSuppressPaperKeyPrompt"
 private let debugShouldShowPaperKeyPreviewKey = "debugShouldShowPaperKeyPreviewKey"
-private let debugBackendHostKey = "debugBackendHostKey"
 private let platformDebugURLKey = "platformDebugURLKey"
 private let appLaunchCountKey = "appLaunchCountKey"
 private let notificationOptInDeferralCountKey = "notificationOptInDeferCountKey"
@@ -400,16 +399,6 @@ extension UserDefaults {
         set {
             defaults.set(newValue, forKey: debugShouldShowPaperKeyPreviewKey)
         }        
-    }
-
-    static var debugBackendHost: String? {
-        get {
-            return defaults.string(forKey: debugBackendHostKey)
-        }
-
-        set {
-            defaults.set(newValue, forKey: debugBackendHostKey)
-        }
     }
 
     static var platformDebugURL: URL? {

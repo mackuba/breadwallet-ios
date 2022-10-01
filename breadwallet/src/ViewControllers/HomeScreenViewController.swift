@@ -167,9 +167,6 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
         if E.isTestnet && !E.isScreenshots {
             debugLabel.text = "(Testnet)"
             debugLabel.isHidden = false
-        } else if (E.isTestFlight || E.isDebug), let debugHost = UserDefaults.debugBackendHost {
-            debugLabel.text = "[\(debugHost)]"
-            debugLabel.isHidden = false
         } else {
             debugLabel.isHidden = true
         }

@@ -575,40 +575,6 @@ class ModalPresenter: Subscriber, Trackable {
                                                 fatalError("forced exit")
                                             }
             }))
-            
-            developerItems.append(
-                MenuItem(title: "API Host",
-                         accessoryText: { Backend.apiClient.host }, callback: {
-                            let alert = UIAlertController(title: "Set API Host", message: "Clear and save to reset", preferredStyle: .alert)
-                            alert.addTextField(configurationHandler: { textField in
-                                textField.text = Backend.apiClient.host
-                                textField.keyboardType = .URL
-                                textField.clearButtonMode = .always
-                            })
-
-                            alert.addAction(UIAlertAction(title: "Save", style: .default) { (_) in
-                                guard let newHost = alert.textFields?.first?.text, !newHost.isEmpty else {
-                                    UserDefaults.debugBackendHost = nil
-                                    Backend.apiClient.host = C.backendHost
-                                    (menuNav.topViewController as? MenuViewController)?.reloadMenu()
-                                    return
-                                }
-                                let originalHost = Backend.apiClient.host
-                                Backend.apiClient.host = newHost
-                                Backend.apiClient.me { (success, _, _) in
-                                    if success {
-                                        UserDefaults.debugBackendHost = newHost
-                                        (menuNav.topViewController as? MenuViewController)?.reloadMenu()
-                                    } else {
-                                        Backend.apiClient.host = originalHost
-                                    }
-                                }
-                            })
-
-                            alert.addAction(UIAlertAction(title: S.Button.cancel, style: .cancel, handler: nil))
-
-                            menuNav.present(alert, animated: true, completion: nil)
-                }))
 
             developerItems.append(
                 MenuItem(title: "Web Platform Debug URL",
