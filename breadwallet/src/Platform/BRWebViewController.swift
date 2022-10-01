@@ -159,27 +159,22 @@ open class BRWebViewController: UIViewController, WKNavigationDelegate, BRWebSoc
                 // update can fail, so this update should fetch an entirely new copy
                 let activity = BRActivityViewController(message: S.Webview.dismiss)
                 myself.present(activity, animated: true, completion: nil)
-                Backend.apiClient.updateBundles(completionHandler: { results in
-                    results.forEach({ _, err in
-                        if err != nil {
-                            print("[BRWebViewController] error updating bundle: \(String(describing: err))")
+                Backend.apiClient.updateBundles()
+
+                // give the webview another chance to load
+                DispatchQueue.main.async {
+                    self?.refresh()
+                }
+                // XXX(sam): log this event so we know how frequently it happens
+                DispatchQueue.main.asyncAfter(deadline: timeout) {
+                    Store.trigger(name: .showStatusBar)
+                    self?.dismiss(animated: true) {
+                        self?.notifyUserOfLoadFailure()
+                        if let didClose = self?.didClose {
+                            didClose()
                         }
-                        // give the webview another chance to load
-                        DispatchQueue.main.async {
-                            self?.refresh()
-                        }
-                        // XXX(sam): log this event so we know how frequently it happens
-                        DispatchQueue.main.asyncAfter(deadline: timeout) {
-                            Store.trigger(name: .showStatusBar)
-                            self?.dismiss(animated: true) {
-                                self?.notifyUserOfLoadFailure()
-                                if let didClose = self?.didClose {
-                                    didClose()
-                                }
-                            }
-                        }
-                    })
-                })
+                    }
+                }
             }
         }
     }
@@ -282,7 +277,7 @@ open class BRWebViewController: UIViewController, WKNavigationDelegate, BRWebSoc
         let router = BRHTTPRouter()
         server.prependMiddleware(middleware: router)
         
-        if let archive = AssetArchive(name: bundleName, apiClient: Backend.apiClient) {
+        if let archive = AssetArchive(name: bundleName) {
             // basic file server for static assets
             let fileMw = BRHTTPFileMiddleware(baseURL: archive.extractedUrl, debugURL: UserDefaults.platformDebugURL)
             server.prependMiddleware(middleware: fileMw)

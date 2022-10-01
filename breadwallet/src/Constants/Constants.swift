@@ -94,12 +94,8 @@ struct C {
     }
 
     static var webBundle: String {
-        if let debugWebBundle = UserDefaults.debugWebBundleName {
-            return debugWebBundle
-        } else {
-            // names should match AssetBundles.plist
-            return (E.isDebug || E.isTestFlight) ? "brd-web-3-staging" : "brd-web-3"
-        }
+        // names should match AssetBundles.plist
+        return (E.isDebug || E.isTestFlight) ? "brd-web-3-staging" : "brd-web-3"
     }
 
     static var bdbHost: String {

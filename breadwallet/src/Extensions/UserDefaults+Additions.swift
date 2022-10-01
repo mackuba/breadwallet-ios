@@ -29,7 +29,6 @@ private let debugShouldAutoEnterPinKey = "shouldAutoEnterPIN"
 private let debugShouldSuppressPaperKeyPromptKey = "shouldSuppressPaperKeyPrompt"
 private let debugShouldShowPaperKeyPreviewKey = "debugShouldShowPaperKeyPreviewKey"
 private let debugBackendHostKey = "debugBackendHostKey"
-private let debugWebBundleNameKey = "debugWebBundleNameKey"
 private let platformDebugURLKey = "platformDebugURLKey"
 private let appLaunchCountKey = "appLaunchCountKey"
 private let notificationOptInDeferralCountKey = "notificationOptInDeferCountKey"
@@ -410,16 +409,6 @@ extension UserDefaults {
 
         set {
             defaults.set(newValue, forKey: debugBackendHostKey)
-        }
-    }
-
-    static var debugWebBundleName: String? {
-        get {
-            return defaults.string(forKey: debugWebBundleNameKey)
-        }
-
-        set {
-            defaults.set(newValue, forKey: debugWebBundleNameKey)
         }
     }
 

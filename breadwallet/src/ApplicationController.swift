@@ -206,7 +206,6 @@ class ApplicationController: Subscriber, Trackable {
             Store.perform(action: RequireLogin())
         }
         resume()
-        updateAssetBundles()
         coreSystem.updateFees()
     }
 
@@ -302,11 +301,7 @@ class ApplicationController: Subscriber, Trackable {
     
     private func updateAssetBundles() {
         DispatchQueue.global(qos: .utility).async { [unowned self] in
-            Backend.apiClient.updateBundles { errors in
-                for (n, e) in errors {
-                    print("Bundle \(n) ran update. err: \(String(describing: e))")
-                }
-            }
+            Backend.apiClient.updateBundles()
         }
     }
     

@@ -174,10 +174,6 @@ class URLController: Trackable, Subscriber {
             Backend.apiClient.host = backendHost
         }
 
-        if let webBundleName = params["web_bundle"] {
-            UserDefaults.debugWebBundleName = webBundleName
-        }
-
         if let urlText = params["bundle_debug_url"], let platformDebugURL = URL(string: urlText) {
             UserDefaults.platformDebugURL = platformDebugURL
         }

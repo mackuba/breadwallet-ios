@@ -19,7 +19,6 @@
 		22A9A9461DF61945000F0016 /* BRAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9321DF61945000F0016 /* BRAPIClient.swift */; };
 		22A9A9471DF61945000F0016 /* BRAPIProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9331DF61945000F0016 /* BRAPIProxy.swift */; };
 		22A9A9481DF61945000F0016 /* BRBitID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9341DF61945000F0016 /* BRBitID.swift */; };
-		22A9A9491DF61945000F0016 /* BRBSPatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9351DF61945000F0016 /* BRBSPatch.swift */; };
 		22A9A94A1DF61945000F0016 /* BRCameraPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9361DF61945000F0016 /* BRCameraPlugin.swift */; };
 		22A9A94B1DF61945000F0016 /* BRCoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9371DF61945000F0016 /* BRCoding.swift */; };
 		22A9A94C1DF61945000F0016 /* BRGeoLocationPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A9A9381DF61945000F0016 /* BRGeoLocationPlugin.swift */; };
@@ -43,7 +42,6 @@
 		22A9A9661DF61FEE000F0016 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A9651DF61FEE000F0016 /* WebKit.framework */; };
 		22A9A9A31DF63497000F0016 /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 22A9A9671DF61FF8000F0016 /* libbz2.tbd */; };
 		22C4312A1DF89D0A0017CAEA /* BRTarTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C431291DF89D0A0017CAEA /* BRTarTests.swift */; };
-		22C4312C1DF89D700017CAEA /* BRBSPatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4312B1DF89D700017CAEA /* BRBSPatchTests.swift */; };
 		22C4312E1DF89D970017CAEA /* BRHTTPServerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4312D1DF89D970017CAEA /* BRHTTPServerTests.swift */; };
 		22C431301DF89DC00017CAEA /* BRReplicatedKVStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C4312F1DF89DC00017CAEA /* BRReplicatedKVStoreTests.swift */; };
 		22C431341DF89DFE0017CAEA /* BRCoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22C431331DF89DFE0017CAEA /* BRCoderTests.swift */; };
@@ -682,7 +680,6 @@
 		22A9A9321DF61945000F0016 /* BRAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRAPIClient.swift; path = src/Platform/BRAPIClient.swift; sourceTree = "<group>"; };
 		22A9A9331DF61945000F0016 /* BRAPIProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRAPIProxy.swift; path = src/Platform/BRAPIProxy.swift; sourceTree = "<group>"; };
 		22A9A9341DF61945000F0016 /* BRBitID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRBitID.swift; path = src/Platform/BRBitID.swift; sourceTree = "<group>"; };
-		22A9A9351DF61945000F0016 /* BRBSPatch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRBSPatch.swift; path = src/Platform/BRBSPatch.swift; sourceTree = "<group>"; };
 		22A9A9361DF61945000F0016 /* BRCameraPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRCameraPlugin.swift; path = src/Platform/BRCameraPlugin.swift; sourceTree = "<group>"; };
 		22A9A9371DF61945000F0016 /* BRCoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRCoding.swift; path = src/Platform/BRCoding.swift; sourceTree = "<group>"; };
 		22A9A9381DF61945000F0016 /* BRGeoLocationPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BRGeoLocationPlugin.swift; path = src/Platform/BRGeoLocationPlugin.swift; sourceTree = "<group>"; };
@@ -710,7 +707,6 @@
 		22A9A9AA1DF64B97000F0016 /* iphone.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = iphone.modulemap; path = Modules/libbz2/iphone.modulemap; sourceTree = SOURCE_ROOT; };
 		22A9A9AB1DF64B97000F0016 /* iphonesim.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; name = iphonesim.modulemap; path = Modules/libbz2/iphonesim.modulemap; sourceTree = SOURCE_ROOT; };
 		22C431291DF89D0A0017CAEA /* BRTarTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRTarTests.swift; sourceTree = "<group>"; };
-		22C4312B1DF89D700017CAEA /* BRBSPatchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRBSPatchTests.swift; sourceTree = "<group>"; };
 		22C4312D1DF89D970017CAEA /* BRHTTPServerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRHTTPServerTests.swift; sourceTree = "<group>"; };
 		22C4312F1DF89DC00017CAEA /* BRReplicatedKVStoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRReplicatedKVStoreTests.swift; sourceTree = "<group>"; };
 		22C431331DF89DFE0017CAEA /* BRCoderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRCoderTests.swift; sourceTree = "<group>"; };
@@ -1333,7 +1329,6 @@
 				71A3171122A6E5F10088F97C /* BRAPIClient+Messages.swift */,
 				22A9A9341DF61945000F0016 /* BRBitID.swift */,
 				222319AF1F27985A00008F20 /* BRBrowserViewController.swift */,
-				22A9A9351DF61945000F0016 /* BRBSPatch.swift */,
 				22A9A9371DF61945000F0016 /* BRCoding.swift */,
 				22A9A93C1DF61945000F0016 /* BRHTTPServer.swift */,
 				22A9A9401DF61945000F0016 /* BRReplicatedKVStore.swift */,
@@ -2174,7 +2169,6 @@
 			isa = PBXGroup;
 			children = (
 				22C431291DF89D0A0017CAEA /* BRTarTests.swift */,
-				22C4312B1DF89D700017CAEA /* BRBSPatchTests.swift */,
 				22C4312D1DF89D970017CAEA /* BRHTTPServerTests.swift */,
 				22C4312F1DF89DC00017CAEA /* BRReplicatedKVStoreTests.swift */,
 				22C431331DF89DFE0017CAEA /* BRCoderTests.swift */,
@@ -3019,7 +3013,6 @@
 				CE6D0E5C1E14BFA700137DF1 /* KeyboardNotificationInfo.swift in Sources */,
 				CEA05CC31F21B53C00D850F0 /* FeeSelector.swift in Sources */,
 				CE20C8F21DBAF71500C8397A /* ApplicationController.swift in Sources */,
-				22A9A9491DF61945000F0016 /* BRBSPatch.swift in Sources */,
 				CE92F9F61DEDF6890046B516 /* UIViewControllerContextTransitioning+BRAdditions.swift in Sources */,
 				CEA362681E00EE320061FC0E /* CameraGuideView.swift in Sources */,
 				3ADA10E824BE28D6000A1D99 /* HistoryFetcher.swift in Sources */,
@@ -3268,7 +3261,6 @@
 				7138BABB223062F50059091E /* NotificationTests.swift in Sources */,
 				71249918222046EB00BEA491 /* PromptTests.swift in Sources */,
 				71988B0B21EF8D06008B8EA0 /* BRUserAgentHeaderGeneratorTests.swift in Sources */,
-				22C4312C1DF89D700017CAEA /* BRBSPatchTests.swift in Sources */,
 				CEA7E6761F057D77001F8C27 /* WalletInfoTest.swift in Sources */,
 				3A211D1D2242AF0500C2A906 /* Bip38Tests.swift in Sources */,
 				3ADA10D924BE097D000A1D99 /* CoinGeckoTests.swift in Sources */,

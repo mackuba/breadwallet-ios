@@ -291,7 +291,7 @@ extension Currency {
 extension CurrencyWithIcon {
     /// Icon image with square color background
     public var imageSquareBackground: UIImage? {
-        if let baseURL = AssetArchive(name: imageBundleName, apiClient: Backend.apiClient)?.extractedUrl {
+        if let baseURL = AssetArchive(name: imageBundleName)?.extractedUrl {
             let path = baseURL.appendingPathComponent("white-square-bg").appendingPathComponent(code.lowercased()).appendingPathExtension("png")
             if let data = try? Data(contentsOf: path) {
                 return UIImage(data: data)
@@ -302,7 +302,7 @@ extension CurrencyWithIcon {
 
     /// Icon image with no background using template rendering mode
     public var imageNoBackground: UIImage? {
-        if let baseURL = AssetArchive(name: imageBundleName, apiClient: Backend.apiClient)?.extractedUrl {
+        if let baseURL = AssetArchive(name: imageBundleName)?.extractedUrl {
             let path = baseURL.appendingPathComponent("white-no-bg").appendingPathComponent(code.lowercased()).appendingPathExtension("png")
             if let data = try? Data(contentsOf: path) {
                 return UIImage(data: data)?.withRenderingMode(.alwaysTemplate)
