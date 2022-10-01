@@ -301,7 +301,7 @@ class ApplicationController: Subscriber, Trackable {
     
     private func updateAssetBundles() {
         DispatchQueue.global(qos: .utility).async { [unowned self] in
-            Backend.apiClient.updateBundles()
+            AssetManager().unpackBundles()
         }
     }
     

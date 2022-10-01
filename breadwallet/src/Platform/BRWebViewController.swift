@@ -159,7 +159,7 @@ open class BRWebViewController: UIViewController, WKNavigationDelegate, BRWebSoc
                 // update can fail, so this update should fetch an entirely new copy
                 let activity = BRActivityViewController(message: S.Webview.dismiss)
                 myself.present(activity, animated: true, completion: nil)
-                Backend.apiClient.updateBundles()
+                AssetManager().unpackBundles()
 
                 // give the webview another chance to load
                 DispatchQueue.main.async {

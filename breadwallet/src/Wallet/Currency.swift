@@ -291,29 +291,14 @@ extension Currency {
 extension CurrencyWithIcon {
     /// Icon image with square color background
     public var imageSquareBackground: UIImage? {
-        if let baseURL = AssetArchive(name: imageBundleName)?.extractedUrl {
-            let path = baseURL.appendingPathComponent("white-square-bg").appendingPathComponent(code.lowercased()).appendingPathExtension("png")
-            if let data = try? Data(contentsOf: path) {
-                return UIImage(data: data)
-            }
-        }
-        return TokenImageSquareBackground(code: code, color: colors.0).renderedImage
+        return UIImage(named: "square-" + code.lowercased()) ??
+            TokenImageSquareBackground(code: code, color: colors.0).renderedImage
     }
 
     /// Icon image with no background using template rendering mode
     public var imageNoBackground: UIImage? {
-        if let baseURL = AssetArchive(name: imageBundleName)?.extractedUrl {
-            let path = baseURL.appendingPathComponent("white-no-bg").appendingPathComponent(code.lowercased()).appendingPathExtension("png")
-            if let data = try? Data(contentsOf: path) {
-                return UIImage(data: data)?.withRenderingMode(.alwaysTemplate)
-            }
-        }
-        
-        return TokenImageNoBackground(code: code, color: colors.0).renderedImage
-    }
-    
-    private var imageBundleName: String {
-        return (E.isDebug || E.isTestFlight) ? "brd-tokens-staging" : "brd-tokens"
+        return UIImage(named: "white-" + code.lowercased()) ??
+            TokenImageNoBackground(code: code, color: colors.0).renderedImage
     }
 }
 
