@@ -24,7 +24,6 @@ private let selectedCurrencyCodeKey = "selectedCurrencyCodeKey"
 private let mostRecentSelectedCurrencyCodeKey = "mostRecentSelectedSPVCurrencyCodeKey"
 private let hasSetSelectedCurrencyKey = "hasSetSelectedCurrencyKey"
 private let rescanStateKeyPrefix = "lastRescan-" // append uppercased currency code for key
-private let hasOptedInSegwitKey = "hasOptedInSegwitKey"
 private let hasScannedForTokenBalancesKey = "hasScannedForTokenBalances"
 private let debugShouldAutoEnterPinKey = "shouldAutoEnterPIN"
 private let debugShouldSuppressPaperKeyPromptKey = "shouldSuppressPaperKeyPrompt"
@@ -51,7 +50,6 @@ extension UserDefaults {
         [hasPromptedBiometricsKey: false],
         [isBiometricsEnabledKey: false],
         [isBiometricsEnabledForTransactionsKey: false],
-        [hasOptedInSegwitKey: false],
         [debugShouldAutoEnterPinKey: false],
         [debugShouldSuppressPaperKeyPromptKey: false],
         [debugShouldShowPaperKeyPreviewKey: false]
@@ -218,15 +216,6 @@ extension UserDefaults {
     // Sets the stored value for the height of the last block that was successfully sync'd for the given currency.
     static func setLastSyncedBlockHeight(height: UInt32, for currency: Currency) {
         UserDefaults.standard.set(height, forKey: lastBlockHeightKey(for: currency))
-    }
-    
-    static var hasOptedInSegwit: Bool {
-        get {
-            return defaults.bool(forKey: hasOptedInSegwitKey)
-        }
-        set {
-            defaults.set(newValue, forKey: hasOptedInSegwitKey)
-        }
     }
     
     static var hasScannedForTokenBalances: Bool {

@@ -40,15 +40,6 @@ class CoreSystem: Subscriber, Trackable {
     init(keyStore: KeyStore) {
         self.keyStore = keyStore
         self.widgetDataShareService = DefaultWidgetDataShareService()
-        Store.subscribe(self, name: .optInSegWit) { [weak self] _ in
-            guard let `self` = self else { return }
-            self.queue.async {
-                guard let btc = Currencies.btc.instance,
-                    let btcWalletManager = self.wallet(for: btc)?.manager else { return }
-                btcWalletManager.addressScheme = .btcSegwit
-                print("[SYS] Bitcoin SegWit address scheme enabled")
-            }
-        }
 
         Reachability.addDidChangeCallback { [weak self] isReachable in
             guard let `self` = self, let system = self.system else { return }
@@ -238,12 +229,7 @@ class CoreSystem: Subscriber, Trackable {
         // networks tokens for which wallets are needed
         let requiredTokens = network.currencies.filter { assetCollection.isEnabled($0.uid) }
 
-        var addressScheme: AddressScheme
-        if currency.isBitcoin {
-            addressScheme = UserDefaults.hasOptedInSegwit ? .btcSegwit : .btcLegacy
-        } else {
-            addressScheme = network.defaultAddressScheme
-        }
+        let addressScheme = network.defaultAddressScheme
 
         var mode = self.connectionMode(for: currency)
         if !network.supportsMode(mode) {

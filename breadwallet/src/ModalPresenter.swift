@@ -388,18 +388,11 @@ class ModalPresenter: Subscriber, Trackable {
                     self.presentKeyImport(wallet: btcWallet)
                 })
             }))
-            
-            var enableSegwit = MenuItem(title: S.Settings.enableSegwit, callback: {
-                let segwitView = SegwitViewController()
-                menuNav.pushViewController(segwitView, animated: true)
-            })
-            enableSegwit.shouldShow = { return !UserDefaults.hasOptedInSegwit }
-            var viewLegacyAddress = MenuItem(title: S.Settings.viewLegacyAddress, callback: {
+
+            let viewLegacyAddress = MenuItem(title: S.Settings.viewLegacyAddress, callback: {
                 Store.perform(action: RootModalActions.Present(modal: .receiveLegacy))
             })
-            viewLegacyAddress.shouldShow = { return UserDefaults.hasOptedInSegwit }
-            
-            btcItems.append(enableSegwit)
+
             btcItems.append(viewLegacyAddress)
         }
         var btcMenu = MenuItem(title: String(format: S.Settings.currencyPageTitle, Currencies.btc.instance?.name ?? "Bitcoin"), subMenu: btcItems, rootNav: menuNav)
