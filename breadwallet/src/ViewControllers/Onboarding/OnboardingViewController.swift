@@ -277,7 +277,7 @@ class OnboardingViewController: UIViewController {
     private func animateIcons(metaData: [CurrencyId: CurrencyMetaData]?) {
         guard pageIndex == 0 else { return }
         guard let metaData = metaData else {
-            Backend.apiClient.getCurrencyMetaData { [weak self] currencyMetaData in
+            CurrencyStore.shared.getCurrencyMetaData { [weak self] currencyMetaData in
                 DispatchQueue.main.async {
                     self?.animateIcons(metaData: currencyMetaData)
                 }

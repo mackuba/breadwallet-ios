@@ -132,7 +132,7 @@
 		7C45481A2187E65B0002E884 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4548192187E65B0002E884 /* AnyCodable.swift */; };
 		7C54FF9E2165866A007BF3EF /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C54FF9D21658669007BF3EF /* currencies.json */; };
 		7C5AC8A6203B93D3001B221E /* TxListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5AC8A5203B93D3001B221E /* TxListCell.swift */; };
-		7C67B6362056FB13006487BE /* BRAPIClient+Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67B6352056FB13006487BE /* BRAPIClient+Currencies.swift */; };
+		7C67B6362056FB13006487BE /* CurrencyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C67B6352056FB13006487BE /* CurrencyStore.swift */; };
 		7C6ACCB11FEB21580028ABFA /* TxDetailDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6ACCB01FEB21580028ABFA /* TxDetailDataSource.swift */; };
 		7C6ACCB41FEB34470028ABFA /* TxLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6ACCB31FEB34470028ABFA /* TxLabelCell.swift */; };
 		7C6ACCB61FEB345E0028ABFA /* TxStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6ACCB51FEB345E0028ABFA /* TxStatusCell.swift */; };
@@ -812,7 +812,7 @@
 		7C4D64CA222C511900DE2C2B /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		7C54FF9D21658669007BF3EF /* currencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = currencies.json; path = Resources/currencies.json; sourceTree = "<group>"; };
 		7C5AC8A5203B93D3001B221E /* TxListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TxListCell.swift; path = src/Views/TransactionCells/TxListCell.swift; sourceTree = "<group>"; };
-		7C67B6352056FB13006487BE /* BRAPIClient+Currencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Currencies.swift"; path = "src/Platform/BRAPIClient+Currencies.swift"; sourceTree = "<group>"; };
+		7C67B6352056FB13006487BE /* CurrencyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CurrencyStore.swift; path = src/Platform/CurrencyStore.swift; sourceTree = "<group>"; };
 		7C6ACCB01FEB21580028ABFA /* TxDetailDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxDetailDataSource.swift; sourceTree = "<group>"; };
 		7C6ACCB31FEB34470028ABFA /* TxLabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TxLabelCell.swift; path = src/Views/TransactionCells/TxLabelCell.swift; sourceTree = "<group>"; };
 		7C6ACCB51FEB345E0028ABFA /* TxStatusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TxStatusCell.swift; path = src/Views/TransactionCells/TxStatusCell.swift; sourceTree = "<group>"; };
@@ -1329,7 +1329,6 @@
 				CE4CA7BB1EE3649100373F11 /* BRActivityView.swift */,
 				22A9A9321DF61945000F0016 /* BRAPIClient.swift */,
 				2218BD761E8F55430091D5E8 /* BRAPIClient+Assets.swift */,
-				7C67B6352056FB13006487BE /* BRAPIClient+Currencies.swift */,
 				222C424F1E90492800078EB5 /* BRAPIClient+KV.swift */,
 				71A3171122A6E5F10088F97C /* BRAPIClient+Messages.swift */,
 				22A9A9341DF61945000F0016 /* BRBitID.swift */,
@@ -1342,6 +1341,7 @@
 				71988B0721EF8A0E008B8EA0 /* BRUserAgentHeaderGenerator.swift */,
 				22A9A9431DF61945000F0016 /* BRWebSocket.swift */,
 				22A9A9441DF61945000F0016 /* BRWebViewController.swift */,
+				7C67B6352056FB13006487BE /* CurrencyStore.swift */,
 				22A9A9451DF61945000F0016 /* Extensions.swift */,
 				CE65C668207D4180000C99C4 /* KVStore Objects */,
 				22A9A95B1DF61964000F0016 /* Middleware */,
@@ -2965,7 +2965,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEBF29301EF9D76F005C330A /* Environment.swift in Sources */,
-				7C67B6362056FB13006487BE /* BRAPIClient+Currencies.swift in Sources */,
+				7C67B6362056FB13006487BE /* CurrencyStore.swift in Sources */,
 				CEC6AA4D1DF0741100EE5AFD /* ModalDisplayable.swift in Sources */,
 				CEE0EF521EBD14B60018DB36 /* PinTransitioningDelegate.swift in Sources */,
 				754AE0BC1DFE8A46007FD001 /* SecureAllocator.swift in Sources */,

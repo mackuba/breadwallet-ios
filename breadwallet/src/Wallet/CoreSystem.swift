@@ -91,7 +91,7 @@ class CoreSystem: Subscriber, Trackable {
             System.wipeAll(atPath: C.coreDataDirURL.path, except: [system])
         }
         
-        Backend.apiClient.getCurrencyMetaData { currencyMetaData in
+        CurrencyStore.shared.getCurrencyMetaData { currencyMetaData in
             self.queue.async {
                 self.assetCollection = AssetCollection(kvStore: kvStore,
                                                        allTokens: currencyMetaData,
