@@ -1,79 +1,49 @@
-# This repository is unmaintained, BRD iOS has moved to [https://github.com/breadwallet/brd-mobile](https://github.com/breadwallet/brd-mobile)
+# Forked BRD iOS Bitcoin wallet
 
-[![Bread](/images/top-logo.png)](https://itunes.apple.com/app/breadwallet/id885251393)
+This is a forked repository of a slightly older version of the BRD (Breadwallet) Bitcoin wallet app for iOS, available at <https://github.com/breadwallet/breadwallet-ios>. I've updated it to make it work again after the app broke when the BRD backend was suddenly turned off after the company was bought by Coinbase.
 
-## BRD is the simple and secure wallet for bitcoin, ethereum, and other digital assets. Today, BRD is one of the largest non-custodial mobile wallets used by over 6 million users and protects an estimated nearly $7B USD.
+This is based on a version of the app from ~ the spring of 2021. The current App Store version is a partially multiplatform app which uses Kotlin for shared code between platforms, available at <https://github.com/breadwallet/brd-mobile>.
 
-BRD is the best way to get started with bitcoin. Our simple, streamlined design is easy for beginners, yet powerful enough for experienced users.
+Behind the scenes, the app uses the [WalletKit](https://github.com/blockset-corp/walletkit) library from Blockset (a slightly old version of it), which has also been abandoned for the same reason.
 
-### Fastsync
-[Fastsync](https://brd.com/blog/fastsync-explained) is a new feature in the BRD app that makes Bitcoin wallets sync in seconds, while also keeping BRD technology ahead of the curve as SPV slowly phases out. When Fastsync is enabled the BRD wallet uses our server technology, [Blockset](https://docs.blockset.com/) to sync, send and receive instantly!
 
-### Your Decentralized Bitcoin Wallet
+## ⚠️⚠️⚠️ WARNING IMPORTANT ⚠️⚠️⚠️
 
-Unlike other iOS bitcoin wallets, **BRD** users have the option to disable Fastsync converting the wallet into a standalone bitcoin client. It connects directly to the bitcoin network using [SPV](https://en.bitcoin.it/wiki/Thin_Client_Security#Header-Only_Clients) mode, and doesn't rely on servers that can be hacked or disabled. If BRD the company disappears, your private key can still be derived from the recovery phrase to recover your funds since your funds exist on the blockchain.
+I made this updated version mostly for myself, because the Coinbase wallet app which I was forced to migrate to is crap, and I want the old BRD app back and it stopped working.
 
-### Cutting-edge security
+I do not provide any support or warranty for this project, and I do not take responsibility for any possible problems you may have using it, including lost funds. I am not an expert in security, cryptography or Bitcoin internals; I am a Mac/iOS app developer with past experience in backend/frontend web dev and *some* knowledge of how Bitcoin works. I am mostly relying on the existing code written by the BRD team and simply ripping out things from it that don't work or that I don't need. The app works for me and I use it on my phone, but if you decide to use it, don't put too much money into it because something may go wrong.
 
-**BRD** utilizes the latest iOS security features to protect users from malware, browser security holes, and even physical theft. The user’s private key is stored in the device keychain, secured by Secure Enclave, inaccessible to anyone other than the user. Users are also able to backup their wallet using iCloud Keychain to store an encrypted backup of their recovery phrase.  The backup is encrypted with the BRD app PIN.
 
-### Designed with New Users in Mind
+## Current status
 
-Simplicity and ease-of-use is **BRD**'s core design principle. A simple recovery phrase (which we call a recovery key) is all that is needed to restore the user's wallet if they ever lose or replace their device. **BRD** is [deterministic](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki), which means the user's balance and transaction history can be recovered just from the recovery key.
+I've removed most code that was calling the no longer existing backend, including things like analytics tracking, feature flags or server-side image asset updating. I've also removed most non-ETH coins including Bitcoin Cash, Tezos, Hedera, Ripple and staking code.
 
-![screenshots](/images/brd-hero-mockup.png)
+Bitcoin currently seems to be working, using the P2P (SPV) mode which fortunately was kept in the app as an option, so now it's the only option. Segwit is enabled by default, legacy addresses are available in the menu.
 
-### Features
+ETH and ERC20 coins are available in the wallet manager, but they don't currently work because they're trying to sync from the backend. I don't know if it's possible to sync them via P2P or from some other source, and it's not my priority at the moment.
 
-- Supports wallets for Bitcoin, Bitcoin Cash, Ethereum and ERC-20 tokens, Ripple, Hedera, Tezos
-- Single recovery key is all that's needed to backup your wallet
-- Private keys never leave your device and are end-to-end encrypted when using iCloud backup
-- Save a memo for each transaction (off-chain)
+The next things I'd like to do are:
 
-### Bitcoin Specific Features
-- Supports importing [password protected](https://github.com/bitcoin/bips/blob/master/bip-0038.mediawiki) paper wallets
-- Supports [JSON payment protocol](https://bitpay.com/docs/payment-protocol)
-- Supports SegWit and bech32 addresses
+- get rid of any remaining code that calls non-existing backend services, possibly replacing it with other alternative APIs
+- get rid of some other features that I don't need or don't like
+- update to the latest version of WalletKit
 
-### Localization
+I'm not planning to make this into a real product on the App Store or to provide any developer builds, so if you want to try it, you need to build it yourself on your machine.
 
-**BRD** is available in the following languages:
-
-- Chinese (Simplified and traditional)
-- Danish
-- Dutch
-- English
-- French
-- German
-- Italian
-- Japanese
-- Korean
-- Portuguese
-- Russian
-- Spanish
-- Swedish
 
 ## Development Setup
 
-1. Clone the repo: `git clone git@github.com:breadwallet/breadwallet-ios.git`
-2  Update submodules `git submodule update --recursive`
-3. Install imagemagick and ghostscript `brew install imagemagick && brew install ghostscript`
-4. Open the `breadwallet.xcworkspace` file
+To build the app you will need a Mac (obviously), Xcode and a developer account (might be a free one, although IIRC with the free accounts you need to reinstall the app from the Mac to your phone fairly often).
 
-## Advanced Setup
+1. Clone the repo: `git clone https://github.com/mackuba/breadwallet-ios.git`
+2. Update submodules: `git submodule update --recursive`
+3. Open the `breadwallet.xcworkspace` file
+4. Select the main breadwallet project entry in the Project Navigator. For the "breadwallet", "breadwalletWidgetExtension" and "breadwalletIntentHandler" targets, under "Signing and capabilities", change the team setting to your account and change the bundle identifiers to something different.
+5. Build & run.
 
-### Blockset Client Token
 
-Add your [Blockset client token](https://docs.blockset.com/getting-started/authenticationhttps://blockset.com/docs/v1/tools/authentication) to your app’s public CloudKit database with a record id of: `BlockchainDBClientID` 
+## License & credits
 
-### WARNING:
+The BRD app project is available under the terms of the MIT license.
 
-***Installation on jailbroken devices is strongly discouraged.***
-
-Any jailbreak app can grant itself access to every other app's keychain data. This means it can access your wallet and steal your bitcoin by self-signing as described [here](http://www.saurik.com/id/8) and including `<key>application-identifier</key><string>*</string>` in its .entitlements file.
-
----
-
-**BRD** is open source and available under the terms of the MIT license.
-
-Source code is available at https://github.com/breadwallet
+Original code © Aaron Voisine, Adrian Corscadden and the BRD team. Updates by [Kuba Suder](https://mackuba.eu).
