@@ -358,11 +358,6 @@ class ModalPresenter: Subscriber, Trackable {
         var btcItems: [MenuItem] = []
         if let btc = Currencies.btc.instance, let btcWallet = btc.wallet {
             
-            // Connection mode
-            btcItems.append(MenuItem(title: S.WalletConnectionSettings.menuTitle) { [weak self] in
-                self?.presentConnectionModeScreen(menuNav: menuNav)
-            })
-
             // Rescan
             var rescan = MenuItem(title: S.Settings.sync, callback: { [unowned self] in
                 menuNav.pushViewController(ReScanViewController(system: self.system, wallet: btcWallet), animated: true)
@@ -523,10 +518,6 @@ class ModalPresenter: Subscriber, Trackable {
         if E.isSimulator || E.isDebug || E.isTestFlight {
             var developerItems = [MenuItem]()
             
-            developerItems.append(MenuItem(title: "Fast Sync", callback: { [weak self] in
-                self?.presentConnectionModeScreen(menuNav: menuNav)
-            }))
-            
             developerItems.append(MenuItem(title: S.Settings.sendLogs) { [weak self] in
                 self?.showEmailLogsModal()
             })
@@ -545,13 +536,6 @@ class ModalPresenter: Subscriber, Trackable {
                                                accessoryText: { UserDefaults.debugShouldAutoEnterPIN ? "ON" : "OFF" },
                                                callback: {
                                                 _ = UserDefaults.toggleAutoEnterPIN()
-                                                (menuNav.topViewController as? MenuViewController)?.reloadMenu()
-                }))
-                
-                developerItems.append(MenuItem(title: "Connection Settings Override",
-                                               accessoryText: { UserDefaults.debugConnectionModeOverride.description },
-                                               callback: {
-                                                UserDefaults.cycleConnectionModeOverride()
                                                 (menuNav.topViewController as? MenuViewController)?.reloadMenu()
                 }))
             }
@@ -703,19 +687,6 @@ class ModalPresenter: Subscriber, Trackable {
         self.menuNavController = menuNav
         
         self.topViewController?.present(menuNav, animated: true, completion: nil)
-    }
-    
-    private func presentConnectionModeScreen(menuNav: UINavigationController) {
-        guard let kv = Backend.kvStore, let walletInfo = WalletInfo(kvStore: kv) else {
-            return assertionFailure()
-        }
-        let connectionSettings = WalletConnectionSettings(system: self.system,
-                                                          kvStore: kv,
-                                                          walletInfo: walletInfo)
-        let connectionSettingsVC = WalletConnectionSettingsViewController(walletConnectionSettings: connectionSettings) { _ in
-            (menuNav.viewControllers.compactMap { $0 as? MenuViewController }).last?.reloadMenu()
-        }
-        menuNav.pushViewController(connectionSettingsVC, animated: true)
     }
     
     private func presentScan(parent: UIViewController, currency: Currency?) -> PresentScan {

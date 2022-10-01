@@ -366,17 +366,6 @@ enum S {
         static let exportFailedBody = NSLocalizedString("ExportTransfers.exportFailedBody", value:"Failed to export CSV file, please try again.", comment: "Export dialog error message")
     }
 
-    enum WalletConnectionSettings {
-        static let menuTitle = NSLocalizedString("WalletConnectionSettings.menuTitle", value:"Connection Mode", comment: "Wallet connection settings menu item title.")
-        static let viewTitle = NSLocalizedString("WalletConnectionSettings.viewTitle", value:"Fastsync", comment: "Wallet connection settings view title")
-        static let header = NSLocalizedString("WalletConnectionSettings.header", value:"Fastsync (pilot)", comment: "Wallet connection settings view title")
-        static let explanatoryText = NSLocalizedString("WalletConnectionSettings.explanatoryText", value: "Make syncing your bitcoin wallet practically instant. Learn more about how it works here.", comment: "Explanation for wallet connection setting")
-        static let link = NSLocalizedString("WalletConnectionSettings.link", value: "here", comment: "Link text in explanatoryText")
-        static let footerTitle = NSLocalizedString("WalletConnectionSettings.footerTitle", value:"Powered by", comment: "Connection mode switch label.")
-        static let confirmation = NSLocalizedString("WalletConnectionSettings.confirmation", value:"Are you sure you want to turn off Fast Sync?", comment: "Turn off fast sync confirmation question")
-        static let turnOff = NSLocalizedString("WalletConnectionSettings.turnOff", value:"Turn Off", comment: "Turn off fast sync button label")
-    }
-
     enum ConfirmPaperPhrase {
         static let word = NSLocalizedString("ConfirmPaperPhrase.word", value:"Word #%1$@", comment: "Word label eg. Word #1, Word #2")
         static let label = NSLocalizedString("ConfirmPaperPhrase.label", value:"To make sure everything was written down correctly, please enter the following words from your paper key.", comment: "Confirm paper phrase view label.")

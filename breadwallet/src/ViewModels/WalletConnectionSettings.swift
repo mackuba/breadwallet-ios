@@ -29,9 +29,10 @@ class WalletConnectionSettings {
 
     static func defaultMode(for currency: Currency) -> WalletConnectionMode {
         assert(currency.tokenType == .native)
+
         switch currency.uid {
         case Currencies.btc.uid:
-            return .api_only
+            return .p2p_only
         case Currencies.eth.uid:
             return .api_only
         default:
@@ -41,6 +42,7 @@ class WalletConnectionSettings {
 
     func mode(for currency: Currency) -> WalletConnectionMode {
         assert(currency.tokenType == .native)
+
         if let serialization = walletInfo.connectionModes[currency.uid],
             let mode = WalletManagerMode(serialization: serialization) {
             return mode
@@ -88,34 +90,6 @@ class WalletConnectionSettings {
             !system.isModeSupported(mode, for: currency.network) {
             // replace unsupported mode with default
             walletInfo.connectionModes[currency.uid] = nil
-        }
-    }
-}
-
-enum WalletManagerModeOverride: Int {
-    case none
-    case api
-    case p2p
-    
-    var description: String {
-        switch self {
-        case .none:
-            return "none"
-        case .api:
-            return "api"
-        case .p2p:
-            return "p2p"
-        }
-    }
-    
-    var mode: WalletConnectionMode? {
-        switch self {
-        case .none:
-            return nil
-        case .api:
-            return .api_only
-        case .p2p:
-            return .p2p_only
         }
     }
 }

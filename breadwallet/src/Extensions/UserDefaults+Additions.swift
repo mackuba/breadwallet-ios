@@ -28,7 +28,6 @@ private let hasScannedForTokenBalancesKey = "hasScannedForTokenBalances"
 private let debugShouldAutoEnterPinKey = "shouldAutoEnterPIN"
 private let debugShouldSuppressPaperKeyPromptKey = "shouldSuppressPaperKeyPrompt"
 private let debugShouldShowPaperKeyPreviewKey = "debugShouldShowPaperKeyPreviewKey"
-private let debugConnectionModeOverrideKey = "debugConnectionModeOverrideKey"
 private let debugBackendHostKey = "debugBackendHostKey"
 private let debugWebBundleNameKey = "debugWebBundleNameKey"
 private let platformDebugURLKey = "platformDebugURLKey"
@@ -431,23 +430,6 @@ extension UserDefaults {
 
         set {
             defaults.set(newValue, forKey: platformDebugURLKey)
-        }
-    }
-    
-    static func cycleConnectionModeOverride() {
-        let newValue = defaults.integer(forKey: debugConnectionModeOverrideKey) + 1
-        let newMode = WalletManagerModeOverride(rawValue: newValue) ?? .none
-        UserDefaults.debugConnectionModeOverride = newMode
-    }
-    
-    static var debugConnectionModeOverride: WalletManagerModeOverride {
-        get {
-            let value = defaults.integer(forKey: debugConnectionModeOverrideKey)
-            return WalletManagerModeOverride(rawValue: value) ?? .none
-        }
-        
-        set {
-            defaults.set(newValue.rawValue, forKey: debugConnectionModeOverrideKey)
         }
     }
 }
