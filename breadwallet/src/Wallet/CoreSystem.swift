@@ -222,10 +222,6 @@ class CoreSystem: Subscriber, Trackable {
             return
         }
 
-        if currency.isBitcoin {
-            self.migrateLegacyDatabase(network: network)
-        }
-        
         // networks tokens for which wallets are needed
         let requiredTokens = network.currencies.filter { assetCollection.isEnabled($0.uid) }
 
@@ -293,44 +289,6 @@ class CoreSystem: Subscriber, Trackable {
         DispatchQueue.main.async {
             Store.perform(action: SetRequiresCreation(currency))
         }
-    }
-
-    /// Migrates the old sqlite persistent storage data to Core, if present.
-    /// Deletes old database after successful migration.
-    private func migrateLegacyDatabase(network: Network) {
-        guard let system = system,
-            let currency = currencies[network.currency.uid],
-            currency.isBitcoin else { return assertionFailure() }
-        let fm = FileManager.default
-        let filename = "BreadWallet.sqlite"
-        let docsUrl = try? fm.url(for: .documentDirectory,
-                                  in: .userDomainMask,
-                                  appropriateFor: nil,
-                                  create: false)
-        guard let dbPath = docsUrl?.appendingPathComponent(filename).path,
-            fm.fileExists(atPath: dbPath) else { return }
-
-        do {
-            let db = CoreDatabase()
-            try db.openDatabase(path: dbPath)
-            defer { db.close() }
-
-            let txBlobs = db.loadTransactions()
-            let blockBlobs = db.loadBlocks()
-            let peerBlobs = db.loadPeers()
-
-            print("[SYS] migrating \(network.currency.code) database: \(txBlobs.count) txns / \(blockBlobs.count) blocks / \(peerBlobs.count) peers")
-
-            try system.migrateStorage(network: network,
-                                      transactionBlobs: txBlobs,
-                                      blockBlobs: blockBlobs,
-                                      peerBlobs: peerBlobs)
-            print("[SYS] \(network.currency.code) database migrated")
-        } catch let error {
-            print("[SYS] database migration failed: \(error)")
-        }
-        // delete the old database to avoid future migration attempts
-        try? fm.removeItem(atPath: dbPath)
     }
 
     /// Adds a Wallet model for the Core Wallet if it is enabled in the asset collection.
