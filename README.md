@@ -20,6 +20,8 @@ I've removed most code that was calling the no longer existing backend, includin
 
 Bitcoin currently seems to be working, using the P2P (SPV) mode which fortunately was kept in the app as an option, so now it's the only option. Segwit is enabled by default, legacy addresses are available in the menu.
 
+**Note**: the Coinbase wallet uses a different (standard) key derivation path for addresses than the non-standard one that BRD uses for both legacy and Segwit addresses. If you've migrated the wallet to the Coinbase app and made some transactions there, the transactions after the migration will not currently appear in this app.
+
 ETH and ERC20 coins are available in the wallet manager, but they don't currently work because they're trying to sync from the backend. I don't know if it's possible to sync them via P2P or from some other source, and it's not my priority at the moment.
 
 The next things I'd like to do are:
