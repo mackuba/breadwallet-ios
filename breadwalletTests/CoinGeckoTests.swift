@@ -55,7 +55,7 @@ class CoinGeckoTests : XCTestCase {
         waitForExpectations(timeout: 60, handler: nil)
     }
     
-    func testSupportedCrypto() {
+    /*func testSupportedCrypto() {
         let exp = expectation(description: "Fetch supported currencies")
         brClient.getCurrencyMetaData { metadata in
             
@@ -97,6 +97,5 @@ class CoinGeckoTests : XCTestCase {
             
         }
         waitForExpectations(timeout: 60, handler: nil)
-    }
-    
+    }*/
 }

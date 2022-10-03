@@ -58,43 +58,4 @@ class FioTests : XCTestCase {
         
         wait(for: [exp], timeout: 10.0)
     }
-    
-    func testFetchBRDAddress() {
-        let exp = expectation(description: "fetch fio address")
-        let fio = ResolvableFactory.resolver("luke@stokes")
-        XCTAssertNotNil(fio)
-        fio?.fetchAddress(forCurrency: TestCurrencies.brd) { result in
-            switch result {
-            case .success(_):
-                XCTFail() //currency not supported
-            case .failure(let error):
-                if case .currencyNotSupported = error {
-                    XCTAssert(true)
-                } else {
-                    XCTFail()
-                }
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 10.0)
-    }
-    
-    func testFetchXRPWithDTAddress() {
-        let exp = expectation(description: "fetch fio address")
-        let fio = ResolvableFactory.resolver("ericbutz@bitmaxfio")
-        XCTAssertNotNil(fio)
-        fio?.fetchAddress(forCurrency: TestCurrencies.xrp) { result in
-            switch result {
-            case .success((let address, let destinationTag)):
-                XCTAssertTrue(TestCurrencies.xrp.isValidAddress(address))
-                XCTAssertTrue(destinationTag != nil)
-            case .failure(_):
-                XCTFail()
-            }
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 10.0)
-    }
 }

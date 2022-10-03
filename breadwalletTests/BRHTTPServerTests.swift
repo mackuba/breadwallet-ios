@@ -57,7 +57,7 @@ class BRHTTPServerTests: XCTestCase {
         server = nil
     }
     
-    func testDownloadFile() {
+    /*func testDownloadFile() {
         let exp = expectation(description: "load")
         
         let url = URL(string: "http://localhost:\(server.port)/bundle.tar")!
@@ -77,7 +77,7 @@ class BRHTTPServerTests: XCTestCase {
                 NSLog("timeout error \(String(describing: err))")
             }
         }
-    }
+    }*/
 }
 
 class BRTestHTTPRequest: BRHTTPRequest {

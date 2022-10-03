@@ -38,44 +38,6 @@ class PayIdTests : XCTestCase {
         XCTAssertTrue(payID!.type == .payId, "Resolver should not be type Payid for \(address)")
     }
 
-    func testBTC() {
-        let path = ResolvableFactory.resolver("adrian$stage2.breadwallet.com/payid/")
-        XCTAssertNotNil(path)
-        let exp = expectation(description: "Fetch PayId address")
-        path?.fetchAddress(forCurrency: TestCurrencies.btc) { result in
-            self.handleResult(result, expected: "mzVtspCQoEGnEbCUWVrug72yD4ShDTUbw8")
-            exp.fulfill()
-        }
-        waitForExpectations(timeout: 60, handler: nil)
-    }
-
-    func testEth() {
-        let path = ResolvableFactory.resolver("adrian$stage2.breadwallet.com/payid/")
-        XCTAssertNotNil(path)
-        let exp = expectation(description: "Fetch PayId address")
-        path?.fetchAddress(forCurrency: TestCurrencies.eth) { result in
-            self.handleResult(result, expected: "0x8fB4CB96F7C15F9C39B3854595733F728E1963Bc")
-            exp.fulfill()
-        }
-        waitForExpectations(timeout: 60, handler: nil)
-    }
-
-    func testUnsuportedCurrency() {
-        let path = ResolvableFactory.resolver("adrian$stage2.breadwallet.com/payid/")
-        XCTAssertNotNil(path)
-        let exp = expectation(description: "Fetch PayId address")
-        path?.fetchAddress(forCurrency: TestCurrencies.bch) { address in
-            switch address {
-            case .success(_):
-                XCTFail("BCH should not return a payID")
-            case .failure(let error):
-                XCTAssert(error == .currencyNotSupported, "Should return currency not supported error")
-            }
-            exp.fulfill()
-        }
-        waitForExpectations(timeout: 60, handler: nil)
-    }
-
     func handleResult(_ result: Result<(String, String?), ResolvableError>, expected: String) {
         switch result {
         case .success(let address):
