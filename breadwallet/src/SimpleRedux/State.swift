@@ -14,7 +14,6 @@ struct State {
     let showFiatAmounts: Bool
     let alert: AlertType
     let defaultCurrencyCode: String
-    let isPushNotificationsEnabled: Bool
     let isPromptingBiometrics: Bool
     let pinLength: Int
     let walletID: String?
@@ -44,7 +43,6 @@ extension State {
                         showFiatAmounts: UserDefaults.showFiatAmounts,
                         alert: .none,
                         defaultCurrencyCode: UserDefaults.defaultCurrencyCode,
-                        isPushNotificationsEnabled: UserDefaults.pushToken != nil,
                         isPromptingBiometrics: false,
                         pinLength: 6,
                         walletID: nil,
@@ -59,7 +57,6 @@ extension State {
                    showFiatAmounts: Bool? = nil,
                    alert: AlertType? = nil,
                    defaultCurrencyCode: String? = nil,
-                   isPushNotificationsEnabled: Bool? = nil,
                    isPromptingBiometrics: Bool? = nil,
                    pinLength: Int? = nil,
                    walletID: String? = nil,
@@ -70,7 +67,6 @@ extension State {
                      showFiatAmounts: showFiatAmounts ?? self.showFiatAmounts,
                      alert: alert ?? self.alert,
                      defaultCurrencyCode: defaultCurrencyCode ?? self.defaultCurrencyCode,
-                     isPushNotificationsEnabled: isPushNotificationsEnabled ?? self.isPushNotificationsEnabled,
                      isPromptingBiometrics: isPromptingBiometrics ?? self.isPromptingBiometrics,
                      pinLength: pinLength ?? self.pinLength,
                      walletID: walletID ?? self.walletID,

@@ -15,8 +15,6 @@ public enum EventContext: String {
     case generateKey
     case writeKey
     case rewards
-    case pushNotifications
-    case inAppNotifications
     case wallet
     case jailbreak
     case fastSync
@@ -61,23 +59,7 @@ public enum Event: String {
     case allowButton
     case denyButton
     
-    // enable/disable push notifications
-    case pushNotificationsToggleOn
-    case pushNotificationsToggleOff
-    
-    // open notification system settings for BRD
-    case openNotificationSystemSettings
-    
-    // user opened a push notification
-    case openNotification
-
     case iOSError
-    
-    // received notification
-    case receivedNotification
-
-    // tapped notification viewer CTA button
-    case notificationCTAButton
     
     // charts
     case axisToggle
@@ -116,14 +98,6 @@ public enum Screen: String {
     case coinsPage
     case finalPage
 
-    // push notifications
-    case optInPrompt
-    case systemPrompt
-    case pushNotificationSettings
-    
-    // in-app notifications
-    case inAppNotification
-    
     case test
 
     var name: String { return rawValue }

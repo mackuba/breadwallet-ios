@@ -91,7 +91,6 @@
 		71249916221F466800BEA491 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71249915221F466800BEA491 /* Prompt.swift */; };
 		71249918222046EB00BEA491 /* PromptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71249917222046EB00BEA491 /* PromptTests.swift */; };
 		7124991B22204E6C00BEA491 /* announcement-email.json in Resources */ = {isa = PBXBuildFile; fileRef = 7124991A22204E6C00BEA491 /* announcement-email.json */; };
-		7138BABB223062F50059091E /* NotificationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7138BABA223062F40059091E /* NotificationTests.swift */; };
 		713CD8872240117A004657D4 /* RecoveryKeyFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713CD8862240117A004657D4 /* RecoveryKeyFlowController.swift */; };
 		713CD88A2240198A004657D4 /* RecoveryKeyIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 713CD8892240198A004657D4 /* RecoveryKeyIntroViewController.swift */; };
 		7141BB5B2245271800F7ECF2 /* WriteRecoveryKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7141BB5A2245271800F7ECF2 /* WriteRecoveryKeyViewController.swift */; };
@@ -104,8 +103,6 @@
 		71988B0B21EF8D06008B8EA0 /* BRUserAgentHeaderGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71988B0A21EF8D06008B8EA0 /* BRUserAgentHeaderGeneratorTests.swift */; };
 		71999FDD22147CD90024271F /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71999FDC22147CD90024271F /* Events.swift */; };
 		71A3170D229C70C00088F97C /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3170C229C70C00088F97C /* Theme.swift */; };
-		71A3171022A6D55A0088F97C /* InAppNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3170F22A6D55A0088F97C /* InAppNotificationViewController.swift */; };
-		71A3171222A6E5F10088F97C /* BRAPIClient+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A3171122A6E5F10088F97C /* BRAPIClient+Messages.swift */; };
 		71C44E90225D135E00EF4459 /* ConfirmRecoveryKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C44E8F225D135E00EF4459 /* ConfirmRecoveryKeyViewController.swift */; };
 		71C44E92225F95B100EF4459 /* RecoveryKeyCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C44E91225F95B100EF4459 /* RecoveryKeyCompleteViewController.swift */; };
 		71C44E942264BE2C00EF4459 /* BaseRecoveryKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C44E932264BE2C00EF4459 /* BaseRecoveryKeyViewController.swift */; };
@@ -116,7 +113,6 @@
 		75A2A79B1DA5934300A983D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79A1DA5934300A983D8 /* Assets.xcassets */; };
 		75A2A79E1DA5934300A983D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75A2A79C1DA5934300A983D8 /* LaunchScreen.storyboard */; };
 		75A2A7B41DA5934300A983D8 /* breadwalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A2A7B31DA5934300A983D8 /* breadwalletUITests.swift */; };
-		7C0A3ACE210A0E1D006C2783 /* NotificationAuthorizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0A3ACD210A0E1D006C2783 /* NotificationAuthorizer.swift */; };
 		7C0F3DC42124A81100531E54 /* Backend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C0F3DC32124A81100531E54 /* Backend.swift */; };
 		7C230E752037AD52002F0FF1 /* SyncingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C230E742037AD52002F0FF1 /* SyncingIndicator.swift */; };
 		7C35E712200AC2080064808F /* TxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CBF4B612007DB9200E003AA /* TxViewModel.swift */; };
@@ -124,7 +120,6 @@
 		7C35E719200AF3940064808F /* TxListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C35E718200AF3940064808F /* TxListViewModel.swift */; };
 		7C377EC220F6C29E00E8CF1C /* UIAlertController+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C377EC120F6C29E00E8CF1C /* UIAlertController+Additions.swift */; };
 		7C40DE2D20E09207000E289D /* ToggleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C40DE2C20E09207000E289D /* ToggleButton.swift */; };
-		7C424A6E20FD34F20064557E /* NotificationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C424A6D20FD34F20064557E /* NotificationHandler.swift */; };
 		7C45481A2187E65B0002E884 /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C4548192187E65B0002E884 /* AnyCodable.swift */; };
 		7C54FF9E2165866A007BF3EF /* currencies.json in Resources */ = {isa = PBXBuildFile; fileRef = 7C54FF9D21658669007BF3EF /* currencies.json */; };
 		7C5AC8A6203B93D3001B221E /* TxListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5AC8A5203B93D3001B221E /* TxListCell.swift */; };
@@ -886,7 +881,6 @@
 		CEEC708A1E945E3B00EF788E /* UnEditableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70891E945E3B00EF788E /* UnEditableTextView.swift */; };
 		CEEC708C1E95461A00EF788E /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC708B1E95461A00EF788E /* AboutViewController.swift */; };
 		CEEC708E1E954AAB00EF788E /* AboutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC708D1E954AAB00EF788E /* AboutCell.swift */; };
-		CEEC70901E95D5C100EF788E /* PushNotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC708F1E95D5C100EF788E /* PushNotificationsViewController.swift */; };
 		CEEC70921E95DA4400EF788E /* GradientSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70911E95DA4400EF788E /* GradientSwitch.swift */; };
 		CEEC70941E96A24F00EF788E /* DefaultCurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70931E96A24F00EF788E /* DefaultCurrencyViewController.swift */; };
 		CEEC70981E96BF8800EF788E /* DefaultCurrencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEC70971E96BF8800EF788E /* DefaultCurrencyTests.swift */; };
@@ -1088,7 +1082,6 @@
 		71249915221F466800BEA491 /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Prompt.swift; path = src/Models/Prompts/Prompt.swift; sourceTree = "<group>"; };
 		71249917222046EB00BEA491 /* PromptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptTests.swift; sourceTree = "<group>"; };
 		7124991A22204E6C00BEA491 /* announcement-email.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "announcement-email.json"; path = "json/announcement-email.json"; sourceTree = "<group>"; };
-		7138BABA223062F40059091E /* NotificationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTests.swift; sourceTree = "<group>"; };
 		713CD8862240117A004657D4 /* RecoveryKeyFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecoveryKeyFlowController.swift; path = src/FlowControllers/RecoveryKeyFlowController.swift; sourceTree = "<group>"; };
 		713CD8892240198A004657D4 /* RecoveryKeyIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecoveryKeyIntroViewController.swift; path = src/ViewControllers/RecoveryKey/RecoveryKeyIntroViewController.swift; sourceTree = "<group>"; };
 		7141BB5A2245271800F7ECF2 /* WriteRecoveryKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WriteRecoveryKeyViewController.swift; path = src/ViewControllers/RecoveryKey/WriteRecoveryKeyViewController.swift; sourceTree = "<group>"; };
@@ -1100,8 +1093,6 @@
 		71988B0A21EF8D06008B8EA0 /* BRUserAgentHeaderGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRUserAgentHeaderGeneratorTests.swift; sourceTree = "<group>"; };
 		71999FDC22147CD90024271F /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Events.swift; path = src/Constants/Events.swift; sourceTree = "<group>"; };
 		71A3170C229C70C00088F97C /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = src/Theme/Theme.swift; sourceTree = "<group>"; };
-		71A3170F22A6D55A0088F97C /* InAppNotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InAppNotificationViewController.swift; path = src/ViewControllers/Notifications/InAppNotificationViewController.swift; sourceTree = "<group>"; };
-		71A3171122A6E5F10088F97C /* BRAPIClient+Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "BRAPIClient+Messages.swift"; path = "src/Platform/BRAPIClient+Messages.swift"; sourceTree = "<group>"; };
 		71C44E8F225D135E00EF4459 /* ConfirmRecoveryKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConfirmRecoveryKeyViewController.swift; path = src/ViewControllers/RecoveryKey/ConfirmRecoveryKeyViewController.swift; sourceTree = "<group>"; };
 		71C44E91225F95B100EF4459 /* RecoveryKeyCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecoveryKeyCompleteViewController.swift; path = src/ViewControllers/RecoveryKey/RecoveryKeyCompleteViewController.swift; sourceTree = "<group>"; };
 		71C44E932264BE2C00EF4459 /* BaseRecoveryKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BaseRecoveryKeyViewController.swift; path = src/ViewControllers/RecoveryKey/BaseRecoveryKeyViewController.swift; sourceTree = "<group>"; };
@@ -1125,14 +1116,12 @@
 		75A2A8091DA5936F00A983D8 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		75A2A87C1DA59E4E00A983D8 /* breadwallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = breadwallet.entitlements; sourceTree = "<group>"; };
 		75FEFD1B1DAED56E00203D3A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		7C0A3ACD210A0E1D006C2783 /* NotificationAuthorizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationAuthorizer.swift; path = src/NotificationAuthorizer.swift; sourceTree = "<group>"; };
 		7C0F3DC32124A81100531E54 /* Backend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Backend.swift; path = src/Backend.swift; sourceTree = "<group>"; };
 		7C230E742037AD52002F0FF1 /* SyncingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SyncingIndicator.swift; path = src/Views/SyncingIndicator.swift; sourceTree = "<group>"; };
 		7C35E716200ADF450064808F /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		7C35E718200AF3940064808F /* TxListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxListViewModel.swift; sourceTree = "<group>"; };
 		7C377EC120F6C29E00E8CF1C /* UIAlertController+Additions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIAlertController+Additions.swift"; path = "src/Extensions/UIAlertController+Additions.swift"; sourceTree = "<group>"; };
 		7C40DE2C20E09207000E289D /* ToggleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ToggleButton.swift; path = src/Controls/ToggleButton.swift; sourceTree = "<group>"; };
-		7C424A6D20FD34F20064557E /* NotificationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationHandler.swift; path = src/NotificationHandler.swift; sourceTree = "<group>"; };
 		7C4548192187E65B0002E884 /* AnyCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnyCodable.swift; path = src/AnyCodable.swift; sourceTree = "<group>"; };
 		7C4D64CA222C511900DE2C2B /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		7C54FF9D21658669007BF3EF /* currencies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = currencies.json; path = Resources/currencies.json; sourceTree = "<group>"; };
@@ -1885,7 +1874,6 @@
 		CEEC70891E945E3B00EF788E /* UnEditableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnEditableTextView.swift; path = src/Views/UnEditableTextView.swift; sourceTree = "<group>"; };
 		CEEC708B1E95461A00EF788E /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutViewController.swift; path = src/ViewControllers/AboutViewController.swift; sourceTree = "<group>"; };
 		CEEC708D1E954AAB00EF788E /* AboutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AboutCell.swift; path = src/Views/AboutCell.swift; sourceTree = "<group>"; };
-		CEEC708F1E95D5C100EF788E /* PushNotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushNotificationsViewController.swift; path = src/ViewControllers/PushNotificationsViewController.swift; sourceTree = "<group>"; };
 		CEEC70911E95DA4400EF788E /* GradientSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GradientSwitch.swift; path = src/Views/GradientSwitch.swift; sourceTree = "<group>"; };
 		CEEC70931E96A24F00EF788E /* DefaultCurrencyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DefaultCurrencyViewController.swift; path = src/Views/DefaultCurrencyViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		CEEC70971E96BF8800EF788E /* DefaultCurrencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultCurrencyTests.swift; sourceTree = "<group>"; };
@@ -1989,7 +1977,6 @@
 				CE4CA7BB1EE3649100373F11 /* BRActivityView.swift */,
 				22A9A9321DF61945000F0016 /* BRAPIClient.swift */,
 				222C424F1E90492800078EB5 /* BRAPIClient+KV.swift */,
-				71A3171122A6E5F10088F97C /* BRAPIClient+Messages.swift */,
 				22A9A9341DF61945000F0016 /* BRBitID.swift */,
 				222319AF1F27985A00008F20 /* BRBrowserViewController.swift */,
 				22A9A9371DF61945000F0016 /* BRCoding.swift */,
@@ -2171,14 +2158,6 @@
 			name = Theme;
 			sourceTree = "<group>";
 		};
-		71A3170E22A6D51C0088F97C /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				71A3170F22A6D55A0088F97C /* InAppNotificationViewController.swift */,
-			);
-			name = Notifications;
-			sourceTree = "<group>";
-		};
 		75A2A7871DA5934300A983D8 = {
 			isa = PBXGroup;
 			children = (
@@ -2219,8 +2198,6 @@
 				7C0F3DC32124A81100531E54 /* Backend.swift */,
 				CED82D4D1E575A5500507A9B /* main.swift */,
 				8CBC1DE028E73AF900C8F912 /* MockAnalytics.swift */,
-				7C0A3ACD210A0E1D006C2783 /* NotificationAuthorizer.swift */,
-				7C424A6D20FD34F20064557E /* NotificationHandler.swift */,
 				CEC6F8441E886723000795B8 /* PaymentRequest.swift */,
 				CE3D4C561EF5D5740016B1C8 /* ReachabilityMonitor.swift */,
 				CEE659E61F65A936001FF29D /* RetryTimer.swift */,
@@ -2265,7 +2242,6 @@
 				7CF2B051228F478A004AA905 /* DataExtensionTests.swift */,
 				CEEC70971E96BF8800EF788E /* DefaultCurrencyTests.swift */,
 				3AF78B3A2523B05E00FBB280 /* FioTests.swift */,
-				7138BABA223062F40059091E /* NotificationTests.swift */,
 				3A69884E24591F4A0084953D /* PayIdTests.swift */,
 				CEC6F8461E8878B6000795B8 /* PaymentRequestTests.swift */,
 				CE6DCC281E63D0280044257B /* PhraseTests.swift */,
@@ -3019,10 +2995,8 @@
 				3A3D63DD22F10B57000DE920 /* ManageWalletsViewController.swift */,
 				CEF3E8351DE60222007C0A9E /* ModalNavigationController.swift */,
 				CE44BA1A1F33BFC500392A1A /* NodeSelectorViewController.swift */,
-				71A3170E22A6D51C0088F97C /* Notifications */,
 				E843C10F2188CBDA00F46672 /* Onboarding */,
 				CECCE5A81E0378FB00D99448 /* PinPadViewController.swift */,
-				CEEC708F1E95D5C100EF788E /* PushNotificationsViewController.swift */,
 				CEB909F81E5FF20A001804DC /* Recover */,
 				713CD88822401946004657D4 /* RecoverKey */,
 				CEEE92F01EBA7CBA00B7AC9C /* RequestAmountViewController.swift */,
@@ -4323,7 +4297,6 @@
 				E843C1172188D19000F46672 /* OnboardingViewController.swift in Sources */,
 				3A36328D225301D60043EBA4 /* PriceChangeView.swift in Sources */,
 				7C5AC8A6203B93D3001B221E /* TxListCell.swift in Sources */,
-				71A3171222A6E5F10088F97C /* BRAPIClient+Messages.swift in Sources */,
 				CE45C1FB1E74F89C002C3847 /* WalletInfo.swift in Sources */,
 				3ACFD96D25CDBE0600AA931F /* CsvExporter.swift in Sources */,
 				CEE659E71F65A936001FF29D /* RetryTimer.swift in Sources */,
@@ -4386,7 +4359,6 @@
 				3A93890922A303800081FCF9 /* BezierView.swift in Sources */,
 				CE124D001E69170900DFA146 /* SyncingView.swift in Sources */,
 				CE20C90E1DBE52B000C8397A /* UIView+BRWAdditions.swift in Sources */,
-				7C424A6E20FD34F20064557E /* NotificationHandler.swift in Sources */,
 				7C35E719200AF3940064808F /* TxListViewModel.swift in Sources */,
 				CE6314831E08E5BB00D4AFE0 /* UIView+InitAdditions.swift in Sources */,
 				CEC6AA401DEFC87300EE5AFD /* SendViewController.swift in Sources */,
@@ -4442,7 +4414,6 @@
 				22A9A9461DF61945000F0016 /* BRAPIClient.swift in Sources */,
 				CEAA9E9B1DC2B9320066731D /* ConfirmPhraseView.swift in Sources */,
 				75A2A7941DA5934300A983D8 /* AppDelegate.swift in Sources */,
-				CEEC70901E95D5C100EF788E /* PushNotificationsViewController.swift in Sources */,
 				222C42501E90492800078EB5 /* BRAPIClient+KV.swift in Sources */,
 				CE5E6C941EB7964900A476DB /* WalletDisabledView.swift in Sources */,
 				CEF3E8341DE57166007C0A9E /* AnimatableIcon.swift in Sources */,
@@ -4493,7 +4464,6 @@
 				CEEC708A1E945E3B00EF788E /* UnEditableTextView.swift in Sources */,
 				CE3645481E7B424D0079D0CF /* WhiteNumberPad.swift in Sources */,
 				CE3840E81FD590BD00437C31 /* AssetListTableView.swift in Sources */,
-				71A3171022A6D55A0088F97C /* InAppNotificationViewController.swift in Sources */,
 				7CF5319D231EE01300E61F12 /* Base32.swift in Sources */,
 				22A9A9591DF61945000F0016 /* Extensions.swift in Sources */,
 				22A9A94C1DF61945000F0016 /* BRGeoLocationPlugin.swift in Sources */,
@@ -4532,7 +4502,6 @@
 				22A9A9501DF61945000F0016 /* BRHTTPServer.swift in Sources */,
 				CE1E7A9A20938DFD00C86BB7 /* MenuButton.swift in Sources */,
 				22A9A9531DF61945000F0016 /* BRLinkPlugin.swift in Sources */,
-				7C0A3ACE210A0E1D006C2783 /* NotificationAuthorizer.swift in Sources */,
 				7CA3BC302006864C00517BF7 /* Currency.swift in Sources */,
 				7C72D134226625130091B185 /* CoreSystem.swift in Sources */,
 				CE3D4C571EF5D5740016B1C8 /* ReachabilityMonitor.swift in Sources */,
@@ -4609,7 +4578,6 @@
 				22C431341DF89DFE0017CAEA /* BRCoderTests.swift in Sources */,
 				CEEC70981E96BF8800EF788E /* DefaultCurrencyTests.swift in Sources */,
 				22C4312A1DF89D0A0017CAEA /* BRTarTests.swift in Sources */,
-				7138BABB223062F50059091E /* NotificationTests.swift in Sources */,
 				71249918222046EB00BEA491 /* PromptTests.swift in Sources */,
 				71988B0B21EF8D06008B8EA0 /* BRUserAgentHeaderGeneratorTests.swift in Sources */,
 				CEA7E6761F057D77001F8C27 /* WalletInfoTest.swift in Sources */,

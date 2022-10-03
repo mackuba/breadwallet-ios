@@ -184,15 +184,6 @@ enum DefaultCurrency {
     }
 }
 
-enum PushNotifications {
-    struct SetIsEnabled: Action {
-        let reduce: Reducer
-        init(_ isEnabled: Bool) {
-            reduce = { $0.mutate(isPushNotificationsEnabled: isEnabled) }
-        }
-    }
-}
-
 enum BiometricsActions {
     struct SetIsPrompting: Action {
         let reduce: Reducer

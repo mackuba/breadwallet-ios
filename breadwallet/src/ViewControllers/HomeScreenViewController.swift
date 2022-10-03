@@ -21,8 +21,7 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     private let prompt = UIView()
     private var promptHiddenConstraint: NSLayoutConstraint!
     private let toolbar = UIToolbar()
-    private let notificationHandler = NotificationHandler()
-    
+
     var didSelectCurrency: ((Currency) -> Void)?
     var didTapManageWallets: (() -> Void)?
     var didTapMenu: (() -> Void)?
@@ -77,12 +76,6 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + promptDelay) { [unowned self] in
             self.attemptShowPrompt()
-            
-            if !Store.state.isLoginRequired {
-                NotificationAuthorizer().showNotificationsOptInAlert(from: self, callback: { _ in
-                    self.notificationHandler.checkForInAppNotifications()
-                })
-            }
         }
 
         updateTotalAssets()
@@ -274,7 +267,6 @@ class HomeScreenViewController: UIViewController, Subscriber, Trackable {
     // MARK: - Prompt
     
     private let promptDelay: TimeInterval = 0.6
-    private let inAppNotificationDelay: TimeInterval = 3.0
     
     private var currentPromptView: PromptView? {
         didSet {

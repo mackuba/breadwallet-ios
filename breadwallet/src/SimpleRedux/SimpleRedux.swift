@@ -40,7 +40,6 @@ struct Trigger {
 }
 
 enum TriggerName {
-    case registerForPushNotificationToken
     case lock
     case promptBiometrics
     case promptPaperKey
@@ -65,7 +64,6 @@ enum TriggerName {
     case fetchInbox
     case openPlatformUrl(String)
     case didViewTransactions([Transaction]?)
-    case showInAppNotification(BRDMessage?)
     case didSyncKVStore
     case createAccount(Currency?, ((Wallet?) -> Void)?)
     case handleGift(URL)
@@ -76,8 +74,6 @@ extension TriggerName: Equatable {}
 
 func == (lhs: TriggerName, rhs: TriggerName) -> Bool {
     switch (lhs, rhs) {
-    case (.registerForPushNotificationToken, .registerForPushNotificationToken):
-        return true
     case (.lock, .lock):
         return true
     case (.promptBiometrics, .promptBiometrics):
@@ -125,8 +121,6 @@ func == (lhs: TriggerName, rhs: TriggerName) -> Bool {
     case (.openPlatformUrl, .openPlatformUrl):
         return true
     case (.didViewTransactions, .didViewTransactions):
-        return true
-    case (.showInAppNotification, .showInAppNotification):
         return true
     case (.didSyncKVStore, .didSyncKVStore):
         return true

@@ -16,7 +16,6 @@ private let legacyWalletNeedsBackupKey = "WALLET_NEEDS_BACKUP"
 private let writePaperPhraseDateKey = "writepaperphrasedatekey"
 private let hasPromptedBiometricsKey = "haspromptedtouched"
 private let showFiatAmountsKey = "isBtcSwappedKey" // legacy key name
-private let pushTokenKey = "pushTokenKey"
 private let currentRateKey = "currentRateKey"
 private let customNodeIPKey = "customNodeIPKey"
 private let customNodePortKey = "customNodePortKey"
@@ -30,8 +29,6 @@ private let debugShouldSuppressPaperKeyPromptKey = "shouldSuppressPaperKeyPrompt
 private let debugShouldShowPaperKeyPreviewKey = "debugShouldShowPaperKeyPreviewKey"
 private let platformDebugURLKey = "platformDebugURLKey"
 private let appLaunchCountKey = "appLaunchCountKey"
-private let notificationOptInDeferralCountKey = "notificationOptInDeferCountKey"
-private let appLaunchesAtLastNotificationDeferralKey = "appLaunchesAtLastNotificationDeferralKey"
 private let deviceIdKey = "BR_DEVICE_ID"
 private let savedChartHistoryPeriodKey = "savedHistoryPeriodKey"
 private let balanceKey = "balanceKey"
@@ -59,23 +56,18 @@ extension UserDefaults {
     // Called from the Reset User Defaults menu item to allow the resetting of
     // the UserDefaults state for showing/hiding elements, etc.
     static func resetAll() {
-        
         for resettableBooelan in resettableBooleans {
             if let key = resettableBooelan.keys.first {
                 let defaultValue = resettableBooelan[key]
                 defaults.set(defaultValue, forKey: key)
             }
         }
-        
-        reset(for: NotificationHandler.hasShownInAppNotificationKeyPrefix)
 
         for resettableObject in resettableObjects {
             defaults.removeObject(forKey: resettableObject)
         }
-        
+
         appLaunchCount = 0
-        notificationOptInDeferralCount = 0
-        appLaunchesAtLastNotificationDeferral = 0
     }
     
     static func reset(for keysWithPrefix: String) {
@@ -125,16 +117,6 @@ extension UserDefaults {
         get { return defaults.bool(forKey: showFiatAmountsKey)
         }
         set { defaults.set(newValue, forKey: showFiatAmountsKey) }
-    }
-
-    static var pushToken: Data? {
-        get {
-            guard defaults.object(forKey: pushTokenKey) != nil else {
-                return nil
-            }
-            return defaults.data(forKey: pushTokenKey)
-        }
-        set { defaults.set(newValue, forKey: pushTokenKey) }
     }
 
     static func currentRate(forCode: String) -> Rate? {
@@ -278,18 +260,6 @@ extension UserDefaults {
     static var hasPromptedBiometrics: Bool {
         get { return defaults.bool(forKey: hasPromptedBiometricsKey) }
         set { defaults.set(newValue, forKey: hasPromptedBiometricsKey) }
-    }
-    
-    // Returns the number of times the user has deferred the notifications opt-in decision.
-    static var notificationOptInDeferralCount: Int {
-        get { return defaults.integer(forKey: notificationOptInDeferralCountKey) }
-        set { defaults.set(newValue, forKey: notificationOptInDeferralCountKey) }
-    }
-    
-    // Returns the number of times the user has deferred the notifications opt-in decision.
-    static var appLaunchesAtLastNotificationDeferral: Int {
-        get { return defaults.integer(forKey: appLaunchesAtLastNotificationDeferralKey) }
-        set { defaults.set(newValue, forKey: appLaunchesAtLastNotificationDeferralKey) }
     }
     
     // The count of app-foreground events. This is used in part for determining when to show the app-rating

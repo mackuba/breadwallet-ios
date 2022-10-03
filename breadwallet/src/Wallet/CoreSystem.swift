@@ -766,24 +766,3 @@ extension Address {
         return description
     }
 }
-
-//TODO:CRYPTO hook up to notifications?
-// MARK: - Sounds
-/*
-extension WalletManager {
-    func ping() {
-        guard let url = Bundle.main.url(forResource: "coinflip", withExtension: "aiff") else { return }
-        var id: SystemSoundID = 0
-        AudioServicesCreateSystemSoundID(url as CFURL, &id)
-        AudioServicesAddSystemSoundCompletion(id, nil, nil, { soundId, _ in
-            AudioServicesDisposeSystemSoundID(soundId)
-        }, nil)
-        AudioServicesPlaySystemSound(id)
-    }
-
-    func showLocalNotification(message: String) {
-        guard UIApplication.shared.applicationState == .background || UIApplication.shared.applicationState == .inactive else { return }
-        guard Store.state.isPushNotificationsEnabled else { return }
-    }
-}
-*/

@@ -109,50 +109,7 @@ class ModalPresenter: Subscriber, Trackable {
                 self?.showAccountView(currency: currency, animated: true, completion: nil)
             }
         })
-        
-        // Push Notifications Permission Request
-        Store.subscribe(self, name: .registerForPushNotificationToken) { [weak self]  _ in
-            guard let top = self?.topViewController else { return }
-            NotificationAuthorizer().requestAuthorization(fromViewController: top, completion: { granted in
-                DispatchQueue.main.async {
-                    if granted {
-                        print("[PUSH] notification authorization granted")
-                    } else {
-                        // TODO: log event
-                        print("[PUSH] notification authorization denied")
-                    }
-                }
-            })
-        }
-        
-        // in-app notifications
-        Store.subscribe(self, name: .showInAppNotification(nil)) { [weak self] (trigger) in
-            guard let `self` = self else { return }
-            guard let topVC = self.topViewController else { return }
-            
-            if case let .showInAppNotification(notification?)? = trigger {
-                let display: (UIImage?) -> Void = { (image) in
-                    let notificationVC = InAppNotificationViewController(notification, image: image)
-                    
-                    let navigationController = ModalNavigationController(rootViewController: notificationVC)
-                    navigationController.setClearNavbar()
-                    
-                    topVC.present(navigationController, animated: true, completion: nil)
-                }
-                
-                // Fetch the image first so that it's ready when we display the notification
-                // screen to the user.
-                if let imageUrl = notification.imageUrl, !imageUrl.isEmpty {
-                    UIImage.fetchAsync(from: imageUrl) { (image) in
-                        display(image)
-                    }
-                } else {
-                    display(nil)
-                }
-                
-            }
-        }
-        
+
         Store.subscribe(self, name: .openPlatformUrl("")) { [weak self] in
             guard let trigger = $0 else { return }
             if case let .openPlatformUrl(url) = trigger {
@@ -428,11 +385,6 @@ class ModalPresenter: Subscriber, Trackable {
                 menuNav.dismiss(animated: true, completion: {
                     self.system.resetToDefaultCurrencies()
                 })
-            }),
-            
-            // Notifications
-            MenuItem(title: S.Settings.notifications, callback: {
-                menuNav.pushViewController(PushNotificationsViewController(), animated: true)
             })
         ]
         

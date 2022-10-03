@@ -8,7 +8,6 @@
 
 import UIKit
 import WalletKit
-import UserNotifications
 
 private let timeSinceLastExitKey = "TimeSinceLastExit"
 private let shouldRequireLoginTimeoutKey = "ShouldRequireLoginTimeoutKey"
@@ -44,7 +43,6 @@ class ApplicationController: Subscriber, Trackable {
 
     private var launchURL: URL?
     private var urlController: URLController?
-    private let notificationHandler = NotificationHandler()
     private var backgroundTaskID: UIBackgroundTaskIdentifier = .invalid
     private var shouldDisableBiometrics = false
     
@@ -75,8 +73,6 @@ class ApplicationController: Subscriber, Trackable {
         self.application = application
         handleLaunchOptions(options)
         application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalNever)
-        
-        UNUserNotificationCenter.current().delegate = notificationHandler
         
         setup()
         Reachability.addDidChangeCallback({ isReachable in
@@ -245,13 +241,11 @@ class ApplicationController: Subscriber, Trackable {
     
     func willResignActive() {
         applyBlurEffect()
-        checkForNotificationSettingsChange(appActive: false)
         cacheBalances()
     }
     
     func didBecomeActive() {
         removeBlurEffect()
-        checkForNotificationSettingsChange(appActive: true)
     }
 
     // MARK: Background Task Support
@@ -427,48 +421,5 @@ extension ApplicationController {
             return open(url: userActivity.webpageURL!)
         }
         return false
-    }
-}
-
-// MARK: - Push notifications
-extension ApplicationController {
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        guard UserDefaults.pushToken != deviceToken else { return }
-        UserDefaults.pushToken = deviceToken
-        Backend.apiClient.savePushNotificationToken(deviceToken)
-        Store.perform(action: PushNotifications.SetIsEnabled(true))
-    }
-
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        print("[PUSH] failed to register for remote notifications: \(error.localizedDescription)")
-        Store.perform(action: PushNotifications.SetIsEnabled(false))
-    }
-    
-    private func checkForNotificationSettingsChange(appActive: Bool) {
-        guard Backend.isConnected else { return }
-        
-        if appActive {
-            // check if notification settings changed
-            NotificationAuthorizer().areNotificationsAuthorized { authorized in
-                DispatchQueue.main.async {
-                    if authorized {
-                        if !Store.state.isPushNotificationsEnabled {
-                            self.saveEvent("push.enabledSettings")
-                        }
-                        UIApplication.shared.registerForRemoteNotifications()
-                    } else {
-                        if Store.state.isPushNotificationsEnabled, let pushToken = UserDefaults.pushToken {
-                            self.saveEvent("push.disabledSettings")
-                            Store.perform(action: PushNotifications.SetIsEnabled(false))
-                            Backend.apiClient.deletePushNotificationToken(pushToken)
-                        }
-                    }
-                }
-            }
-        } else {
-            if !Store.state.isPushNotificationsEnabled, let pushToken = UserDefaults.pushToken {
-                Backend.apiClient.deletePushNotificationToken(pushToken)
-            }
-        }
     }
 }

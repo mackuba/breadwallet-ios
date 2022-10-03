@@ -293,7 +293,6 @@ enum S {
         static let advanced = NSLocalizedString("Settings.advanced", value: "Advanced", comment: "Advanced settings header")
         static let currencyPageTitle = NSLocalizedString("Settings.currencyPageTitle", value: "%1$@ Settings", comment: "Bitcoin Settings page title")
         static let importTile = NSLocalizedString("Settings.importTitle", value:"Redeem Private Key", comment: "Import wallet label")
-        static let notifications = NSLocalizedString("Settings.notifications", value:"Notifications", comment: "Notifications label")
         static let currency = NSLocalizedString("Settings.currency", value:"Display Currency", comment: "Default currency label")
         static let sync = NSLocalizedString("Settings.sync", value:"Sync Blockchain", comment: "Sync blockchain label")
         static let earlyAccess = NSLocalizedString("Settings.earlyAccess", value:"Join Early Access", comment: "Join Early access label")
@@ -316,19 +315,6 @@ enum S {
         static let privacy = NSLocalizedString("About.privacy", value:"Privacy Policy", comment: "Privay Policy button label")
         static let walletID = NSLocalizedString("About.walletID", value:"BRD Rewards ID", comment: "About screen wallet ID label")
         static let footer = NSLocalizedString("About.footer", value:"Made by the global BRD team. Version %1$@ Build %2$@", comment: "About screen footer")
-    }
-
-    enum PushNotifications {
-        static let title = NSLocalizedString("PushNotifications.title", value:"Stay in the Loop", comment: "Push notifications settings view title label")
-        static let body = NSLocalizedString("PushNotifications.body", value:"Turn on push notifications and be the first to hear about new features and special offers.", comment: "Push notifications settings view body")
-        static let enabledBody = NSLocalizedString("PushNotifications.enabledBody", value:"You’re receiving special offers and updates from BRD.", comment: "Push notifications settings view body when the toggle is enabled.")
-        static let disabledBody = NSLocalizedString("PushNotifications.disabledBody", value:"Turn on notifications to receive special offers and updates from BRD.", comment: "Push notifications settings view body when the toggle is disabled.")
-        static let enableInstructions = NSLocalizedString("PushNotifications.enableInstructions", value: "Looks like notifications are turned off. Please go to Settings to enable notifications from BRD.", comment: "Instructions for enabling push notifications in Settings")
-        static let maybeLater = NSLocalizedString("PushNotifications.maybeLater", value: "Maybe Later", comment: "Button title for the 'Maybe Later' option")
-        static let label = NSLocalizedString("PushNotifications.label", value:"Receive Push Notifications", comment: "Push notifications toggle switch label")
-        static let on = NSLocalizedString("PushNotifications.on", value: "On", comment: "Push notifications are on label")
-        static let off = NSLocalizedString("PushNotifications.off", value: "Off", comment: "Push notifications are off label")
-        static let disabled = NSLocalizedString("PushNotifications.disabled", value: "Notifications Disabled", comment: "Push notifications are disabled alert title")
     }
 
     enum DefaultCurrency {
